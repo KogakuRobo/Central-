@@ -9,6 +9,13 @@
       <FileCategoryGuid>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</FileCategoryGuid>
       <Property>fb98844b-2c27-4275-9804-f6e63e204da0</Property>
     </Instance>
+    <Instance Guid="7bbddd8b-8399-41d7-b85e-41c2fe1f930c">
+      <Name>main.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>main.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">
@@ -48,7 +55,9 @@
       <BuildMode0>RABlAGYAYQB1AGwAdABCAHUAaQBsAGQA</BuildMode0>
       <BatchBuildFlag0>False</BatchBuildFlag0>
       <CurrentBuildMode>DefaultBuild</CurrentBuildMode>
-      <SourceItemCount>0</SourceItemCount>
+      <SourceItemGuid0>7bbddd8b-8399-41d7-b85e-41c2fe1f930c</SourceItemGuid0>
+      <SourceItemType0>CppSource</SourceItemType0>
+      <SourceItemCount>1</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -226,7 +235,14 @@
       <COptionPreinclude-DefaultValue />
       <COptionSectionC-DefaultValue>C</COptionSectionC-DefaultValue>
       <COptionShowExpansions-DefaultValue>False</COptionShowExpansions-DefaultValue>
-      <COptionCommandLine-DefaultValue />
+      <COptionCommandLine-DefaultValue>-isa=rxv1
+-fpu
+-include=..\include
+-output=obj
+-obj_path=%BuildModeName%
+-debug
+-nologo
+</COptionCommandLine-DefaultValue>
       <COptionDefine-DefaultValue />
       <COptionInline-DefaultValue>Auto</COptionInline-DefaultValue>
       <COptionMisra2004RuleNumberRequiredAdd-DefaultValue />
@@ -287,8 +303,8 @@
       <COptionFloatOrder-DefaultValue>False</COptionFloatOrder-DefaultValue>
       <COptionIncode-DefaultValue>Sjis</COptionIncode-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064642860304888</TimeTagModified--0>
-      <COptionLangC-0>C</COptionLangC-0>
+      <TimeTagModified--0>-8587064637431590821</TimeTagModified--0>
+      <COptionLangC-0>C99</COptionLangC-0>
       <COptionListfile-0>False</COptionListfile-0>
       <COptionLogo-0>False</COptionLogo-0>
       <COptionMisra-0>Misra2012</COptionMisra-0>
@@ -304,7 +320,8 @@
       <COptionShowSource-0>False</COptionShowSource-0>
       <COptionXcref-0>False</COptionXcref-0>
       <COptionDebug-0>True</COptionDebug-0>
-      <COptionInclude-0 />
+      <COptionInclude-0>..\include
+</COptionInclude-0>
       <COptionMisra2004RuleFile-0 />
       <COptionPreCompileCommands-0 />
       <COptionShowConditionals-0>False</COptionShowConditionals-0>
@@ -321,7 +338,14 @@
       <COptionPreinclude-0 />
       <COptionSectionC-0>C</COptionSectionC-0>
       <COptionShowExpansions-0>False</COptionShowExpansions-0>
-      <COptionCommandLine-0 />
+      <COptionCommandLine-0>-isa=rxv1
+-fpu
+-include=..\include
+-output=obj
+-obj_path=%BuildModeName%
+-debug
+-nologo
+</COptionCommandLine-0>
       <COptionDefine-0 />
       <COptionInline-0>Auto</COptionInline-0>
       <COptionMisra2004RuleNumberRequiredAdd-0 />
@@ -397,7 +421,13 @@
       <AsmOptionPreAssembleCommands-DefaultValue />
       <AsmOptionPostAssembleCommands-DefaultValue />
       <AsmOptionOtherAdditionalOptions-DefaultValue />
-      <AsmOptionCommandLine-DefaultValue />
+      <AsmOptionCommandLine-DefaultValue>-isa=rxv1
+-fpu
+-output=obj
+-obj_path=%BuildModeName%
+-debug
+-nologo
+</AsmOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
       <TimeTagModified--0>-8587064642860264863</TimeTagModified--0>
       <AsmOptionChkpm-0>False</AsmOptionChkpm-0>
@@ -419,7 +449,13 @@
       <AsmOptionPreAssembleCommands-0 />
       <AsmOptionPostAssembleCommands-0 />
       <AsmOptionOtherAdditionalOptions-0 />
-      <AsmOptionCommandLine-0 />
+      <AsmOptionCommandLine-0>-isa=rxv1
+-fpu
+-output=obj
+-obj_path=%BuildModeName%
+-debug
+-nologo
+</AsmOptionCommandLine-0>
     </Instance>
     <Instance Guid="dbb16727-3e81-4169-956a-790355cab4a1">
       <LinkOptionCpu-DefaultValue>False</LinkOptionCpu-DefaultValue>
@@ -498,17 +534,27 @@
       <LinkOptionOtherAdditionalOptionsForLoadModule-DefaultValue />
       <LinkOptionS9-DefaultValue>False</LinkOptionS9-DefaultValue>
       <LinkOptionOtherAdditionalOptionsForConvertFile-DefaultValue />
-      <LinkOptionCommandLine-DefaultValue />
+      <LinkOptionCommandLine-DefaultValue>-input=../%BuildModeName%/CentralLibrary.rel
+-noprelink
+-output=%BuildModeName%\%ProjectName%.abs
+-list=%BuildModeName%\%ProjectName%.map
+-show=symbol,total_size
+-nooptimize
+-start=B_1,R_1,B_2,R_2,B,R,SU,SI/00001400,PResetPRG/0FFF80000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFF80100,FIXEDVECT/0FFFFFFD0
+-nologo
+-exit
+</LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064642860255077</TimeTagModified--0>
+      <TimeTagModified--0>-8587064615862534513</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
-      <LinkOptionInput-0 />
+      <LinkOptionInput-0>../%BuildModeName%/CentralLibrary.rel
+</LinkOptionInput-0>
       <LinkOptionListShow-0>List</LinkOptionListShow-0>
       <LinkOptionOptimize-0>None</LinkOptionOptimize-0>
       <LinkOptionStack-0>False</LinkOptionStack-0>
-      <LinkOptionStart-0>B_1,R_1,B_2,R_2,B,R,SU,SI/04,PResetPRG/0FFF80000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFF80100,FIXEDVECT/0FFFFFFD0</LinkOptionStart-0>
+      <LinkOptionStart-0>B_1,R_1,B_2,R_2,B,R,SU,SI/00001400,PResetPRG/0FFF80000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFF80100,FIXEDVECT/0FFFFFFD0</LinkOptionStart-0>
       <LinkOptionCompress-0>False</LinkOptionCompress-0>
       <LinkOptionCpuInformation-0 />
       <LinkOptionDebug-0>Debug</LinkOptionDebug-0>
@@ -516,7 +562,7 @@
       <LinkOptionLibrary-0 />
       <LinkOptionOptimizeSymbolDelete-0>False</LinkOptionOptimizeSymbolDelete-0>
       <LinkOptionRecordH-0>None</LinkOptionRecordH-0>
-      <LinkOptionShowSymbol-0>False</LinkOptionShowSymbol-0>
+      <LinkOptionShowSymbol-0>True</LinkOptionShowSymbol-0>
       <LinkOptionAlignedSection-0 />
       <LinkOptionCpuStride-0>False</LinkOptionCpuStride-0>
       <LinkOptionMemory-0>False</LinkOptionMemory-0>
@@ -538,7 +584,7 @@
       <LinkOptionDefine-0 />
       <LinkOptionMap-0>False</LinkOptionMap-0>
       <LinkOptionOptimizeShortFormat-0>False</LinkOptionOptimizeShortFormat-0>
-      <LinkOptionShowTotalSize-0>False</LinkOptionShowTotalSize-0>
+      <LinkOptionShowTotalSize-0>True</LinkOptionShowTotalSize-0>
       <LinkOptionChangeMessageWarning-0>None</LinkOptionChangeMessageWarning-0>
       <LinkOptionConvertFileName-0>%ProjectName%.mot</LinkOptionConvertFileName-0>
       <LinkOptionEntry-0>False</LinkOptionEntry-0>
@@ -577,7 +623,16 @@
       <LinkOptionOtherAdditionalOptionsForLoadModule-0 />
       <LinkOptionS9-0>False</LinkOptionS9-0>
       <LinkOptionOtherAdditionalOptionsForConvertFile-0 />
-      <LinkOptionCommandLine-0 />
+      <LinkOptionCommandLine-0>-input=../%BuildModeName%/CentralLibrary.rel
+-noprelink
+-output=%BuildModeName%\%ProjectName%.abs
+-list=%BuildModeName%\%ProjectName%.map
+-show=symbol,total_size
+-nooptimize
+-start=B_1,R_1,B_2,R_2,B,R,SU,SI/00001400,PResetPRG/0FFF80000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFF80100,FIXEDVECT/0FFFFFFD0
+-nologo
+-exit
+</LinkOptionCommandLine-0>
     </Instance>
     <Instance Guid="df74c69e-635e-42d9-845e-14128ba4d48a">
       <HexOptionForm-DefaultValue>Stype</HexOptionForm-DefaultValue>
@@ -604,7 +659,12 @@
       <LinkOptionCrc2-DefaultValue>False</LinkOptionCrc2-DefaultValue>
       <LinkOptionCrcOutputAddress-DefaultValue>0</LinkOptionCrcOutputAddress-DefaultValue>
       <LinkOptionOtherAdditionalOptionsForConvertFile-DefaultValue />
-      <HexOptionCommandLine-DefaultValue />
+      <HexOptionCommandLine-DefaultValue>-end
+-input=%BuildModeName%\%ProjectName%.abs
+-form=stype
+-output=%BuildModeName%\%ProjectName%.mot
+-exit
+</HexOptionCommandLine-DefaultValue>
       <LinkOptionCrcCalculationRange-DefaultValue />
       <HexOptionCrcType-DefaultValue>Ccitt</HexOptionCrcType-DefaultValue>
       <HexOptionCrcInitialValue-DefaultValue />
@@ -637,7 +697,12 @@
       <LinkOptionCrc2-0>False</LinkOptionCrc2-0>
       <LinkOptionCrcOutputAddress-0>0</LinkOptionCrcOutputAddress-0>
       <LinkOptionOtherAdditionalOptionsForConvertFile-0 />
-      <HexOptionCommandLine-0 />
+      <HexOptionCommandLine-0>-end
+-input=%BuildModeName%\%ProjectName%.abs
+-form=stype
+-output=%BuildModeName%\%ProjectName%.mot
+-exit
+</HexOptionCommandLine-0>
       <LinkOptionCrcCalculationRange-0 />
       <HexOptionCrcType-0>Ccitt</HexOptionCrcType-0>
       <HexOptionCrcInitialValue-0 />
@@ -841,6 +906,16 @@
       <LbgOptionSimpleFloatConv-0>False</LbgOptionSimpleFloatConv-0>
       <LbgOptionFpu-0>Fpu</LbgOptionFpu-0>
       <LbgOptionFloatOrder-0>False</LbgOptionFloatOrder-0>
+    </Instance>
+    <Instance Guid="7bbddd8b-8399-41d7-b85e-41c2fe1f930c">
+      <ItemAddTime>636307745118657231</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
+      <TimeTagModified-SourceItem0--0>-8587064615736118577</TimeTagModified-SourceItem0--0>
+      <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
+      <SourceItem0-BuildingTarget-0>True</SourceItem0-BuildingTarget-0>
+      <SourceItem0-IndividualCompileOption-0>False</SourceItem0-IndividualCompileOption-0>
     </Instance>
   </Class>
   <Class Guid="44fa27c9-0aa0-4297-bd3b-2c5c5bdb8881">
