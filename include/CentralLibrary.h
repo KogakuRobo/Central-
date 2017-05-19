@@ -2,6 +2,14 @@
 #define _CentrolLibrary_H_
 
 #include "iodefine.h"
-#include "../E1/E1_lib.h"
+
+#ifdef __cplusplus
+
+#include "../SPI/SPI.hpp"
+#include "../SPI/_rx621_RSPI1.hpp"
+
+#include "../CAN/_rx621_can_driver.hpp"
+
+#endif
 
 #endif

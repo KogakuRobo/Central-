@@ -20,6 +20,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <ctype.h>
 #include "lowsrc.h"
 
 extern const long _nfiles;     /* The number of files for input/output files */
@@ -28,7 +29,7 @@ extern const long _nfiles;     /* The number of files for input/output files */
 
 //ドライバ登録名とFDの対応テーブル
 struct{
-	char *name;
+	const char *name;
 	_FD *fd;
 }g_name_fd[IODRIVER];
 
@@ -45,8 +46,7 @@ int set_io_driver(const char *name,_FD *fd)
 	for(;i < IODRIVER;i++){
 		if(g_name_fd[i].name == NULL){
 			//開いているところに名前領域を動的に開けてコピー。
-			g_name_fd[i].name = (char *)malloc(strlen(name)+1);
-			strcpy(g_name_fd[i].name,name);
+			g_name_fd[i].name = name;
 			g_name_fd[i].fd = fd;
 			return 0;
 		}
@@ -67,6 +67,16 @@ int search_io_driver(const char *name)
 	return -1;
 }
 
+int extraction_driver_name(const char *path,char *dest)
+{
+	int i;
+	//空白を除く表示文字
+	for (i = 0; isgraph(path[i]); i++){
+		dest[i] = path[i];
+	}
+	dest[i] = '\0';
+	return 0;
+}
 /****************************************************************************/
 /* _INIT_IOLIB                                                              */
 /*  Initialize C library Functions, if necessary.                           */
@@ -110,6 +120,7 @@ long open(const char *name,                  /* File name                 */
 	int fdno = 0;
 	int driver_no;
 	int ret;
+	char path[6];
 	//空きディスクリプタナンバー調べ
 	for(;fdno < IOSTREAM;fdno++){
 		if(file_descriptor[fdno].control_flags.use == 0)break;
@@ -117,12 +128,13 @@ long open(const char *name,                  /* File name                 */
 	if(fdno == IOSTREAM)return -1;		//空き無し
 	
 	//該当デバイスドライバ検索
-	driver_no = search_io_driver(name);
+	extraction_driver_name(name,path);
+	driver_no = search_io_driver(path);
 	if(driver_no == -1)return -1;		//当該ドライバなし
 	
 	file_descriptor[fdno] = *g_name_fd[driver_no].fd;
 	file_descriptor[fdno].control_flags.use = 1;
-	ret = file_descriptor[fdno]._open(&file_descriptor[fdno],mode);
+	ret = file_descriptor[fdno]._open(&file_descriptor[fdno],name,mode);
 	if(ret == -1)return -1;
 	return fdno;
 }

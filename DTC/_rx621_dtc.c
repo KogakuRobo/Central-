@@ -1,18 +1,20 @@
-#include"_rx621_dtc.hpp"
+#include"_rx621_dtc.h"
 
 #pragma pack
 
 #pragma address DTC_VectorTable=0x00000000
 void *DTC_VectorTable[256];
 
+//変更する場合にはセクション設定も変更が必要です。
+#define TABLE_AREA_LENGTH 256
 #pragma address dtc_table=0x00000400
-volatile DTC_TABLE dtc_table[256];
+volatile DTC_TABLE dtc_table[TABLE_AREA_LENGTH];
 
 #pragma packoption
 
 unsigned char table_State[32] = {0};
 
-bool SerchTableState(unsigned char num)				//DTCが使用されているかサーチ
+int SerchTableState(unsigned char num)				//DTCが使用されているかサーチ
 {
 	unsigned char e = num % 8;
 	unsigned char s = (num - e) / 8;
@@ -51,6 +53,8 @@ volatile DTC_TABLE *DTC_CreateVect(unsigned int size)
 	}
 	return &dtc_table[num];
 }
+
+//volatile int DTC_ReleaseVect(
 
 int DTC_SetTable(unsigned int vect,volatile DTC_TABLE* table){
 	DTC_VectorTable[vect] = (void*)table;		//テーブルにを登録

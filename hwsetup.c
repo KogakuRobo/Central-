@@ -15,7 +15,13 @@
 *
 ************************************************************************/
 
+#include "CentralLibrary.h"
+#include "Description.h"
 #include "iodefine.h"
+
+#include "./E1/E1_lib.h"
+#include "../SCI0/sci0_lowsrc.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -24,22 +30,24 @@ extern void HardwareSetup(void);
 }
 #endif
 
+void OSC_Init(void);
+
 void HardwareSetup(void)
 {
-/*
- BSC.CS0MOD.WORD = 0x1234;
- BSC.CS7CNT.WORD = 0x5678;
-  
- SCI0.SCR.BIT.TE  = 0;
- SCI0.SCR.BIT.RE  = 0;
- SCI0.SCR.BIT.TE  = 1;
- SCI2.SSR.BIT.PER = 0;
+	OSC_Init();
+	E1_init();
+	sci0_init();
+}
 
- TMR0.TCR.BYTE = 0x12;
- TMR1.TCR.BYTE = 0x12;
- TMR2.TCR.BYTE = 0x12;
- 
- P0.DDR.BYTE = 0x12;
- P1.DDR.BYTE = 0x12;
-*/
+void OSC_Init(void)
+{
+	SYSTEM.SCKCR.BIT.ICK = 0;
+	while(SYSTEM.SCKCR.BIT.ICK != 0);
+	SYSTEM.SCKCR.BIT.PSTOP1 = 1;
+	SYSTEM.SCKCR.BIT.PSTOP0 = 1;
+	SYSTEM.SCKCR.BIT.BCK = 1;
+	SYSTEM.SCKCR.BIT.PCK = 1;
+	while(SYSTEM.SCKCR.BIT.PCK != 1);
+	
+	SYSTEM.SUBOSCCR.BIT.SUBSTOP = 1;
 }

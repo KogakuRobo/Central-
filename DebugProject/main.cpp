@@ -1,12 +1,15 @@
 
+#include<stdio.h>
 #include"CentralLibrary.h"
-#include <stdio.h>
 
 void main(void){
-	E1_init();
+	int i = 0;
+	FILE *fp = fopen("SCI0","w");
+	printf("%d\n",FOPEN_MAX);
+	while(1);
 }
 
 extern "C"{
-void abort(void){
+void user_abort(void){
 }
 }

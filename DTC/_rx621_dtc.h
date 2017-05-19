@@ -49,8 +49,16 @@ typedef struct{
 
 #pragma packoption
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 extern void DTC_init(void);
 extern volatile DTC_TABLE *DTC_CreateVect(unsigned int);
 extern int DTC_SetTable(unsigned int,volatile DTC_TABLE*);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

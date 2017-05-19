@@ -43,6 +43,12 @@
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
+  <Class Guid="873c9a58-9bc5-439a-b476-78629a4553ed">
+    <Instance Guid="873c9a58-9bc5-439a-b476-78629a4553ed">
+      <ProjectDeviceChangedCounter>0</ProjectDeviceChangedCounter>
+      <ProjectInitialDeviceName>R5F56218BxFP</ProjectInitialDeviceName>
+    </Instance>
+  </Class>
   <Class Guid="c3835e31-dea3-4c93-b02b-d2db997f7630">
     <Instance Guid="c3835e31-dea3-4c93-b02b-d2db997f7630">
       <BuildToolManager>3a79707d-5977-45f7-ac11-19c35e333132</BuildToolManager>
@@ -541,11 +547,12 @@
 -show=symbol,total_size
 -nooptimize
 -start=B_1,R_1,B_2,R_2,B,R,SU,SI/00001400,PResetPRG/0FFF80000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFF80100,FIXEDVECT/0FFFFFFD0
+-rom=D=R,D_1=R_1,D_2=R_2
 -nologo
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064615862534513</TimeTagModified--0>
+      <TimeTagModified--0>-8587064543789837757</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -576,7 +583,10 @@
       <LinkOptionContiguousSection-0 />
       <LinkOptionDividedConvertFile-0>False</LinkOptionDividedConvertFile-0>
       <LinkOptionOutputFileName-0>%ProjectName%.abs</LinkOptionOutputFileName-0>
-      <LinkOptionRom-0 />
+      <LinkOptionRom-0>D=R
+D_1=R_1
+D_2=R_2
+</LinkOptionRom-0>
       <LinkOptionSameSize-0>1E</LinkOptionSameSize-0>
       <LinkOptionShowXreference-0>False</LinkOptionShowXreference-0>
       <LinkOptionChangeMessageInformationNumber-0 />
@@ -630,6 +640,7 @@
 -show=symbol,total_size
 -nooptimize
 -start=B_1,R_1,B_2,R_2,B,R,SU,SI/00001400,PResetPRG/0FFF80000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFF80100,FIXEDVECT/0FFFFFFD0
+-rom=D=R,D_1=R_1,D_2=R_2
 -nologo
 -exit
 </LinkOptionCommandLine-0>
@@ -794,7 +805,12 @@
       <LbgOptionOtherAdditionalOptions-DefaultValue />
       <LbgOptionReent-DefaultValue>False</LbgOptionReent-DefaultValue>
       <LbgOptionSpeedAndSize-DefaultValue>Size</LbgOptionSpeedAndSize-DefaultValue>
-      <LbgOptionCommandLine-DefaultValue />
+      <LbgOptionCommandLine-DefaultValue>-isa=rxv1
+-fpu
+-head=runtime,stdarg,stdio,stdlib,string,new
+-output=%BuildModeName%\%ProjectName%.lib
+-nologo
+</LbgOptionCommandLine-DefaultValue>
       <LbgOptionHeadMathH-DefaultValue>False</LbgOptionHeadMathH-DefaultValue>
       <LbgOptionLoop-DefaultValue>Auto</LbgOptionLoop-DefaultValue>
       <LbgOptionSecureMalloc-DefaultValue>False</LbgOptionSecureMalloc-DefaultValue>
@@ -842,7 +858,7 @@
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064642860185040</TimeTagModified--0>
+      <TimeTagModified--0>-8587064577339201799</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -859,14 +875,19 @@
       <LbgOptionOtherAdditionalOptions-0 />
       <LbgOptionReent-0>False</LbgOptionReent-0>
       <LbgOptionSpeedAndSize-0>Size</LbgOptionSpeedAndSize-0>
-      <LbgOptionCommandLine-0 />
+      <LbgOptionCommandLine-0>-isa=rxv1
+-fpu
+-head=runtime,stdarg,stdio,stdlib,string,new
+-output=%BuildModeName%\%ProjectName%.lib
+-nologo
+</LbgOptionCommandLine-0>
       <LbgOptionHeadMathH-0>False</LbgOptionHeadMathH-0>
       <LbgOptionLoop-0>Auto</LbgOptionLoop-0>
       <LbgOptionSecureMalloc-0>False</LbgOptionSecureMalloc-0>
       <LbgOptionHeadMathfH-0>False</LbgOptionHeadMathfH-0>
       <LbgOptionLoopValue-0>2</LbgOptionLoopValue-0>
       <LbgOptionUseSameObjectRelatedSettingsAsCompileOptions-0>False</LbgOptionUseSameObjectRelatedSettingsAsCompileOptions-0>
-      <LbgOptionHeadStdargH-0>False</LbgOptionHeadStdargH-0>
+      <LbgOptionHeadStdargH-0>True</LbgOptionHeadStdargH-0>
       <LbgOptionInline-0>Auto</LbgOptionInline-0>
       <LbgOptionSectionP-0>P</LbgOptionSectionP-0>
       <LbgOptionHeadStdioH-0>True</LbgOptionHeadStdioH-0>
@@ -1284,6 +1305,11 @@
       <ChannelColor14>c0317f0c</ChannelColor14>
       <ChannelColor15>c060493e</ChannelColor15>
       <ChannelColor16>c072808e</ChannelColor16>
+    </Instance>
+  </Class>
+  <Class Guid="2a2c2a43-ecdb-4e88-80bd-e75f3e33db90">
+    <Instance Guid="2a2c2a43-ecdb-4e88-80bd-e75f3e33db90">
+      <ProductVersion>7.00.00.00</ProductVersion>
     </Instance>
   </Class>
 </CubeSuiteProject>
