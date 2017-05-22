@@ -8,5 +8,5 @@
 /*  NOTE:THIS IS A TYPICAL EXAMPLE.                                    */
 /*                                                                     */
 /***********************************************************************/
-#pragma stacksize su=0x400
+#pragma stacksize su=0x4000
 #pragma stacksize si=0x400

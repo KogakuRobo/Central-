@@ -1,0 +1,43 @@
+
+;変数宣言
+	.SECTION	B,DATA,ALIGN=4
+	.GLB	_esc_pc		;割り込み前のプログラムカウンタ
+	.GLB	_esc_psw	;割り込み前のプロセッサステータスワード
+	.GLB	_esc_fpsw
+	.GLB	_esc_usp
+	
+	.GLB	_swint_esc_reg
+
+_esc_pc:
+	.BLKL 		1
+_esc_psw:
+	.BLKL 		1
+_esc_fpsw:
+	.BLKL		1
+_esc_usp:
+	.BLKL		1
+
+
+;プログラム
+	.SECTION	P,CODE
+	.GLB		_swint
+	.RVECTOR	27,_low_swint
+_low_swint:
+	;PCとPSWを別領域に退避
+	
+	PUSHC		USP
+	PUSHC		FPSW
+	PUSHM		R1-R15
+	MOV.L		R0,R14
+	MOV.L		#_swint_esc_reg,R15
+	MOV.L		R14,[R15]
+	
+	BSR		_swint
+	
+	
+	POPM 	R1-R15
+	POPC 	FPSW
+	POPC 	USP
+	RTE
+
+	.END

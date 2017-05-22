@@ -16,6 +16,13 @@
       <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
       <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
     </Instance>
+    <Instance Guid="3afd2b81-ffbc-4ce6-b080-d4bf477f6d5b">
+      <Name>CentralLibrary.rel</Name>
+      <Type>File</Type>
+      <RelativePath>..\DefaultBuild\CentralLibrary.rel</RelativePath>
+      <TreeImageGuid>0163449b-1184-496f-9f59-23f3dda22baa</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">
@@ -63,7 +70,9 @@
       <CurrentBuildMode>DefaultBuild</CurrentBuildMode>
       <SourceItemGuid0>7bbddd8b-8399-41d7-b85e-41c2fe1f930c</SourceItemGuid0>
       <SourceItemType0>CppSource</SourceItemType0>
-      <SourceItemCount>1</SourceItemCount>
+      <SourceItemGuid1>3afd2b81-ffbc-4ce6-b080-d4bf477f6d5b</SourceItemGuid1>
+      <SourceItemType1>ObjectSource</SourceItemType1>
+      <SourceItemCount>2</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -552,7 +561,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064543789837757</TimeTagModified--0>
+      <TimeTagModified--0>-8587060976322806603</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -932,11 +941,21 @@ D_2=R_2
       <ItemAddTime>636307745118657231</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="3afd2b81-ffbc-4ce6-b080-d4bf477f6d5b">
+      <ItemAddTime>636311384531949033</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587064615736118577</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
       <SourceItem0-BuildingTarget-0>True</SourceItem0-BuildingTarget-0>
       <SourceItem0-IndividualCompileOption-0>False</SourceItem0-IndividualCompileOption-0>
+    </Instance>
+    <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
+      <TimeTagModified-SourceItem1--0>-8587060976322816772</TimeTagModified-SourceItem1--0>
+      <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
+      <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
+      <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
     </Instance>
   </Class>
   <Class Guid="44fa27c9-0aa0-4297-bd3b-2c5c5bdb8881">

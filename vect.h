@@ -78,7 +78,7 @@ void Excep_FCU_FIFERR(void);
 void Excep_FCU_FRDYI(void);
 
 // ICU SWINT
-#pragma interrupt (Excep_ICU_SWINT(vect=27))
+//#pragma interrupt (Excep_ICU_SWINT(vect=27))
 void Excep_ICU_SWINT(void);
 
 // CMT0 CMI0

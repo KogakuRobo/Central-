@@ -15,10 +15,15 @@
 *
 ************************************************************************/
 
+#include <stddef.h>
+#include <stdio.h>
+#include "lowsrc.h"
 #include "CentralLibrary.h"
+#include "syscall_table.h"
 #include "Description.h"
 #include "iodefine.h"
 
+#include "./DTC/_rx621_dtc.h"
 #include "./E1/E1_lib.h"
 #include "../SCI0/sci0_lowsrc.h"
 
@@ -31,12 +36,15 @@ extern void HardwareSetup(void);
 #endif
 
 void OSC_Init(void);
-
+extern void main(void);
 void HardwareSetup(void)
 {
 	OSC_Init();
 	E1_init();
+	DTC_init();
 	sci0_init();
+	
+	sys_init();
 }
 
 void OSC_Init(void)

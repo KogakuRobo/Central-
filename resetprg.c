@@ -19,12 +19,14 @@
 *
 *********************************************************************/
 
+#include	<stddef.h>
 #include	<machine.h>
 #include	<_h_c_lib.h>
 //#include	<stddef.h>					// Remove the comment when you use errno
 //#include 	<stdlib.h>					// Remove the comment when you use rand()
 #include	"typedefine.h"		// Define Types
 #include	"stacksct.h"		// Stack Sizes (Interrupt and User)
+#include	"CentralLibrary.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -106,7 +108,7 @@ void PowerON_Reset_PC(void)
 	_CALL_INIT();					// Use global class object
 
 	set_psw(PSW_init);				// Set Ubit & Ibit for PSW
-//	chg_pmusr();					// Remove the comment when you need to change PSW PMbit (SuperVisor->User)
+	chg_pmusr();					// Remove the comment when you need to change PSW PMbit (SuperVisor->User)
 
 	main();
 

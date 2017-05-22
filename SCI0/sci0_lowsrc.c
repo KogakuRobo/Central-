@@ -27,16 +27,9 @@ long sci0_open(_FD* fd,
 	long mode)
 {
 	if(IS_OPEN_FILE_NOTHING){
-		MSTP(SCI0) = 0;
-	
-		PORT2.DDR.BIT.B1 = 0;		//RxD1
-		PORT2.DDR.BIT.B0 = 1;		//TxD1
-	
-		PORT2.ICR.BIT.B1 = 1;
-		
 		SCI0.SMR.BYTE = 0x00;
 		SCI0.SEMR.BIT.ABCS = 1;
-		SCI0.BRR = 26 - 1;
+		SCI0.BRR = 53 - 1;
 		
 		IPR(SCI0,TXI0) = 13;
 		IEN(SCI0,TXI0) = 1;
@@ -60,7 +53,7 @@ long sci0_close(_FD *fd)
 		IEN(SCI0,TXI0) = 0;
 		IEN(SCI0,TEI0) = 0;
 		
-		MSTP(SCI0) = 1;
+		//MSTP(SCI0) = 1;
 		
 	}
 	else return -1;
@@ -71,6 +64,7 @@ long sci0_write(_FD *fd,
 	const unsigned char *buf,
 	long count)
 {
+	
 	DTC.DTCCR.BIT.RRS = 0;
 	
 	tx_table->MRA.BIT.MD = 0x00;			//ノーマル転送
@@ -108,9 +102,16 @@ long sci0_read(_FD *fd,
 
 void sci0_init(void)
 {
+	MSTP(SCI0) = 0;
 	set_io_driver(g_sci0_path,&_sci0_driver);
+	
+	PORT2.DDR.BIT.B1 = 0;		//RxD1
+	PORT2.DDR.BIT.B0 = 1;		//TxD1
+	
+	PORT2.DR.BIT.B0 = 1;		//TEbitを0にすると信号線が経ち下がるため
+	
+	PORT2.ICR.BIT.B1 = 1;
 }
-
 
 #pragma interrupt SCI0_TXI0(vect = VECT(SCI0,TXI0))
 void SCI0_TXI0(void)

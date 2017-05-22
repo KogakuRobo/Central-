@@ -1,2 +1,2 @@
 /* size of area managed by sbrk */
-#define HEAPSIZE 0x800
+#define HEAPSIZE 0x1000

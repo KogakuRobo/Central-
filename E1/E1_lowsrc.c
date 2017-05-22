@@ -70,14 +70,14 @@ void E1_init(void)
 {	
 	set_io_driver(g_e1_path,&_e1_driver);
 	
-	if( freopen( g_e1_path, "r", stdin ) == NULL )stdin->_Mode = 0xffff;  /* Not allow the access if it fails to open */
+	if( freopen( "E1", "r", stdin ) == NULL )stdin->_Mode = 0xffff;  /* Not allow the access if it fails to open */
 	    stdin->_Mode  = _MOPENR;            /* Read only attribute              */
 	    stdin->_Mode |= _MNBF;              /* Non-buffering for data           */
 	    stdin->_Bend = stdin->_Buf + 1;  /* Re-set pointer to the end of buffer */
-	if( freopen( g_e1_path, "w", stdout ) == NULL )stdout->_Mode = 0xffff; /* Not allow the access if it fails to open */
+	if( freopen( "E1", "w", stdout ) == NULL )stdout->_Mode = 0xffff; /* Not allow the access if it fails to open */
 	    stdout->_Mode |= _MNBF;             /* Non-buffering for data           */
 	    stdout->_Bend = stdout->_Buf + 1;/* Re-set pointer to the end of buffer */
-	if( freopen( g_e1_path, "w", stderr ) == NULL )stderr->_Mode = 0xffff; /* Not allow the access if it fails to open */
+	if( freopen( "E1", "w", stderr ) == NULL )stderr->_Mode = 0xffff; /* Not allow the access if it fails to open */
 	    stderr->_Mode |= _MNBF;             /* Non-buffering for data           */
 	    stderr->_Bend = stderr->_Buf + 1;/* Re-set pointer to the end of buffer */
 }
