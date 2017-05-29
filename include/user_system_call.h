@@ -7,8 +7,4 @@
 int user_syscall(int,void*);
 int sys_init(void);
 
-long open(const char *name,                  /* File name                 */
-     long  mode,                             /* Open mode                 */
-     long  flg);
-
 #endif

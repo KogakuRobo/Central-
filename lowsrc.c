@@ -113,7 +113,7 @@ void _CLOSEALL( void )
     }
 }
 
-long open(const char *name,                  /* File name                 */
+long kernel_open(const char *name,                  /* File name                 */
      long  mode,                             /* Open mode                 */
      long  flg)                              /* Open flag                 */
 {
@@ -144,7 +144,7 @@ long open(const char *name,                  /* File name                 */
 /*  Return value:Number of write characters (Pass)                        */
 /*               -1                         (Failure)                     */
 /**************************************************************************/
-long write(long  fileno,             /* File number                       */
+long kernel_write(long  fileno,             /* File number                       */
       const unsigned char *buf,       /* The address of destination buffer */
       long  count)                   /* The number of chacter to write    */
 {
@@ -156,7 +156,7 @@ long write(long  fileno,             /* File number                       */
     return -1;
 }
 
-long read( long fileno, unsigned char *buf, long count )
+long kernel_read( long fileno, unsigned char *buf, long count )
 {
     if(fileno < IOSTREAM){
 	    if(file_descriptor[fileno].control_flags.use == 1){
@@ -166,7 +166,7 @@ long read( long fileno, unsigned char *buf, long count )
     return -1;
 }
 
-long close( long fileno )
+long kernel_close( long fileno )
 {
     if(fileno < IOSTREAM){
 	    if(file_descriptor[fileno].control_flags.use == 1){

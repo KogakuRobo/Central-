@@ -40,11 +40,15 @@ extern void main(void);
 void HardwareSetup(void)
 {
 	OSC_Init();
+	
+	IPR(ICU,SWINT) = 15;
+	IEN(ICU,SWINT) = 1;
+	
+	sys_init();
+	
 	E1_init();
 	DTC_init();
 	sci0_init();
-	
-	sys_init();
 }
 
 void OSC_Init(void)

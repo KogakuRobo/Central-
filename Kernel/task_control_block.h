@@ -3,8 +3,9 @@
 
 #include "thread.h"
 
-#define NUMBER_OF_MAX_TASK 16
-#define SIZE_OF_STACK	0x400
+#define NUMBER_OF_MAX_TASK 	6
+#define SIZE_OF_USER_STACK	0x400
+#define SIZE_OF_KERNEL_STACK	0x400
 
 typedef enum{
 	TASK_NON,		//ñ¢èâä˙âªÉ^ÉXÉN
@@ -14,6 +15,7 @@ typedef enum{
 }TASK_STATE;
 
 typedef struct esc_reg{
+	unsigned long ISP;
 	unsigned long GREG[15];
 	unsigned long FPSW;
 	unsigned long USP;
@@ -37,6 +39,7 @@ typedef struct __tcb{
 		
 	}Flags;
 	
+	int num;
 }_task_control_block;
 
 #endif

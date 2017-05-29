@@ -1,43 +1,128 @@
 
 ;変数宣言
-	.SECTION	B,DATA,ALIGN=4
-	.GLB	_esc_pc		;割り込み前のプログラムカウンタ
-	.GLB	_esc_psw	;割り込み前のプロセッサステータスワード
-	.GLB	_esc_fpsw
-	.GLB	_esc_usp
-	
-	.GLB	_swint_esc_reg
-
-_esc_pc:
-	.BLKL 		1
-_esc_psw:
-	.BLKL 		1
-_esc_fpsw:
-	.BLKL		1
-_esc_usp:
-	.BLKL		1
-
 
 ;プログラム
 	.SECTION	P,CODE
 	.GLB		_swint
 	.RVECTOR	27,_low_swint
 _low_swint:
+;	SETPSW		I
 	;PCとPSWを別領域に退避
+;	PUSHC		USP
+;	PUSHC		FPSW
+;	PUSHM		R1-R15
+;	PUSHC		ISP
 	
-	PUSHC		USP
-	PUSHC		FPSW
-	PUSHM		R1-R15
-	MOV.L		R0,R14
-	MOV.L		#_swint_esc_reg,R15
-	MOV.L		R14,[R15]
-	
+;	MOV.L		R0,R3
 	BSR		_swint
-	
-	
-	POPM 	R1-R15
-	POPC 	FPSW
-	POPC 	USP
+;	MVTC		R1,ISP
+;	
+;	POPC	ISP
+;	POPM 	R1-R15
+;	POPC 	FPSW
+;	POPC 	USP
 	RTE
+
+
+	.GLB		__switch_to
+;int _swint_to(_task_control_box *perv,_task_control_box *next);
+__switch_to:
+;レジスタ退避
+	PUSHM		R1-R15
+	ADD		#4,R1,R15
+	
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	POP		R14
+	MOV.L		R14,[R15+]
+	
+	MVFC		USP,R14
+	MOV.L		R14,44H[R1]
+	MVFC		ISP,R14
+	MOV.L		R14,0H[R1]
+	MVFC		PSW,R14
+	MOV.L		R14,4CH[R1]
+	MVFC		FPSW,R14
+	MOV.L		R14,40H[R1]
+	
+	MOV.L		#_SWITCH_RETURN,48H[R1]
+	
+	MOV.L		40H[R2],R14
+	MVTC		R14,FPSW
+	MOV.L		0H[R2],R14
+	MVTC		R14,ISP
+	MOV.L		44H[R2],R14
+	MVTC		R14,USP
+	
+	
+	MOV.L		4CH[R2],R14
+	PUSH.L		R14
+	MOV.L		48H[R2],R14
+	PUSH.L		R14
+	
+	ADD		#3CH,R2,R15
+	MOV.L		[R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	MOV.L		[-R15],R14
+	PUSH.L		R14
+	
+	POPM		R1-R15
+	
+	RTE
+	
+_SWITCH_RETURN:
+	RTS
 
 	.END

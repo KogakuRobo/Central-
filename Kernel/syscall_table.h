@@ -7,7 +7,12 @@ typedef enum{
 	SYSCALL_CREATE_THREAD = 0,
 	SYSCALL_DESTROY_THREAD,
 	SYSCALL_OPEN,
+	SYSCALL_WRITE,
+	SYSCALL_READ,
 	SYSCALL_CLOSE,
+	
+	SYSCALL_SUSPEND_THREAD,
+	SYSCALL_RESUME_THREAD,
 	
 	SYSCALL_INIT,
 }syscall_table;
@@ -19,6 +24,28 @@ struct __create_thread_struct{
 	void *(*function)(thread_t *,void*);
 	void *arg;
 };
+
+typedef struct{
+	const char *name;
+	long mode;
+	long flg;
+}open_stc;
+
+typedef struct{
+	long fileno;
+	const unsigned char *buf;
+	long count;
+}write_stc;
+
+typedef struct{
+	long fileno;
+	unsigned char *buf;
+	long count;
+}read_stc;
+
+typedef struct{
+	long fileno;
+}close_stc;
 
 typedef struct __create_thread_struct CreateThreadStruct;
 
