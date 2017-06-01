@@ -47,6 +47,18 @@
 #define O_APPEND 0x0020 /* The position is set for next reading/writing    */
                         /* 0: Top of the file 1: End of file               */
 
+class _low_file_desc_class{
+public:
+	virtual long read	(unsigned char*, long) 		= 0;
+	virtual long write	(const unsigned char*, long) 	= 0;
+	virtual long close	(void) 				= 0;
+};
+			
+class _low_file_desc_factor{
+public:
+	virtual const unsigned char*	get_name(void) 		= 0;
+	virtual _low_file_desc_class* 	open(const char *,long) = 0;
+};
 
 struct _low_file_desc{
 	long (*_open)	(struct _low_file_desc *,	const char*,		long);

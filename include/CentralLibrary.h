@@ -3,15 +3,8 @@
 
 #include "iodefine.h"
 
-#ifdef __cplusplus
-extern "C"{
-#endif
-
 #include"user_system_call.h"
 
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 

@@ -4,7 +4,21 @@
 #include "../lowsrc.h"
 #include "E1_lib.h"
 
-static const char g_e1_path[] = E1_PATH;
+static const unsigned char g_e1_path[] = E1_PATH;
+
+class E1_file_desc_factor:public _low_file_desc_factor{
+public:
+	virtual const unsigned char* 	get_name(void){return g_e1_path;}
+	virtual _low_file_desc_class*	open(const unsigned char* path,long mode);
+};
+
+class E1_file_desc:public _low_file_desc_class{
+	//プライベートデータなし
+public:
+	virtual long read(unsigned char,long);
+	virtual long write(const unsigned char,long);
+	virtual long close(void);
+};
 
 long E1_open(_FD*,const char*,	long);
 long E1_write(_FD*,const unsigned char *,long);
@@ -17,7 +31,8 @@ _FD _e1_driver = {
 	._write = E1_write,
 	._close = E1_close,
 };
-	
+
+
 
 /* Output one character to standard output */
 extern void charput(unsigned char);

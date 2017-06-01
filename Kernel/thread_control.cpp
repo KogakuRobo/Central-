@@ -1,48 +1,33 @@
-#include<stddef.h>
-#include"task_control_block.h"
-#include"syscall_table.h"
+#include <stddef.h>
+#include "task_control_block.h"
+#include "task_control_que.h"
+#include "syscall_table.h"
 
 #define NUMBER_OF_MAX_QUE 5
-
-typedef struct _task_que{
-	struct _task_que *prev,*next,*head,*end;
-	thread_t *tid;
-	struct{
-		unsigned char use:1;
-		
-	}Flags;
-}TaskQue;
 
 extern int now_tcb_number;
 extern _task_control_block TCBs[NUMBER_OF_MAX_TASK];
 
-TaskQue ReadyQueHead;
+TaskQueHead ReadyQueHead;
 TaskQue Que[NUMBER_OF_MAX_QUE];
 
 
 void user_kernel_des(void);
 int kernel_ready_thread(thread_t *);
+void* idle_task(thread_t*,void*);
 
 int init(void){
 	const int MAIN_TCB = 0;
 	const int IDLE_TCB = 1;
 	static thread_t main;
-	/*
-	for(int tcb_node = 1;tcb_node < NUMBER_OF_MAX_TASK;tcb_node++){
-		TCBs[tcb_node].Flags.use = 0;
-		TCBs[tcb_node].reg.USP = (long)(__secend("SU")) - SIZE_OF_USER_STACK * tcb_node - 4;
-		*(long *)(TCBs[tcb_node].p_reg->USP) = (long)user_kernel_des;
-		TCBs[tcb_node].p_reg->PSW = 0x00130000;
-		TCBs[tcb_node].p_reg->FPSW = 0x00000100;
-		TCBs[tcb_node].arg = NULL;
-		TCBs[tcb_node].state = TASK_NON;
-		TCBs[tcb_node].priority = 0;
-		TCBs[tcb_node].num = tcb_node;
-	}
-	*/
+	static thread_t idle;
+	
 	for(int que_node = 0;que_node < NUMBER_OF_MAX_QUE;que_node++){
 		Que[que_node].Flags.use = 0;Que[que_node].tid = NULL;
 	}
+
+//レディキューなし
+	ReadyQueHead.prev = ReadyQueHead.next = &ReadyQueHead;
 	
 //メインタスク用初期設定
 //すでに動作しているこのタスク
@@ -53,9 +38,12 @@ int init(void){
 	
 	TCBs[MAIN_TCB].tid = &main;
 	main.p_TCB = &TCBs[MAIN_TCB];
-	
-//レディキューなし
-	ReadyQueHead.prev = ReadyQueHead.next = ReadyQueHead.end = ReadyQueHead.head = &ReadyQueHead;
+
+//アイドルタスク生成
+//スリープモードに移行するために、タスクはスーパーバイザーモードで起動
+	thread_create(&idle,CT_PRIORITY_MIN,idle_task,NULL);
+	((_task_control_block*)idle.p_TCB)->reg.PSW = 0x00000000;
+
 	return 0;
 }
 
@@ -98,7 +86,7 @@ int kernel_ready_thread(thread_t *tid){
 	int free_que;
 	
 	TaskQue *node 			= ReadyQueHead.next;
-	_task_control_block *terget 	= tid->p_TCB;
+	_task_control_block *terget 	= (_task_control_block *)tid->p_TCB;
 	 
 	for(free_que = 0;free_que < NUMBER_OF_MAX_QUE;free_que++){
 		if(Que[free_que].Flags.use == 0)break;
@@ -183,7 +171,7 @@ int context_switch(int num){
 		break;
 	}
 	
-	TaskQue *run = TCBs[num].tid->p_Que;
+	TaskQue *run = (TaskQue*)TCBs[num].tid->p_Que;
 	run->prev->next = run->next;
 	run->next->prev = run->prev;
 	run->Flags.use = 0;

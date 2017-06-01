@@ -5,48 +5,37 @@
 #include"CentralLibrary.h"
 #include"machine.h"
 
-volatile int g_time = 0;
+volatile int g_r_time = 0;
 
 
 thread_t *t_main;
-thread_t t_test;
+thread_t t_test_a;
 
 void cmt_init(void){
+	MSTP(CMT0) = 0;
 	CMT0.CMCR.BIT.CKS = 0;
 	CMT0.CMCR.BIT.CMIE = 1;
 	
-	IPR(CMT0,CMI0) = 10;
+	IPR(CMT0,CMI0) = 15;
 	IEN(CMT0,CMI0) = 1;
 	
-	CMT0.CMCOR = 15000;
+	CMT0.CMCOR = 6000 - 1 ;
 	
 	CMT.CMSTR0.BIT.STR0 = 1;
 }
 
-void *TestA(thread_t * tid,void *attr){
-	FILE *fp = (FILE*)attr;
-	while(1){
-		fprintf(fp,"count Up\n\r");
-		for(int i = 0;i < 256;i++){
-			for(int j =0 ; j < 256;j++){
-			}
-		}
-	}
-	return NULL;
+#pragma interrupt CMT0_CMI0(vect = VECT(CMT0,CMI0))
+void CMT0_CMI0(void)
+{
+	thread_resume(&t_test_a);
 }
 
-void *TestB(thread_t * tid,void *attr){
-	FILE *fp = (FILE*)attr;
-	PORTA.DR.BIT.B0 = 0;
-	PORTA.DR.BIT.B1 = 0;
+
+void *TestA(thread_t * tid,void *attr){
 	while(1){
-		g_time++;
-		for(int i = 0;i < 256;i++){
-			for(int j =0 ; j < 256;j++){
-			}
-		}
+		thread_suspend(&t_test_a);
+		g_r_time++;
 	}
-	return NULL;
 }
 
 void main(void)
@@ -55,14 +44,16 @@ void main(void)
 
 	setvbuf(fp,(char*)fp->_Buf,_IONBF,1);
 	
-	thread_create(&t_test,CT_PRIORITY_MIN,TestB,fp);
+	thread_create(&t_test_a,CT_PRIORITY_MAX,TestA,fp);
+	
+	cmt_init();
 	
 	PORTA.DDR.BIT.B0 = 0x01;
 	PORTA.DDR.BIT.B1 = 0x01;
 	while(1){
 		static int count = 0;
-		int time = g_time;
-		fprintf(fp,"time[%d] %d\n\r",count++,time);
+		int ps = get_psw();
+		fprintf(fp,"time[%d],%d\n\r",count++,g_r_time);
 	}
 	while(1);
 }
