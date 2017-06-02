@@ -21,34 +21,21 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <ctype.h>
-#include "lowsrc.h"
+#include "lowsrc.hpp"
 
 extern const long _nfiles;     /* The number of files for input/output files */
 
 #include <stdio.h>
 
-//ドライバ登録名とFDの対応テーブル
-struct{
-	const char *name;
-	_FD *fd;
-}g_name_fd[IODRIVER];
-
-//ファイルディスクリプタ本体
-_FD file_descriptor[IOSTREAM];
-
-FILE *_Files[IOSTREAM]; // structure for FILE 
+_low_file_desc_factor* 	factor[IODRIVER];
+_low_file_desc_class*	file_desc[IOSTREAM];
 
 //ドライバ登録関数
-int set_io_driver(const char *name,_FD *fd)
-{
-	int i = 0;
-	//バッファが使用されていないことを確認
-	for(;i < IODRIVER;i++){
-		if(g_name_fd[i].name == NULL){
-			//開いているところに名前領域を動的に開けてコピー。
-			g_name_fd[i].name = name;
-			g_name_fd[i].fd = fd;
-			return 0;
+int set_io_driver(_low_file_desc_factor* _factor){
+	for(int i = 0;i < IODRIVER;i++){
+		if(factor[i] == NULL){
+			factor[i] = _factor;
+			return i;
 		}
 	}
 	return -1;
@@ -58,9 +45,12 @@ int set_io_driver(const char *name,_FD *fd)
 int search_io_driver(const char *name)
 {
 	int i = 0;
+	const char* n;
 	//識別ネームが同一であることを確認
 	for(;i < IODRIVER;i++){
-		if(strcmp( name, g_name_fd[i].name ) == 0){
+		if(factor[i] == NULL)break;
+		n = (const char*)factor[i]->get_name();
+		if(strcmp( name, n ) == 0) {
 			return i;
 		}
 	}
@@ -94,8 +84,8 @@ void _INIT_IOLIB( void )
     _Files[1] = stdout;
     _Files[2] = stderr;
 
-    for(i = 0;i < IOSTREAM;i++)file_descriptor[i].control_flags.use = 0;
-    for(i = 0;i < IODRIVER;i++)g_name_fd[i].name = NULL;
+    for(i = 0;i < IOSTREAM;i++)file_desc[i] = NULL;
+    for(i = 0;i < IODRIVER;i++)factor[i] = NULL;
 }
 
 /****************************************************************************/
@@ -119,11 +109,10 @@ long kernel_open(const char *name,                  /* File name                
 {
 	int fdno = 0;
 	int driver_no;
-	int ret;
 	char path[6];
 	//空きディスクリプタナンバー調べ
 	for(;fdno < IOSTREAM;fdno++){
-		if(file_descriptor[fdno].control_flags.use == 0)break;
+		if(file_desc[fdno] == NULL)break;
 	}
 	if(fdno == IOSTREAM)return -1;		//空き無し
 	
@@ -132,10 +121,11 @@ long kernel_open(const char *name,                  /* File name                
 	driver_no = search_io_driver(path);
 	if(driver_no == -1)return -1;		//当該ドライバなし
 	
-	file_descriptor[fdno] = *g_name_fd[driver_no].fd;
-	file_descriptor[fdno].control_flags.use = 1;
-	ret = file_descriptor[fdno]._open(&file_descriptor[fdno],name,mode);
-	if(ret == -1)return -1;
+	file_desc[fdno] = factor[driver_no]->open(name,mode);
+	if(file_desc[fdno] == NULL){
+		return -1;
+	}
+	file_desc[fdno]->set_factor(factor[driver_no]);
 	return fdno;
 }
 
@@ -149,8 +139,8 @@ long kernel_write(long  fileno,             /* File number                      
       long  count)                   /* The number of chacter to write    */
 {
     if(fileno < IOSTREAM){
-	    if(file_descriptor[fileno].control_flags.use == 1){
-		    return file_descriptor[fileno]._write(&file_descriptor[fileno],buf,count);
+	    if(file_desc[fileno] != NULL){
+		    return file_desc[fileno]->write(buf,count);
 	    }
     }
     return -1;
@@ -159,8 +149,8 @@ long kernel_write(long  fileno,             /* File number                      
 long kernel_read( long fileno, unsigned char *buf, long count )
 {
     if(fileno < IOSTREAM){
-	    if(file_descriptor[fileno].control_flags.use == 1){
-		    return file_descriptor[fileno]._read(&file_descriptor[fileno],buf,count);
+	    if(file_desc[fileno] != NULL){
+		    return file_desc[fileno]->read(buf,count);
 	    }
     }
     return -1;
@@ -169,16 +159,25 @@ long kernel_read( long fileno, unsigned char *buf, long count )
 long kernel_close( long fileno )
 {
     if(fileno < IOSTREAM){
-	    if(file_descriptor[fileno].control_flags.use == 1){
-		    int ret = file_descriptor[fileno]._close(&file_descriptor[fileno]);
+	    if(file_desc[fileno] != NULL){
+		    int ret =file_desc[fileno]->get_factor()->close(file_desc[fileno]);
 		    if(ret == 0)
-		    {	
-		    	file_descriptor[fileno].control_flags.use = 0;
+		    {
 			return 0;
 		    }
 		    else return -1;
 	    }
 	    return 0;
+    }
+    return -1;
+}
+
+long kernel_ioctl(long fileno,unsigned long request,void *argp)
+{
+	if(fileno < IOSTREAM){
+	    if(file_desc[fileno] != NULL){
+		    return file_desc[fileno]->ioctl(request,argp);
+	    }
     }
     return -1;
 }

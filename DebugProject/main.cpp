@@ -1,59 +1,39 @@
 
-#include<stdio.h>
-#include<stdlib.h>
-#include"../lowsrc.h"
-#include"CentralLibrary.h"
-#include"machine.h"
-
-volatile int g_r_time = 0;
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "localization.hpp"
+#include "CentralLibrary.h"
 
 thread_t *t_main;
-thread_t t_test_a;
-
-void cmt_init(void){
-	MSTP(CMT0) = 0;
-	CMT0.CMCR.BIT.CKS = 0;
-	CMT0.CMCR.BIT.CMIE = 1;
-	
-	IPR(CMT0,CMI0) = 15;
-	IEN(CMT0,CMI0) = 1;
-	
-	CMT0.CMCOR = 6000 - 1 ;
-	
-	CMT.CMSTR0.BIT.STR0 = 1;
-}
-
-#pragma interrupt CMT0_CMI0(vect = VECT(CMT0,CMI0))
-void CMT0_CMI0(void)
-{
-	thread_resume(&t_test_a);
-}
-
-
-void *TestA(thread_t * tid,void *attr){
-	while(1){
-		thread_suspend(&t_test_a);
-		g_r_time++;
-	}
-}
 
 void main(void)
 {
+	
+	data d;
+	//SCI0のopenとノンバッファ処理
 	FILE *fp = fopen("SCI0","w");
-
+	if(fp == NULL){
+		printf("LKK");
+	}
 	setvbuf(fp,(char*)fp->_Buf,_IONBF,1);
 	
-	thread_create(&t_test_a,CT_PRIORITY_MAX,TestA,fp);
+	fprintf(fp,"Program Start\n\r");
 	
-	cmt_init();
+	thread_t loca;
+	thread_create(&loca,CT_PRIORITY_MAX + 3,localization,&d);
 	
-	PORTA.DDR.BIT.B0 = 0x01;
-	PORTA.DDR.BIT.B1 = 0x01;
-	while(1){
-		static int count = 0;
-		int ps = get_psw();
-		fprintf(fp,"time[%d],%d\n\r",count++,g_r_time);
+	extern long kernel_time;
+	
+	msleep(2000);
+	
+	fprintf(fp,"Average:,%d\n\r",d.ave);
+	fprintf(fp,"Deviation:,%d\n\r",d.devia);
+	fprintf(fp,"\n\rtime,yaw \n\r");
+	
+	for(float i = 0.0;;i = i + 1.0){
+		msleep(10);
+		fprintf(fp,"%d,%f\n\r",kernel_time,d.yaw);
+		//printf("FFF\n");
 	}
 	while(1);
 }

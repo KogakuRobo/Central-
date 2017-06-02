@@ -2,30 +2,38 @@
 #include"syscall_table.h"
 #include<stddef.h>
 
+extern "C"{
 long open(const char *name,long mode,long flg)
 {
-	open_stc stc ={.name = name,.mode = mode,.flg = flg};
+	open_stc stc ={name,mode,flg};
 	return user_syscall(SYSCALL_OPEN,&stc);
 }
 
 long write(long fileno,const unsigned char *buf,long count){
-	write_stc stc = {.fileno = fileno,.buf = buf,.count = count};
+	write_stc stc = {fileno,buf,count};
 	return user_syscall(SYSCALL_WRITE,&stc);
 }
 
 long read(long fileno,unsigned char* buf,long count){
-	read_stc stc = {.fileno=fileno,.buf = buf,.count = count};
+	read_stc stc = {fileno,buf,count};
 	return user_syscall(SYSCALL_READ,&stc);
 }
 
 long close(long fileno){
-	close_stc stc = {.fileno = fileno};
+	close_stc stc = {fileno};
 	return user_syscall(SYSCALL_CLOSE,&stc);
+}
+
+long ioctl(long fileno,unsigned long request,void *argp)
+{
+	ioctl_stc stc = {request,argp};
+	return user_syscall(SYSCALL_IOCTL,&stc);
+}
 }
 
 int thread_create(thread_t *tid,long attr,void*(*function)(thread_t *,void*),void* arg)
 {
-	CreateThreadStruct cts ={.tid = tid,.attr = attr,.function=function,.arg=arg};
+	CreateThreadStruct cts ={tid,attr,function,arg};
 	return user_syscall(SYSCALL_CREATE_THREAD,&cts);
 	
 }
@@ -40,6 +48,10 @@ int thread_suspend(thread_t *tid){
 
 int thread_resume(thread_t *tid){
 	return user_syscall(SYSCALL_RESUME_THREAD,tid);
+}
+
+int msleep(unsigned long t){
+	return user_syscall(SYSCALL_TIMER_MSLEEP,(void*)t);
 }
 
 int sys_init(void){

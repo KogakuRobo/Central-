@@ -1,135 +1,125 @@
 #include <stddef.h>
 #include "task_control_block.h"
-#include "task_control_que.h"
+#include "task_que.hpp"
 #include "syscall_table.h"
 
-#define NUMBER_OF_MAX_QUE 5
+static thread_t* current_thread;
 
-extern int now_tcb_number;
-extern _task_control_block TCBs[NUMBER_OF_MAX_TASK];
+static thread_t thread_main;
+static thread_t thread_idle;
 
-TaskQueHead ReadyQueHead;
-TaskQue Que[NUMBER_OF_MAX_QUE];
-
+task_list ready_list;
 
 void user_kernel_des(void);
 int kernel_ready_thread(thread_t *);
 void* idle_task(thread_t*,void*);
 
-int init(void){
-	const int MAIN_TCB = 0;
-	const int IDLE_TCB = 1;
-	static thread_t main;
-	static thread_t idle;
-	
-	for(int que_node = 0;que_node < NUMBER_OF_MAX_QUE;que_node++){
-		Que[que_node].Flags.use = 0;Que[que_node].tid = NULL;
-	}
+struct{
+	long su_addr;
+	long si_addr;
+	struct{
+		unsigned char use:1;
+	}flags;
+}stack_addr[NUMBER_OF_MAX_TASK];
 
-//レディキューなし
-	ReadyQueHead.prev = ReadyQueHead.next = &ReadyQueHead;
+int init(void){
+
+	for(int i = 0;i < NUMBER_OF_MAX_TASK;i++){
+		stack_addr[i].su_addr = (long)(__secend("SU")) - SIZE_OF_USER_STACK * i - 4;
+		stack_addr[i].si_addr = (long)(__secend("SI")) - SIZE_OF_KERNEL_STACK * i;
+		stack_addr[i].flags.use = 0;
+	}
 	
 //メインタスク用初期設定
 //すでに動作しているこのタスク
 //メインタスクのregは退避するときはじめて初期化されます。
-	TCBs[MAIN_TCB].Flags.use = 1;
-	TCBs[MAIN_TCB].state = TASK_RUN;				//メインスレッド
-	TCBs[MAIN_TCB].priority = 0x0f;
+	thread_main.Flags.use = 1;
+	thread_main.state = TASK_RUN;				//メインスレッド
+	thread_main.priority = 0x0f;
+	thread_main.stack_num = 0;
+	stack_addr[0].flags.use = 1;
 	
-	TCBs[MAIN_TCB].tid = &main;
-	main.p_TCB = &TCBs[MAIN_TCB];
-
+	current_thread = &thread_main;
+	
 //アイドルタスク生成
 //スリープモードに移行するために、タスクはスーパーバイザーモードで起動
-	thread_create(&idle,CT_PRIORITY_MIN,idle_task,NULL);
-	((_task_control_block*)idle.p_TCB)->reg.PSW = 0x00000000;
+	thread_create(&thread_idle,CT_PRIORITY_MIN,idle_task,NULL);
+	thread_idle.reg.PSW = 0x00000000;
 
 	return 0;
 }
 
 int kernel_create_thread(CreateThreadStruct *cts){
-	_task_control_block *terget;
-	int free_tcb;
-	
-	for(free_tcb = 0;free_tcb < NUMBER_OF_MAX_TASK;free_tcb++){
-		if(TCBs[free_tcb].Flags.use == 0)break;
+
+	int free_stack;
+	_task_control_block *terget = cts->tid;
+	for(free_stack = 0;free_stack < NUMBER_OF_MAX_TASK;free_stack++){
+		if(stack_addr[free_stack].flags.use == 0)break;
 	}
-	if(free_tcb == NUMBER_OF_MAX_TASK)return -1;
-	
-	terget 				= &TCBs[free_tcb];
+	if(free_stack == NUMBER_OF_MAX_TASK)return -1;
+	stack_addr[free_stack].flags.use = 1;
 	
 	terget->reg.PC 			= (unsigned long)cts->function;
-	terget->reg.USP 		= (long)(__secend("SU")) - SIZE_OF_USER_STACK * free_tcb - 4;
-	terget->reg.ISP 		= (long)(__secend("SI")) - SIZE_OF_KERNEL_STACK * free_tcb;
+	terget->reg.USP 		= stack_addr[free_stack].su_addr;
+	terget->reg.ISP 		= stack_addr[free_stack].si_addr;
 	*(long *)(terget->reg.USP) 	= (long)user_kernel_des;
 	terget->reg.PSW			= 0x00130000;
+	terget->reg.FPSW		= 0x00000100;
 	
 	terget->reg.GREG[0] 		= (long)cts->tid;
 	terget->reg.GREG[1] 		= (long)cts->arg;
 	
 	terget->function 		= cts->function;
 	terget->arg 			= cts->arg;
-	terget->priority 		= (cts->attr & 0x000000ff);
-	terget->state 			= TASK_READY;
-	terget->tid 			= cts->tid;
+	terget->priority 		= cts->attr.BIT.priority;
 	terget->Flags.use 		= 1;
-	terget->num 			= free_tcb;
+	terget->stack_num 		= free_stack;
 	
-	cts->tid->p_TCB 		= terget;
-	
-	if(kernel_ready_thread(cts->tid) != 0)return -1;
+	switch(cts->attr.BIT.create_mode){
+	case (CT_READY & 0x00000f00) >> 8:
+		kernel_ready_thread(cts->tid);
+		terget->state = TASK_READY;
+		return -1;
+		break;
+	case (CT_WAIT & 0x00000f00) >> 8:
+		terget->state = TASK_WAIT;
+		break;
+	case CT_RUN:
+		break;
+	}
 	
 	return 0;
 }
 
 int kernel_ready_thread(thread_t *tid){
-	int free_que;
+
+	ready_list.priority_push(tid);
 	
-	TaskQue *node 			= ReadyQueHead.next;
-	_task_control_block *terget 	= (_task_control_block *)tid->p_TCB;
-	 
-	for(free_que = 0;free_que < NUMBER_OF_MAX_QUE;free_que++){
-		if(Que[free_que].Flags.use == 0)break;
-	}
-	if(free_que == NUMBER_OF_MAX_QUE)return -1;
-	
-	Que[free_que].Flags.use 	= 1;
-	
-	while(((_task_control_block *)(node->tid->p_TCB))->priority < (terget->priority)){
-		node = node->next;
-		if(node == &ReadyQueHead)break;
-	}
-	
-	node->prev->next 	= &Que[free_que];
-	Que[free_que].next 	= node;
-	Que[free_que].prev 	= node->prev;
-	node->prev 		= &Que[free_que];
-	
-	terget->state 			= TASK_READY;
-	
-	tid->p_Que = &Que[free_que];
-	Que[free_que].tid = tid;
-	
+	tid->state 			= TASK_READY;
+
 	return 0;
 }
 
 int kernel_suspend_thread(thread_t *tid){
-	if(tid == NULL)tid = TCBs[now_tcb_number].tid;
-	((_task_control_block *)(tid->p_TCB))->state = TASK_WAIT;
+	if(tid == NULL)tid = current_thread;
+	tid->state = TASK_WAIT;
 	
 	return 0;
 }
 
 int kernel_resume_thread(thread_t *tid){
-	if(tid == NULL)tid = TCBs[now_tcb_number].tid;
-	kernel_ready_thread(tid);
+	if(tid == NULL)tid = current_thread;
+	if(tid->state == TASK_WAIT)
+		kernel_ready_thread(tid);
 	return 0;
 }
 
 int kernel_destroy_thread(thread_t *tid){
-	if(tid == NULL)tid = TCBs[now_tcb_number].tid;
-	((_task_control_block *)(tid->p_TCB))->state = TASK_NON;
-	((_task_control_block *)(tid->p_TCB))->Flags.use = 0;
+	if(tid == NULL)tid = current_thread;
+	tid->state = TASK_NON;
+	tid->Flags.use = 0;
+	stack_addr[tid->stack_num].flags.use = 0;
+	tid->stack_num = 0;
 	return 0;
 }
 
@@ -137,53 +127,42 @@ void user_kernel_des(void){
 	thread_destroy(NULL);
 }
 
+int context_switch(thread_t*,thread_t*);
+
 int schedule(void)
 {
 	
-	if(TCBs[now_tcb_number].state != TASK_RUN){
-		if(ReadyQueHead.next == &ReadyQueHead){
-			//スリープモードへ移行
-		}
-		else{
-			return ((_task_control_block *)(ReadyQueHead.next->tid->p_TCB))->num;
-		}
+	if(current_thread->state != TASK_RUN);				//現在実行中のスレッドが休止であれば、必ず次にスレッドを実行
+	else if(current_thread->priority < (*(ready_list.begin()))->priority){	//現在実行中のスレッドのほうが優先度が高ければ無視
+		return 0;
 	}
 	
-	else if(TCBs[now_tcb_number].priority > ((_task_control_block *)(ReadyQueHead.next->tid->p_TCB))->priority)
-		return ((_task_control_block *)(ReadyQueHead.next->tid->p_TCB))->num;
+	thread_t *new_tid = ready_list.pop_front();
+	context_switch(current_thread,new_tid);
 	
-	else return now_tcb_number;
-	return -1;
+	return 0;
 }
-
+extern "C"
 extern int _switch_to(_task_control_block *prev,_task_control_block *next);
 
-int context_switch(int num){
-	if(now_tcb_number == num)return 0;
-	//タスクのCPU情報退避
-	switch(TCBs[now_tcb_number].state){		//前のカーネルが今どのような状況であるかによって、退避方法を変える
+int context_switch(thread_t* old_tid,thread_t* new_tid){
+	switch(old_tid->state){		//前のカーネルが今どのような状況であるかによって、退避方法を変える
 	case TASK_NON:
 		break;
 	case TASK_WAIT:
 		break;
 	case TASK_RUN:
-		kernel_ready_thread(TCBs[now_tcb_number].tid);
+		kernel_ready_thread(old_tid);
 		break;
 	}
 	
-	TaskQue *run = (TaskQue*)TCBs[num].tid->p_Que;
-	run->prev->next = run->next;
-	run->next->prev = run->prev;
-	run->Flags.use = 0;
-	TCBs[num].state = TASK_RUN;
+	new_tid->state = TASK_RUN;
 	
-	int befor_tcb_num = now_tcb_number;
-	now_tcb_number = num;
+	current_thread = new_tid;
 	
-	return _switch_to(&TCBs[befor_tcb_num],&TCBs[now_tcb_number]);
+	return _switch_to(old_tid,new_tid);
 }
 
-int get_tid(thread_t **_tid){
-	*_tid = TCBs[now_tcb_number].tid;
-	return 0;
+thread_t* get_tid(void){
+	return current_thread;
 }

@@ -1,34 +1,22 @@
 #include "CentralLibrary.h"
 #include <stddef.h>
-#include "../lowsrc.h"
-#include "sci0_lowsrc.h"
+#include <stdlib.h>
+#include "../lowsrc.hpp"
+#include "sci0_lowsrc.hpp"
 #include "_rx621_dtc.h"
 
 #include "CentralLibrary.h"
 #include "syscall_table.h"
 
-static volatile thread_t *thread = NULL;
-
-static const char g_sci0_path[] = SCI0_PATH;
-static volatile DTC_TABLE *tx_table = NULL;
-unsigned char *tx_buf = NULL;
-
-static int n_openfile = 0;					//sci0の開いたファイル数
 #define IS_OPEN_FILE_NOTHING	(n_openfile == 0)
 
-long sci0_open(_FD*,const char*,long);
-long sci0_write(_FD*,const unsigned char*,long);
-long sci0_read(_FD*,unsigned char*,long);
-long sci0_close(_FD*);
+const unsigned char 	sci0_file_desc_factor::g_sci0_path[] 	= SCI0_PATH;
+int 			sci0_file_desc_factor::n_openfile 	= 0;
 
-_FD _sci0_driver = {
-	._open = sci0_open,
-	._read = sci0_read,
-	._write = sci0_write,
-	._close = sci0_close,
-};
+thread_list		sci0_file_desc::t_list			;
+DTC_TABLE*	 	sci0_file_desc::tx_table		= NULL;
 
-long sci0_open(_FD* fd,
+_low_file_desc_class* sci0_file_desc_factor::open(
 	const char *path,
 	long mode)
 {
@@ -44,15 +32,12 @@ long sci0_open(_FD* fd,
 		
 		IPR(SCI0,TXI0) = 13;
 		IPR(SCI0,TEI0) = 12;
-		
-		tx_table = DTC_CreateVect(VECT(SCI0,TXI0));
-		tx_table->CRA = 0x0000;
 	}
 	n_openfile++;
-	return 0;
+	return new sci0_file_desc;
 }
 
-long sci0_close(_FD *fd)
+long sci0_file_desc_factor::close(_low_file_desc_class* desc)
 {
 	if(n_openfile > 1)
 		n_openfile--;
@@ -63,25 +48,17 @@ long sci0_close(_FD *fd)
 		IEN(SCI0,TEI0) = 0;
 	}
 	else return -1;
+	delete desc;
+	
 	return 0;
 }
 
-extern int swint(int,void*);
-long sci0_write(_FD *fd,
+long sci0_file_desc::write(
 	const unsigned char *buf,
 	long count)
 {
-	
-	if(SCI0.SSR.BIT.TEND != 1){
-		get_tid(&thread);
-		thread_suspend(thread);
-	}
-	thread = NULL;
-	if(SCI0.SSR.BIT.TEND == 0)PORTA.DR.BIT.B1 = 1;
-	else PORTA.DR.BIT.B1 =0;
-	
-	unsigned char *tx_buf;
-	tx_buf = malloc(sizeof(unsigned char) * count);
+
+	this->buf_allocate(count);
 	for(int i = 0;i < count;i++){
 		tx_buf[i] = buf[i];
 	}
@@ -112,23 +89,37 @@ long sci0_write(_FD *fd,
 	
 	while(SCI0.SCR.BYTE != 0xa4)SCI0.SCR.BYTE = 0xa4;
 	IEN(SCI0,TXI0) = 1;
-	while(SCI0.SSR.BIT.TEND != 1);
+	while(SCI0.SSR.BIT.TEND != 1);		//送信が開始されたことを確認
 	IEN(SCI0,TEI0) = 1;
+	
+	if(SCI0.SSR.BIT.TEND != 1){
+		suspend();
+	}
+	
+	buf_clear();
 	
 	return count;
 }
 
-long sci0_read(_FD *fd,
+long sci0_file_desc::read(
 	unsigned char *buf,
 	long count)
 {
 	return -1;
 }
 
-void sci0_init(void)
+sci0_file_desc_factor::sci0_file_desc_factor(void)
 {
 	MSTP(SCI0) = 0;
-	set_io_driver(g_sci0_path,&_sci0_driver);
+	set_io_driver(&sci0_factor);
+}
+
+sci0_file_desc::sci0_file_desc(void)
+{
+	if(this->tx_table == NULL){
+		this->tx_table = (DTC_TABLE*)DTC_CreateVect(VECT(SCI0,TXI0));
+		this->tx_table->CRA = 0x0000;
+	}
 }
 
 #pragma interrupt SCI0_TXI0(vect = VECT(SCI0,TXI0))
@@ -140,13 +131,38 @@ void SCI0_TXI0(void)
 #pragma interrupt SCI0_TEI0(vect = VECT(SCI0,TEI0),enable)
 void SCI0_TEI0(void)
 {
+	SCI0.SCR.BIT.TE = 0;
+	SCI0.SCR.BIT.TIE = 0;
+	SCI0.SCR.BIT.TEIE = 0;
+	sci0_file_desc::resume();
+}
+
+int sci0_file_desc::suspend(void){
+	thread_t* tid;
+	tid = get_tid();
+	t_list.push_back(tid);
+	thread_suspend(tid);
+	return 0;
+}
+
+int sci0_file_desc::resume(void){
+	thread_t* tid;
+	if(!t_list.empty()){
+		tid = t_list.pop_front();
+		thread_resume(tid);
+	}
+	return 0;
+}
+
+int sci0_file_desc::buf_allocate(int count){
+	tx_buf = (unsigned char*)malloc(sizeof(unsigned char) * count);
+	return 0;
+}
+
+int sci0_file_desc::buf_clear(void){
 	if(tx_buf != NULL){
 		free(tx_buf);
 		tx_buf = NULL;
 	}
-	SCI0.SCR.BIT.TE = 0;
-	SCI0.SCR.BIT.TIE = 0;
-	SCI0.SCR.BIT.TEIE = 0;
-	if(thread != NULL)
-		thread_resume(thread);
+	return 0;
 }

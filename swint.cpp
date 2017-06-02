@@ -20,14 +20,18 @@ extern int kernel_destroy_thread(thread_t*);
 extern int kernel_suspend_thread(thread_t*);
 extern int kernel_resume_thread(thread_t*);
 
+extern int kernel_msleep(unsigned long);
+
 extern long kernel_open(const char*,long,long);
 extern long kernel_write(long,const unsigned char*,long);
 extern long kernel_read(long,unsigned char*,long);
 extern long kernel_close(long);
 
 extern int schedule(void);					//スケジューラ
-extern int context_switch(int);
 extern int init(void);
+
+
+extern "C" int swint(int,void*);
 
 int swint(int num,void *attr)
 {
@@ -58,6 +62,8 @@ int swint(int num,void *attr)
 	case SYSCALL_CLOSE:
 		close_stc *c_stc = (close_stc *)attr;
 		return kernel_close(c_stc->fileno);
+	case SYSCALL_TIMER_MSLEEP:
+		return kernel_msleep((long)attr);
 	case SYSCALL_INIT:		//初期化時スケジューラは呼ばない。
 		ret = init();
 		return ret;
@@ -65,8 +71,5 @@ int swint(int num,void *attr)
 		ret = -1;
 	}
 	
-	int numterget = schedule();
-	ret = context_switch(numterget);
-	
-	return now_tcb_number;
+	return schedule();
 }

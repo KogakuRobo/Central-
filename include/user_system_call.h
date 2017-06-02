@@ -5,6 +5,9 @@
 #include"thread.h"
 
 int user_syscall(int,void*);
+
 int sys_init(void);
+
+int msleep(unsigned long);
 
 #endif

@@ -17,6 +17,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <machine.h>
 #include "lowsrc.h"
 #include "CentralLibrary.h"
 #include "syscall_table.h"
@@ -24,19 +25,22 @@
 #include "iodefine.h"
 
 #include "./DTC/_rx621_dtc.h"
-#include "./E1/E1_lib.h"
-#include "../SCI0/sci0_lowsrc.h"
 
-#ifdef __cplusplus
-extern "C" {
+#ifdef __cplusplus			// Remove the comment when you use global class object
+extern "C" {					// Sections C$INIT and C$END will be generated
 #endif
-extern void HardwareSetup(void);
+extern void _CALL_INIT(void);
+extern void _CALL_END(void);
 #ifdef __cplusplus
 }
 #endif
 
+extern void HardwareSetup(void);
+
 void OSC_Init(void);
+void cmt0_init(void);
 extern void main(void);
+
 void HardwareSetup(void)
 {
 	OSC_Init();
@@ -44,11 +48,15 @@ void HardwareSetup(void)
 	IPR(ICU,SWINT) = 15;
 	IEN(ICU,SWINT) = 1;
 	
+	DTC_init();
+	
+	_CALL_INIT();
+	
+	cmt0_init();
+	
 	sys_init();
 	
-	E1_init();
-	DTC_init();
-	sci0_init();
+	//DTC_init();
 }
 
 void OSC_Init(void)

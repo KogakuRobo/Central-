@@ -1,6 +1,7 @@
 #ifndef _syscall_table_H_
 #define _syscall_table_H_
 
+#include "thread.h"
 #include"user_system_call.h"
 
 typedef enum{
@@ -10,9 +11,12 @@ typedef enum{
 	SYSCALL_WRITE,
 	SYSCALL_READ,
 	SYSCALL_CLOSE,
+	SYSCALL_IOCTL,
 	
 	SYSCALL_SUSPEND_THREAD,
 	SYSCALL_RESUME_THREAD,
+	
+	SYSCALL_TIMER_MSLEEP,
 	
 	SYSCALL_INIT,
 }syscall_table;
@@ -20,7 +24,7 @@ typedef enum{
 //SYS_CREATE_THREADéûÇÃà¯êîç\ë¢ëÃ
 struct __create_thread_struct{
 	thread_t *tid;
-	long	attr;
+	CreateAttribute	attr;
 	void *(*function)(thread_t *,void*);
 	void *arg;
 };
@@ -46,6 +50,11 @@ typedef struct{
 typedef struct{
 	long fileno;
 }close_stc;
+
+typedef struct{
+	unsigned long request;
+	void *argp;
+}ioctl_stc;
 
 typedef struct __create_thread_struct CreateThreadStruct;
 
