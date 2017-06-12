@@ -4,13 +4,14 @@
 #include "localization.hpp"
 #include "CentralLibrary.h"
 #include "RotaryA.hpp"
+#include "RotaryB.hpp"
 
 thread_t *t_main;
 
+volatile data d;
+
 void main(void)
 {
-	
-	data d;
 	//SCI0のopenとノンバッファ処理
 	FILE *fp = fopen("SCI0","w");
 	if(fp == NULL){
@@ -20,22 +21,17 @@ void main(void)
 	
 	fprintf(fp,"Program Start\n\r");
 	
-	thread_t loca;
-	thread_create(&loca,CT_PRIORITY_MAX + 3,localization,&d);
+	//thread_t loca;
+	//thread_create(&loca,CT_PRIORITY_MAX + 3,localization,&d);
 	
 	PORTA.DDR.BIT.B0 = 1;
 	PORTA.DDR.BIT.B1 = 1;
 	
 	extern long kernel_time;
 	
-	msleep(2000);
+	localization_init();
 	
-	int rotary = open("ROTARY_A",0,0);
-	if(rotary == -1){
-		fprintf(fp,"NOT DIVECE\n\r");
-		return;
-	}
-	ioctl(rotary,ROTARYA_BEGIN,NULL);
+	msleep(2000);
 	
 	fprintf(fp,"Average:,%d\n\r",d.ave);
 	fprintf(fp,"Deviation:,%d\n\r",d.devia);
@@ -43,8 +39,8 @@ void main(void)
 	
 	for(float i = 0.0;;i = i + 1.0){
 		msleep(10);
-		//fprintf(fp,"%d,%f\n\r",kernel_time,d.yaw);
-		fprintf(fp,"%d,%d,%f\n\r",kernel_time,ioctl(rotary,ROTARYA_GET_COUNT,NULL),d.yaw);
+		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
+		fprintf(fp,"%d,%f,%f,%f\n\r",kernel_time,d.X*1000,d.Y*1000,d.yaw);
 		//printf("FFF\n");
 	}
 	while(1);

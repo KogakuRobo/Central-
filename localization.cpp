@@ -1,41 +1,82 @@
 #include "localization.hpp"
 
+#include <math.h>
+
 #include "L3G4200D.hpp"
 #include "../SPI/_rx621_RSPI1.hpp"
 #include "../cmt1.hpp"
 
-L3G4200D *g_gyro;
+#include "RotaryA.hpp"
+#include "RotaryB.hpp"
 
 extern void i_GyroAnalysis(void);
 
-void* localization(thread_t* tid,void *attr){
-	
-	//SPIバスの初期化
+RSPI1_Bus *g_spi_bus;
+L3G4200D *g_gyro;
+
+int rotary_a;
+int rotary_b;
+
+void* localization_init(void)
+{
 	static RSPI1_Bus spi_bus;
 	spi_bus.Begin(0);
 	
-	//gyroの初期化
-	L3G4200D gyro(spi_bus);
+	static L3G4200D gyro(spi_bus);
 	if(gyro.Begin(0) != 0){
 		return NULL;
 	}
 	g_gyro = &gyro;
 	
 	//ジャイロの更新タスクの呼び出し
-	cmt1_timer timer;
+	static cmt1_timer timer;
 	timer.set_timer(2500,CT_PRIORITY_MAX,(void *(*)(thread_t*,void*))i_GyroAnalysis,NULL);
 	
-	volatile float yaw;
+	while(!gyro.isNewData());	//ジャイロデータ更新確認
 	
-	while(1){
-		msleep(3);			//ジャイロのデータ更新間隔が2.5ms
-		while(!gyro.isNewData());	//ジャイロデータ更新確認
-		
-		yaw = gyro.getYaw() * 180.0 / 3.141592535;
-		((data*)attr)->yaw = yaw;
-		((data*)attr)->ave = gyro.getAverage();
-		((data*)attr)->devia = gyro.getDeviation();
-	}
+	interrupt_stc stc;
+	stc.function = localization;
+	stc.argp = (void*)&d;
+	stc.attr = CT_PRIORITY_MAX + 3;
 	
+	rotary_a = open("ROTARY_A",0,0);
+	ioctl(rotary_a,ROTARYA_SET_TGIA,&stc);
+	ioctl(rotary_a,ROTARYA_BEGIN,NULL);
+	
+	rotary_b = open("ROTARY_B",0,0);
+	ioctl(rotary_b,ROTARYB_BEGIN,NULL);
+	
+	return 0;
+}
+
+extern long kernel_time;
+
+enum{
+	Y,
+	X,
+};
+void* localization(thread_t* tid,void *attr){
+	float yaw = g_gyro->getYaw();
+	long count[2] = {ioctl(rotary_a,ROTARYA_GET_COUNT,NULL),ioctl(rotary_b,ROTARYB_GET_COUNT,NULL)};
+	static float point[2] = {0,0};
+	static long b_count[2] = {0,0};
+	
+	long hensa[2];
+	
+	((data*)attr)->yaw = yaw;
+	((data*)attr)->count_A = count[Y];
+	((data*)attr)->count_B = count[X];
+	
+	hensa[X] = count[X] - b_count[X];
+	hensa[Y] = count[Y] - b_count[Y];
+	
+	point[X] += (hensa[X]*cos(yaw+1.57) - hensa[Y]*sin(yaw))*3.6816E-05;
+	point[Y] += (hensa[Y]*cos(yaw+1.57) - hensa[X]*sin(yaw))*3.6816E-05;
+	
+	((data*)attr)->X = point[X];
+	((data*)attr)->Y = point[Y];
+	
+	b_count[X] = count[X];
+	b_count[Y] = count[Y];
 	return NULL;
 }

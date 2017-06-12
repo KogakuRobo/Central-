@@ -13,8 +13,19 @@ typedef struct{
 	long ave;
 	long devia;
 	float yaw;
+	
+	long count_A;
+	
+	long count_B;
+	
+	long time;
+	
+	float X,Y;
 }data;
 
+extern volatile data d;
+
+extern void* localization_init(void);
 extern void *localization(thread_t*,void*);
 
 #endif

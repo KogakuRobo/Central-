@@ -76,6 +76,12 @@
       <ParentItem>e8bee4a1-ea23-4a17-97f3-e96913cdd9ce</ParentItem>
       <Property>c096e305-64b0-4a56-97d3-9d3fecee3068</Property>
     </Instance>
+    <Instance Guid="67b6bd28-291e-4ac0-9f06-623e107c6c84">
+      <Name>CMT1</Name>
+      <Type>Category</Type>
+      <ParentItem>e8bee4a1-ea23-4a17-97f3-e96913cdd9ce</ParentItem>
+      <Property>e242991a-b76f-4cb7-b8f1-9ed661b7faa8</Property>
+    </Instance>
     <Instance Guid="30876c2a-8a8c-4dc0-b5c2-9756c731a726">
       <Name>dbsct.c</Name>
       <Type>File</Type>
@@ -332,26 +338,6 @@
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>fdbcefaf-33cc-4f9b-b5b3-6ec9c56eeb53</ParentItem>
     </Instance>
-    <Instance Guid="67b6bd28-291e-4ac0-9f06-623e107c6c84">
-      <Name>CMT1</Name>
-      <Type>Category</Type>
-      <ParentItem>fdbcefaf-33cc-4f9b-b5b3-6ec9c56eeb53</ParentItem>
-      <Property>e242991a-b76f-4cb7-b8f1-9ed661b7faa8</Property>
-    </Instance>
-    <Instance Guid="700c0532-ffad-49e2-93a8-53189ce7f50c">
-      <Name>cmt1.hpp</Name>
-      <Type>File</Type>
-      <RelativePath>cmt1.hpp</RelativePath>
-      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
-      <ParentItem>67b6bd28-291e-4ac0-9f06-623e107c6c84</ParentItem>
-    </Instance>
-    <Instance Guid="eb4bfb1d-ed00-43fb-b574-05d6e601db33">
-      <Name>cmt1_low.cpp</Name>
-      <Type>File</Type>
-      <RelativePath>cmt1_low.cpp</RelativePath>
-      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
-      <ParentItem>67b6bd28-291e-4ac0-9f06-623e107c6c84</ParentItem>
-    </Instance>
     <Instance Guid="1c9372ca-e1c0-4113-807e-6eed3dda0bcc">
       <Name>_rx_can_bus.cpp</Name>
       <Type>File</Type>
@@ -422,6 +408,20 @@
       <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
       <ParentItem>5e8dd678-4299-47c1-9ae5-51f7641fca2e</ParentItem>
     </Instance>
+    <Instance Guid="700c0532-ffad-49e2-93a8-53189ce7f50c">
+      <Name>cmt1.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>cmt1.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>67b6bd28-291e-4ac0-9f06-623e107c6c84</ParentItem>
+    </Instance>
+    <Instance Guid="eb4bfb1d-ed00-43fb-b574-05d6e601db33">
+      <Name>cmt1_low.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>cmt1_low.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>67b6bd28-291e-4ac0-9f06-623e107c6c84</ParentItem>
+    </Instance>
     <Instance Guid="012eafe0-d264-4df8-b55c-80a6314a69e4">
       <Name>RotaryA.hpp</Name>
       <Type>File</Type>
@@ -434,6 +434,20 @@
       <Type>File</Type>
       <RelativePath>RotaryA.cpp</RelativePath>
       <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>40fbc2a3-01f1-4c5f-9faf-d2b4f1b66fef</ParentItem>
+    </Instance>
+    <Instance Guid="8954f820-d942-4e5c-a0f2-8c4cf00e0394">
+      <Name>RotaryB.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>RotaryB.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>40fbc2a3-01f1-4c5f-9faf-d2b4f1b66fef</ParentItem>
+    </Instance>
+    <Instance Guid="02e1a882-d38f-470e-ae18-2c08bdd9448f">
+      <Name>RotaryB.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>RotaryB.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>40fbc2a3-01f1-4c5f-9faf-d2b4f1b66fef</ParentItem>
     </Instance>
   </Class>
@@ -570,7 +584,9 @@
       <SourceItemType22>CppSource</SourceItemType22>
       <SourceItemGuid23>b1543253-7675-4e7f-a0c9-3c931882f5ed</SourceItemGuid23>
       <SourceItemType23>CppSource</SourceItemType23>
-      <SourceItemCount>24</SourceItemCount>
+      <SourceItemGuid24>8954f820-d942-4e5c-a0f2-8c4cf00e0394</SourceItemGuid24>
+      <SourceItemType24>CppSource</SourceItemType24>
+      <SourceItemCount>25</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -1634,6 +1650,14 @@ E1
       <ItemAddTime>636326972500880020</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="8954f820-d942-4e5c-a0f2-8c4cf00e0394">
+      <ItemAddTime>636328795557270741</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="02e1a882-d38f-470e-ae18-2c08bdd9448f">
+      <ItemAddTime>636328795855169686</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587053131081535201</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
@@ -1695,6 +1719,10 @@ E1
       <SourceItem23-IsLockedByUser>False</SourceItem23-IsLockedByUser>
       <SourceItem23-BuildingTarget-0>True</SourceItem23-BuildingTarget-0>
       <SourceItem23-IndividualCompileOption-0>False</SourceItem23-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem24--0>-8587043565251805988</TimeTagModified-SourceItem24--0>
+      <SourceItem24-IsLockedByUser>False</SourceItem24-IsLockedByUser>
+      <SourceItem24-BuildingTarget-0>True</SourceItem24-BuildingTarget-0>
+      <SourceItem24-IndividualCompileOption-0>False</SourceItem24-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="a7be515f-f007-45ed-9059-4e1500c0f74d">
       <TimeTagModified-SourceItem1--0>-8587064641901849461</TimeTagModified-SourceItem1--0>

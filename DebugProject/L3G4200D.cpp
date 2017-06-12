@@ -30,7 +30,7 @@ int L3G4200D::Begin(unsigned int attr){
 //	HPF Cutoff 1
 	WriteCTRL_REG2(0x05);
 
-	WriteCTRL_REG4(L3G4200D_REG4_FS_2000);
+	WriteCTRL_REG4(L3G4200D_REG4_FS_500);
 	WriteCTRL_REG5(0x00);
 	new_data = 0;
 
@@ -127,7 +127,7 @@ void L3G4200D::Processing(void)
 	}
 	
 	this->z = Filting(z);
-	zd = (this->z + befor_z) * 70 / 1000 / 400.0 * 0.5 * 3.141592653589 / 180.0;
+	zd = (this->z + befor_z) * 17.5 / 1000 / 400.0 * 0.5 * 3.141592653589 / 180.0;
 	t = this->yaw + (zd + e);
 	e = (zd + e) - (t - this->yaw);
 	this->yaw = t;
