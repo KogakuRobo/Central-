@@ -68,26 +68,10 @@ public:
 	virtual long 			close(_low_file_desc_class*)	= 0;
 };
 
-struct _low_file_desc{
-	long (*_open)	(struct _low_file_desc *,	const char*,		long);
-	long (*_read)	(struct _low_file_desc *,	unsigned char*,		long);
-	long (*_write)	(struct _low_file_desc *,	const unsigned char*,	long);
-	long (*_close)	(struct _low_file_desc *);
-	
-	void *private_data;
-	
-	struct{
-		unsigned char use:1;		//use = 1;unuse = 0;
-	}control_flags;
-};
-
-typedef struct _low_file_desc _FD;
-
 
 /*	ドライバ登録関数 	*/
 //ドライバを登録する場合には名前と、_FD構造体の静的宣言が必要です。(モジュール内保持）
 //
-int set_io_driver(const char*,_FD*);
 int set_io_driver(_low_file_desc_factor*);
 
 #endif

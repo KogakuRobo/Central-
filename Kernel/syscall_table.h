@@ -52,6 +52,7 @@ typedef struct{
 }close_stc;
 
 typedef struct{
+	long fileno;
 	unsigned long request;
 	void *argp;
 }ioctl_stc;

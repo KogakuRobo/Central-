@@ -26,6 +26,7 @@ extern long kernel_open(const char*,long,long);
 extern long kernel_write(long,const unsigned char*,long);
 extern long kernel_read(long,unsigned char*,long);
 extern long kernel_close(long);
+extern long kernel_ioctl(long,unsigned long,void*);
 
 extern int schedule(void);					//スケジューラ
 extern int init(void);
@@ -62,6 +63,9 @@ int swint(int num,void *attr)
 	case SYSCALL_CLOSE:
 		close_stc *c_stc = (close_stc *)attr;
 		return kernel_close(c_stc->fileno);
+	case SYSCALL_IOCTL:
+		ioctl_stc *i_stc = (ioctl_stc*)attr;
+		return kernel_ioctl(i_stc->fileno,i_stc->request,i_stc->argp);
 	case SYSCALL_TIMER_MSLEEP:
 		return kernel_msleep((long)attr);
 	case SYSCALL_INIT:		//初期化時スケジューラは呼ばない。

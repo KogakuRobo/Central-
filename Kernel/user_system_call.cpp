@@ -26,7 +26,7 @@ long close(long fileno){
 
 long ioctl(long fileno,unsigned long request,void *argp)
 {
-	ioctl_stc stc = {request,argp};
+	ioctl_stc stc = {fileno,request,argp};
 	return user_syscall(SYSCALL_IOCTL,&stc);
 }
 }

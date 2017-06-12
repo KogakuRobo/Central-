@@ -22,6 +22,7 @@
 #include <stddef.h>
 #include <ctype.h>
 #include "lowsrc.hpp"
+#include "iodefine.h"
 
 extern const long _nfiles;     /* The number of files for input/output files */
 
@@ -109,17 +110,19 @@ long kernel_open(const char *name,                  /* File name                
 {
 	int fdno = 0;
 	int driver_no;
-	char path[6];
+	char path[12];
+	
+	extraction_driver_name(name,path);
+	driver_no = search_io_driver(path);
+	if(driver_no == -1)return -1;		//当該ドライバなし
+	
 	//空きディスクリプタナンバー調べ
 	for(;fdno < IOSTREAM;fdno++){
 		if(file_desc[fdno] == NULL)break;
 	}
 	if(fdno == IOSTREAM)return -1;		//空き無し
 	
-	//該当デバイスドライバ検索
-	extraction_driver_name(name,path);
-	driver_no = search_io_driver(path);
-	if(driver_no == -1)return -1;		//当該ドライバなし
+	PORTA.DR.BYTE = fdno;
 	
 	file_desc[fdno] = factor[driver_no]->open(name,mode);
 	if(file_desc[fdno] == NULL){

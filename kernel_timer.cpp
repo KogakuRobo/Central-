@@ -88,12 +88,8 @@ void CMT0_CMI0(void)
 	timer_task_node* ttn;
 	kernel_time++;
 	
-		PORTA.DR.BIT.B0 = ~PORTA.DR.BIT.B0;
-		PORTA.DR.BIT.B1 = ~PORTA.DR.BIT.B1;
 	do{
 		if(t_list.empty())return;		//待ちノードがなければ割り込みから離脱（pop後になくなる可能性）
-		PORTA.DR.BIT.B0 = ~PORTA.DR.BIT.B0;
-		PORTA.DR.BIT.B1 = ~PORTA.DR.BIT.B1;
 		timer_iterator ite = t_list.begin();	//次のノードを参照（なお、一回目も同様）
 		if((*ite)->timer <= kernel_time){	//リスト登録のタイミングではカーネル時間より遅くなる。
 			ttn = t_list.pop_front();	//取り出し
