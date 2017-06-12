@@ -23,6 +23,55 @@
       <TreeImageGuid>0163449b-1184-496f-9f59-23f3dda22baa</TreeImageGuid>
       <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
     </Instance>
+    <Instance Guid="0369539b-9064-4312-bba8-47c4a12f4df8">
+      <Name>Gyro.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>Gyro.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
+    <Instance Guid="ee9caa5a-aba7-4a44-a2a9-dc3962ee43a4">
+      <Name>Gyro.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>Gyro.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
+    <Instance Guid="c578061d-e290-40cd-8969-2bcff0a7f6f8">
+      <Name>L3G4200D.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>L3G4200D.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
+    <Instance Guid="167cb598-f318-4e8a-90a5-139220bd5cb4">
+      <Name>L3G4200D.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>L3G4200D.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
+    <Instance Guid="8d91ec11-ce3e-4f35-8a26-a9240477fd73">
+      <Name>L3G4200D_defined.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>L3G4200D_defined.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
+    <Instance Guid="d0b71879-60eb-4174-a5bf-187f5592dc80">
+      <Name>localization.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\localization.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
+    <Instance Guid="6bfbe510-f3df-4c61-9171-d1ade1244ec1">
+      <Name>localization.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\localization.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">
@@ -72,7 +121,13 @@
       <SourceItemType0>CppSource</SourceItemType0>
       <SourceItemGuid1>3afd2b81-ffbc-4ce6-b080-d4bf477f6d5b</SourceItemGuid1>
       <SourceItemType1>ObjectSource</SourceItemType1>
-      <SourceItemCount>2</SourceItemCount>
+      <SourceItemGuid2>0369539b-9064-4312-bba8-47c4a12f4df8</SourceItemGuid2>
+      <SourceItemType2>CppSource</SourceItemType2>
+      <SourceItemGuid3>c578061d-e290-40cd-8969-2bcff0a7f6f8</SourceItemGuid3>
+      <SourceItemType3>CppSource</SourceItemType3>
+      <SourceItemGuid4>6bfbe510-f3df-4c61-9171-d1ade1244ec1</SourceItemGuid4>
+      <SourceItemType4>CppSource</SourceItemType4>
+      <SourceItemCount>5</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -156,7 +211,7 @@
       <GeneralOptionPatch-DefaultValue>None</GeneralOptionPatch-DefaultValue>
       <GeneralOptionSaveAcc-DefaultValue>False</GeneralOptionSaveAcc-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064642860355093</TimeTagModified--0>
+      <TimeTagModified--0>-8587047175101111513</TimeTagModified--0>
       <BuildMode-0>DefaultBuild</BuildMode-0>
       <Memo-0 />
       <OutputMessageFormat-0>%TargetFiles%</OutputMessageFormat-0>
@@ -252,6 +307,8 @@
       <COptionShowExpansions-DefaultValue>False</COptionShowExpansions-DefaultValue>
       <COptionCommandLine-DefaultValue>-isa=rxv1
 -fpu
+-include=..
+-include=.
 -include=..\include
 -output=obj
 -obj_path=%BuildModeName%
@@ -318,7 +375,7 @@
       <COptionFloatOrder-DefaultValue>False</COptionFloatOrder-DefaultValue>
       <COptionIncode-DefaultValue>Sjis</COptionIncode-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064637431590821</TimeTagModified--0>
+      <TimeTagModified--0>-8587047955759292816</TimeTagModified--0>
       <COptionLangC-0>C99</COptionLangC-0>
       <COptionListfile-0>False</COptionListfile-0>
       <COptionLogo-0>False</COptionLogo-0>
@@ -335,7 +392,9 @@
       <COptionShowSource-0>False</COptionShowSource-0>
       <COptionXcref-0>False</COptionXcref-0>
       <COptionDebug-0>True</COptionDebug-0>
-      <COptionInclude-0>..\include
+      <COptionInclude-0>..
+.
+..\include
 </COptionInclude-0>
       <COptionMisra2004RuleFile-0 />
       <COptionPreCompileCommands-0 />
@@ -355,6 +414,8 @@
       <COptionShowExpansions-0>False</COptionShowExpansions-0>
       <COptionCommandLine-0>-isa=rxv1
 -fpu
+-include=..
+-include=.
 -include=..\include
 -output=obj
 -obj_path=%BuildModeName%
@@ -561,7 +622,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587056249065977535</TimeTagModified--0>
+      <TimeTagModified--0>-8587043641732404343</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -816,7 +877,7 @@ D_2=R_2
       <LbgOptionSpeedAndSize-DefaultValue>Size</LbgOptionSpeedAndSize-DefaultValue>
       <LbgOptionCommandLine-DefaultValue>-isa=rxv1
 -fpu
--head=runtime,stdarg,stdio,stdlib,string,new
+-head=runtime,math,mathf,stdarg,stdio,stdlib,string,new
 -output=%BuildModeName%\%ProjectName%.lib
 -nologo
 </LbgOptionCommandLine-DefaultValue>
@@ -867,7 +928,7 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587056249065977535</TimeTagModified--0>
+      <TimeTagModified--0>-8587043641732404343</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -886,14 +947,14 @@ D_2=R_2
       <LbgOptionSpeedAndSize-0>Size</LbgOptionSpeedAndSize-0>
       <LbgOptionCommandLine-0>-isa=rxv1
 -fpu
--head=runtime,stdarg,stdio,stdlib,string,new
+-head=runtime,math,mathf,stdarg,stdio,stdlib,string,new
 -output=%BuildModeName%\%ProjectName%.lib
 -nologo
 </LbgOptionCommandLine-0>
-      <LbgOptionHeadMathH-0>False</LbgOptionHeadMathH-0>
+      <LbgOptionHeadMathH-0>True</LbgOptionHeadMathH-0>
       <LbgOptionLoop-0>Auto</LbgOptionLoop-0>
       <LbgOptionSecureMalloc-0>False</LbgOptionSecureMalloc-0>
-      <LbgOptionHeadMathfH-0>False</LbgOptionHeadMathfH-0>
+      <LbgOptionHeadMathfH-0>True</LbgOptionHeadMathfH-0>
       <LbgOptionLoopValue-0>2</LbgOptionLoopValue-0>
       <LbgOptionUseSameObjectRelatedSettingsAsCompileOptions-0>False</LbgOptionUseSameObjectRelatedSettingsAsCompileOptions-0>
       <LbgOptionHeadStdargH-0>True</LbgOptionHeadStdargH-0>
@@ -945,14 +1006,54 @@ D_2=R_2
       <ItemAddTime>636311384531949033</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="0369539b-9064-4312-bba8-47c4a12f4df8">
+      <ItemAddTime>636324341823382742</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="ee9caa5a-aba7-4a44-a2a9-dc3962ee43a4">
+      <ItemAddTime>636324341823382742</ItemAddTime>
+      <ItemAddTimeCount>1</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="c578061d-e290-40cd-8969-2bcff0a7f6f8">
+      <ItemAddTime>636324341823382742</ItemAddTime>
+      <ItemAddTimeCount>2</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="167cb598-f318-4e8a-90a5-139220bd5cb4">
+      <ItemAddTime>636324341823382742</ItemAddTime>
+      <ItemAddTimeCount>3</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="8d91ec11-ce3e-4f35-8a26-a9240477fd73">
+      <ItemAddTime>636324341823382742</ItemAddTime>
+      <ItemAddTimeCount>4</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="d0b71879-60eb-4174-a5bf-187f5592dc80">
+      <ItemAddTime>636324405096107994</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="6bfbe510-f3df-4c61-9171-d1ade1244ec1">
+      <ItemAddTime>636324405203399406</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587064615736118577</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
       <SourceItem0-BuildingTarget-0>True</SourceItem0-BuildingTarget-0>
       <SourceItem0-IndividualCompileOption-0>False</SourceItem0-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem2--0>-8587048019031393066</TimeTagModified-SourceItem2--0>
+      <SourceItem2-IsLockedByUser>False</SourceItem2-IsLockedByUser>
+      <SourceItem2-BuildingTarget-0>True</SourceItem2-BuildingTarget-0>
+      <SourceItem2-IndividualCompileOption-0>False</SourceItem2-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem3--0>-8587048019031393066</TimeTagModified-SourceItem3--0>
+      <SourceItem3-IsLockedByUser>False</SourceItem3-IsLockedByUser>
+      <SourceItem3-BuildingTarget-0>True</SourceItem3-BuildingTarget-0>
+      <SourceItem3-IndividualCompileOption-0>False</SourceItem3-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem4--0>-8587047955651376402</TimeTagModified-SourceItem4--0>
+      <SourceItem4-IsLockedByUser>False</SourceItem4-IsLockedByUser>
+      <SourceItem4-BuildingTarget-0>True</SourceItem4-BuildingTarget-0>
+      <SourceItem4-IndividualCompileOption-0>False</SourceItem4-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
-      <TimeTagModified-SourceItem1--0>-8587056249065977535</TimeTagModified-SourceItem1--0>
+      <TimeTagModified-SourceItem1--0>-8587043641732404343</TimeTagModified-SourceItem1--0>
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
@@ -972,6 +1073,11 @@ D_2=R_2
   <Class Guid="31a86ad3-37bd-4846-aff2-e08abdc00197">
     <Instance Guid="31a86ad3-37bd-4846-aff2-e08abdc00197">
       <DeviceNameOnCreateStartup>R5F56218BxFP</DeviceNameOnCreateStartup>
+    </Instance>
+  </Class>
+  <Class Guid="606767c3-4bf3-4e65-90c1-19075517355d">
+    <Instance Guid="606767c3-4bf3-4e65-90c1-19075517355d">
+      <CurrentToolKey>980229aa-cc4c-40c7-be19-a84e15ec314e</CurrentToolKey>
     </Instance>
   </Class>
   <Class Guid="8b5af363-dcc2-48e6-919c-6cdb80d50173">
@@ -1503,7 +1609,12 @@ D_2=R_2
   </Class>
   <Class Guid="932085a2-9361-4df9-a3f7-12e6de7681a8">
     <Instance Guid="932085a2-9361-4df9-a3f7-12e6de7681a8">
-      <DebugToolManager>1d1a55cf-2b92-481a-af4f-5975d095c419</DebugToolManager>
+      <DebugToolManager>578d917e-0d0a-4491-a220-37ba42009e0b</DebugToolManager>
+    </Instance>
+  </Class>
+  <Class Guid="104fc540-14b6-4fb9-bd7a-0d4844b95028">
+    <Instance Guid="00000000-0000-0000-0000-000000000000">
+      <SubDebugger>980229aa-cc4c-40c7-be19-a84e15ec314e</SubDebugger>
     </Instance>
   </Class>
   <Class Guid="e4df8d71-236e-4af2-aaea-56345a08da25">
@@ -1975,7 +2086,7 @@ D_2=R_2
       <DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-Endian>Little</DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-Endian>
       <DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-EndianMCUSetting>Same</DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-EndianMCUSetting>
       <DebuggerProperty-OptionalProperty-Memory-VerifyCheck>Yes</DebuggerProperty-OptionalProperty-Memory-VerifyCheck>
-      <DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>No</DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>
+      <DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>Yes</DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>
       <DebuggerProperty-OptionalProperty-AccessMemory-UpdateDisplayInExecution>Yes</DebuggerProperty-OptionalProperty-AccessMemory-UpdateDisplayInExecution>
       <DebuggerProperty-OptionalProperty-AccessMemory-UpdateInterval>500</DebuggerProperty-OptionalProperty-AccessMemory-UpdateInterval>
       <DebuggerProperty-OptionalProperty-AccessMemory-AutoSetRrmArea>Yes</DebuggerProperty-OptionalProperty-AccessMemory-AutoSetRrmArea>

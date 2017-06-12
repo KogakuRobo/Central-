@@ -1,68 +1,47 @@
 
-#include<stdio.h>
-#include<stdlib.h>
-#include"../lowsrc.h"
-#include"CentralLibrary.h"
-#include"machine.h"
-
-volatile int g_time = 0;
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "localization.hpp"
+#include "CentralLibrary.h"
+#include "RotaryA.hpp"
+#include "RotaryB.hpp"
 
 thread_t *t_main;
-thread_t t_test;
 
-void cmt_init(void){
-	CMT0.CMCR.BIT.CKS = 0;
-	CMT0.CMCR.BIT.CMIE = 1;
-	
-	IPR(CMT0,CMI0) = 10;
-	IEN(CMT0,CMI0) = 1;
-	
-	CMT0.CMCOR = 15000;
-	
-	CMT.CMSTR0.BIT.STR0 = 1;
-}
-
-void *TestA(thread_t * tid,void *attr){
-	FILE *fp = (FILE*)attr;
-	while(1){
-		fprintf(fp,"count Up\n\r");
-		for(int i = 0;i < 256;i++){
-			for(int j =0 ; j < 256;j++){
-			}
-		}
-	}
-	return NULL;
-}
-
-void *TestB(thread_t * tid,void *attr){
-	FILE *fp = (FILE*)attr;
-	PORTA.DR.BIT.B0 = 0;
-	PORTA.DR.BIT.B1 = 0;
-	while(1){
-		g_time++;
-		for(int i = 0;i < 256;i++){
-			for(int j =0 ; j < 256;j++){
-			}
-		}
-	}
-	return NULL;
-}
+volatile data d;
 
 void main(void)
 {
+	//SCI0のopenとノンバッファ処理
 	FILE *fp = fopen("SCI0","w");
-
+	if(fp == NULL){
+		printf("LKK");
+	}
 	setvbuf(fp,(char*)fp->_Buf,_IONBF,1);
 	
-	thread_create(&t_test,CT_PRIORITY_MIN,TestB,fp);
+	fprintf(fp,"Program Start\n\r");
 	
-	PORTA.DDR.BIT.B0 = 0x01;
-	PORTA.DDR.BIT.B1 = 0x01;
-	while(1){
-		static int count = 0;
-		int time = g_time;
-		fprintf(fp,"time[%d] %d\n\r",count++,time);
+	//thread_t loca;
+	//thread_create(&loca,CT_PRIORITY_MAX + 3,localization,&d);
+	
+	PORTA.DDR.BIT.B0 = 1;
+	PORTA.DDR.BIT.B1 = 1;
+	
+	extern long kernel_time;
+	
+	localization_init();
+	
+	msleep(2000);
+	
+	fprintf(fp,"Average:,%d\n\r",d.ave);
+	fprintf(fp,"Deviation:,%d\n\r",d.devia);
+	fprintf(fp,"\n\rtime,yaw \n\r");
+	
+	for(float i = 0.0;;i = i + 1.0){
+		msleep(10);
+		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
+		fprintf(fp,"%d,%f,%f,%f\n\r",kernel_time,d.X*1000,d.Y*1000,d.yaw);
+		//printf("FFF\n");
 	}
 	while(1);
 }

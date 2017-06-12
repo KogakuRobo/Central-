@@ -47,26 +47,31 @@
 #define O_APPEND 0x0020 /* The position is set for next reading/writing    */
                         /* 0: Top of the file 1: End of file               */
 
+class _low_file_desc_class;
+class _low_file_desc_factor;
 
-struct _low_file_desc{
-	long (*_open)	(struct _low_file_desc *,	const char*,		long);
-	long (*_read)	(struct _low_file_desc *,	unsigned char*,		long);
-	long (*_write)	(struct _low_file_desc *,	const unsigned char*,	long);
-	long (*_close)	(struct _low_file_desc *);
-	
-	void *private_data;
-	
-	struct{
-		unsigned char use:1;		//use = 1;unuse = 0;
-	}control_flags;
+class _low_file_desc_class{
+	_low_file_desc_factor *factor;
+public:
+	virtual _low_file_desc_factor* get_factor(void){return factor;}
+	virtual void set_factor(_low_file_desc_factor* fac){factor = fac;}
+
+	virtual long read	(unsigned char*, long) 		= 0;
+	virtual long write	(const unsigned char*, long) 	= 0;
+	virtual long ioctl	(unsigned long,void *){return -1;}
 };
-
-typedef struct _low_file_desc _FD;
+			
+class _low_file_desc_factor{
+public:
+	virtual const unsigned char*	get_name(void) 			= 0;
+	virtual _low_file_desc_class* 	open(const char *,long) 	= 0;
+	virtual long 			close(_low_file_desc_class*)	= 0;
+};
 
 
 /*	ドライバ登録関数 	*/
 //ドライバを登録する場合には名前と、_FD構造体の静的宣言が必要です。(モジュール内保持）
 //
-int set_io_driver(const char*,_FD*);
+int set_io_driver(_low_file_desc_factor*);
 
 #endif

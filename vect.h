@@ -86,7 +86,7 @@ void Excep_ICU_SWINT(void);
 void Excep_CMT0_CMI0(void);
 
 // CMT1 CMI1
-#pragma interrupt (Excep_CMT1_CMI1(vect=29))
+//#pragma interrupt (Excep_CMT1_CMI1(vect=29))
 void Excep_CMT1_CMI1(void);
 
 // CMT2 CMI2
@@ -278,7 +278,7 @@ void Excep_AD1_ADI1(void);
 void Excep_S12AD_ADI(void);
 
 // MTU0 TGIA0
-#pragma interrupt (Excep_MTU0_TGIA0(vect=114))
+//#pragma interrupt (Excep_MTU0_TGIA0(vect=114))
 void Excep_MTU0_TGIA0(void);
 
 // MTU0 TGIB0
@@ -314,11 +314,11 @@ void Excep_MTU1_TGIA1(void);
 void Excep_MTU1_TGIB1(void);
 
 // MTU1 TCIV1
-#pragma interrupt (Excep_MTU1_TCIV1(vect=123))
+//#pragma interrupt (Excep_MTU1_TCIV1(vect=123))
 void Excep_MTU1_TCIV1(void);
 
 // MTU1 TCIU1
-#pragma interrupt (Excep_MTU1_TCIU1(vect=124))
+//#pragma interrupt (Excep_MTU1_TCIU1(vect=124))
 void Excep_MTU1_TCIU1(void);
 
 // MTU2 TGIA2
@@ -426,11 +426,11 @@ void Excep_MTU7_TGIA7(void);
 void Excep_MTU7_TGIB7(void);
 
 // MTU7 TCIV7
-#pragma interrupt (Excep_MTU7_TCIV7(vect=151))
+//#pragma interrupt (Excep_MTU7_TCIV7(vect=151))
 void Excep_MTU7_TCIV7(void);
 
 // MTU7 TCIU7
-#pragma interrupt (Excep_MTU7_TCIU7(vect=152))
+//#pragma interrupt (Excep_MTU7_TCIU7(vect=152))
 void Excep_MTU7_TCIU7(void);
 
 // MTU8 TGIA8

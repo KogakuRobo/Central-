@@ -1,42 +1,30 @@
 #include <string.h>
 #include <stdio.h>
 #include <stddef.h>
-#include "../lowsrc.h"
-#include "E1_lib.h"
+#include "../lowsrc.hpp"
+#include "E1_lib.hpp"
 
-static const char g_e1_path[] = E1_PATH;
+const unsigned char E1_file_desc_factor::g_e1_path[] = E1_PATH;
 
-long E1_open(_FD*,const char*,	long);
-long E1_write(_FD*,const unsigned char *,long);
-long E1_read(_FD*, unsigned char *,long);
-long E1_close(_FD*);
-
-_FD _e1_driver = {
-	._open = E1_open,
-	._read = E1_read,
-	._write = E1_write,
-	._close = E1_close,
-};
-	
-
+extern "C"{
 /* Output one character to standard output */
 extern void charput(unsigned char);
 /* Input one character from standard input */
 extern unsigned char charget(void);
-
-long E1_open(_FD *fd,                  /* File name                 */
-	const char *path,
-     long  mode)                             /* Open mode                 */
-{
-    return 0;                             /*Others                  */
 }
 
-long E1_close( _FD *fd )
+_low_file_desc_class* E1_file_desc_factor::open(const char* path,long mode)
 {
-    return 1;
+	return new E1_file_desc;
 }
 
-long E1_write(_FD *fd,             /* File number                       */
+long E1_file_desc_factor::close( _low_file_desc_class* desc )
+{
+	delete desc;
+	return 1;
+}
+
+long E1_file_desc::write(
       const unsigned char *buf,       /* The address of destination buffer */
       long  count)                   /* The number of chacter to write    */
 {
@@ -50,7 +38,7 @@ long E1_write(_FD *fd,             /* File number                       */
 	return count;        /*Return the number of written characters */
 }
 
-long E1_read(_FD *fd, unsigned char *buf, long count )
+long E1_file_desc::read(unsigned char *buf, long count )
 {
 	long i;
 
@@ -66,9 +54,9 @@ long E1_read(_FD *fd, unsigned char *buf, long count )
 }
 
 
-void E1_init(void)
+E1_file_desc_factor::E1_file_desc_factor(void)
 {	
-	set_io_driver(g_e1_path,&_e1_driver);
+	set_io_driver(&E1_factor);
 	
 	if( freopen( "E1", "r", stdin ) == NULL )stdin->_Mode = 0xffff;  /* Not allow the access if it fails to open */
 	    stdin->_Mode  = _MOPENR;            /* Read only attribute              */

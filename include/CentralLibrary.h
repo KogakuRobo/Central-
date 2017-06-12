@@ -1,17 +1,11 @@
 #ifndef _CentrolLibrary_H_
 #define _CentrolLibrary_H_
 
+#include "Description.h"
 #include "iodefine.h"
-
-#ifdef __cplusplus
-extern "C"{
-#endif
 
 #include"user_system_call.h"
 
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 

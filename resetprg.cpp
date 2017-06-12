@@ -32,19 +32,14 @@
 extern "C" {
 #endif
 void PowerON_Reset_PC(void);
-void main(void);
 #ifdef __cplusplus
 }
 #endif
 
-#ifdef __cplusplus				// Use SIM I/O
-extern "C" {
-#endif
+void main(void);
+
 extern void _INIT_IOLIB(void);
 extern void _CLOSEALL(void);
-#ifdef __cplusplus
-}
-#endif
 
 #define PSW_init  0x00030000	// PSW bit pattern
 #define FPSW_init 0x00000000	// FPSW bit base pattern
@@ -52,13 +47,7 @@ extern void _CLOSEALL(void);
 //extern void srand(_UINT);		// Remove the comment when you use rand()
 //extern _SBYTE *_s1ptr;				// Remove the comment when you use strtok()
 		
-#ifdef __cplusplus				// Use Hardware Setup
-extern "C" {
-#endif
 extern void HardwareSetup(void);
-#ifdef __cplusplus
-}
-#endif
 	
 #ifdef __cplusplus			// Remove the comment when you use global class object
 extern "C" {					// Sections C$INIT and C$END will be generated
@@ -105,7 +94,7 @@ void PowerON_Reset_PC(void)
 	HardwareSetup();				// Use Hardware Setup
     nop();
 
-	_CALL_INIT();					// Use global class object
+				// Use global class object
 
 	set_psw(PSW_init);				// Set Ubit & Ibit for PSW
 	chg_pmusr();					// Remove the comment when you need to change PSW PMbit (SuperVisor->User)
