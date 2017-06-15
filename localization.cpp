@@ -70,8 +70,8 @@ void* localization(thread_t* tid,void *attr){
 	hensa[X] = count[X] - b_count[X];
 	hensa[Y] = count[Y] - b_count[Y];
 	
-	point[X] += (hensa[X]*cos(yaw+1.57) - hensa[Y]*sin(yaw))*3.6816E-05;
-	point[Y] += (hensa[Y]*cos(yaw+1.57) - hensa[X]*sin(yaw))*3.6816E-05;
+	point[X] += (hensa[X]*cos(yaw) - hensa[Y]*sin(yaw))*3.6816E-05;
+	point[Y] += (hensa[Y]*cos(yaw) + hensa[X]*sin(yaw))*3.6816E-05;
 	
 	((data*)attr)->X = point[X];
 	((data*)attr)->Y = point[Y];

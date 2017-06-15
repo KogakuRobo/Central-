@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "localization.hpp"
 #include "CentralLibrary.h"
 #include "RotaryA.hpp"
@@ -35,12 +36,15 @@ void main(void)
 	
 	fprintf(fp,"Average:,%d\n\r",d.ave);
 	fprintf(fp,"Deviation:,%d\n\r",d.devia);
-	fprintf(fp,"\n\rtime,yaw \n\r");
+	fprintf(fp,"\n\rtime,x,y,yaw,x',y' \n\r");
 	
 	for(float i = 0.0;;i = i + 1.0){
 		msleep(10);
 		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
-		fprintf(fp,"%d,%f,%f,%f\n\r",kernel_time,d.X*1000,d.Y*1000,d.yaw);
+		fprintf(fp,"%d,%f,%f,%f,%f,%f\n\r",kernel_time,d.X*1000,d.Y*1000,d.yaw,
+			d.X*1000 - 244 * sin(d.yaw) + 56 * cos(d.yaw),
+			d.Y*1000 + 56 * sin(d.yaw) + 244 * cos(d.yaw)
+		);
 		//printf("FFF\n");
 	}
 	while(1);
