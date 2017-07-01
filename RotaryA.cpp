@@ -81,13 +81,13 @@ _low_file_desc_class* _rotary_a::open(const char* name,long mode)
 	MTU1.TIER.BIT.TCIEU = 1;
 	MTU1.TIER.BIT.TCIEV = 1;
 	
-	PORT2.DDR.BIT.B4 = 0;
-	PORT2.DDR.BIT.B5 = 0;
+	PORTC.DDR.BIT.B6 = 0;
+	PORTC.DDR.BIT.B7 = 0;
 	
-	PORT2.ICR.BIT.B4 = 1;
-	PORT2.ICR.BIT.B5 = 1;
+	PORTC.ICR.BIT.B6 = 1;
+	PORTC.ICR.BIT.B7 = 1;
 	
-	IOPORT.PFCMTU.BIT.TCLKS = 0;
+	IOPORT.PFCMTU.BIT.TCLKS = 1;
 	
 	return this;
 }
@@ -172,3 +172,4 @@ void MTU1_TCIV1(void){
 void MTU1_TCIU1(void){
 	Rotary_a.count_underflow();
 }
+

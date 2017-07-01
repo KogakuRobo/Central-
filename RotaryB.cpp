@@ -72,13 +72,13 @@ _low_file_desc_class* _rotary_b::open(const char* name,long mode)
 	MTU7.TIER.BIT.TCIEU = 1;
 	MTU7.TIER.BIT.TCIEV = 1;
 	
-	PORTB.DDR.BIT.B4 = 0;
-	PORTB.DDR.BIT.B5 = 0;
+	PORTC.DDR.BIT.B2 = 0;
+	PORTC.DDR.BIT.B3 = 0;
 	
-	PORTB.ICR.BIT.B4 = 1;
-	PORTB.ICR.BIT.B5 = 1;
+	PORTC.ICR.BIT.B2 = 1;
+	PORTC.ICR.BIT.B3 = 1;
 	
-	IOPORT.PFDMTU.BIT.TCLKS = 1;
+	IOPORT.PFDMTU.BIT.TCLKS = 0;
 	
 	return this;
 }
