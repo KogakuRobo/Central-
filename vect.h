@@ -330,11 +330,11 @@ void Excep_MTU2_TGIA2(void);
 void Excep_MTU2_TGIB2(void);
 
 // MTU2 TCIV2
-#pragma interrupt (Excep_MTU2_TCIV2(vect=127))
+//#pragma interrupt (Excep_MTU2_TCIV2(vect=127))
 void Excep_MTU2_TCIV2(void);
 
 // MTU2 TCIU2
-#pragma interrupt (Excep_MTU2_TCIU2(vect=128))
+//#pragma interrupt (Excep_MTU2_TCIU2(vect=128))
 void Excep_MTU2_TCIU2(void);
 
 // MTU3 TGIA3

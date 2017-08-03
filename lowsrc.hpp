@@ -12,8 +12,8 @@
 #ifndef _lowsrc_H_
 #define _lowsrc_H_
 
-#define IOSTREAM 6
-#define IODRIVER 6
+#define IOSTREAM 12
+#define IODRIVER 12
 
 /* file number */
 #define STDIN  0                    /* Standard input (console)        */
