@@ -41,10 +41,10 @@ void* localization_init(void)
 	
 	rotary_a = open("ROTARY_A",0,0);
 	ioctl(rotary_a,ROTARYA_SET_TGIA,&stc);
-	ioctl(rotary_a,ROTARYA_BEGIN,NULL);
+	ioctl(rotary_a,ROTARY_BEGIN,NULL);
 	
 	rotary_b = open("ROTARY_B",0,0);
-	ioctl(rotary_b,ROTARYB_BEGIN,NULL);
+	ioctl(rotary_b,ROTARY_BEGIN,NULL);
 	
 	return 0;
 }
@@ -57,7 +57,7 @@ enum{
 };
 void* localization(thread_t* tid,void *attr){
 	float yaw = g_gyro->getYaw();
-	long count[2] = {ioctl(rotary_a,ROTARYA_GET_COUNT,NULL),ioctl(rotary_b,ROTARYB_GET_COUNT,NULL)};
+	long count[2] = {ioctl(rotary_a,ROTARY_GET_COUNT,NULL),ioctl(rotary_b,ROTARY_GET_COUNT,NULL)};
 	static float point[2] = {0,0};
 	static long b_count[2] = {0,0};
 	

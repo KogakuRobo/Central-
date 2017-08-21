@@ -101,9 +101,9 @@ long _rotary_b::write(const unsigned char *buf,long count)
 long _rotary_b::ioctl(unsigned long request,void* attr)
 {
 	switch(request){
-	case ROTARYB_BEGIN:
+	case ROTARY_BEGIN:
 		return begin(attr);
-	case ROTARYB_GET_COUNT:
+	case ROTARY_GET_COUNT:
 		return get_count(attr);
 	default:
 		return -1;
