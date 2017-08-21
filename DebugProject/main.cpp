@@ -14,7 +14,7 @@ volatile data d;
 void main(void)
 {
 	//SCI0のopenとノンバッファ処理
-	FILE *fp = fopen("SCI0","w");
+	FILE *fp = fopen("E1","w");
 	if(fp == NULL){
 		printf("LKK");
 	}
