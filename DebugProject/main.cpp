@@ -5,7 +5,7 @@
 #include "localization.hpp"
 #include "CentralLibrary.h"
 #include "RotaryC.hpp"
-#include "MotorA.hpp"
+#include "MotorClass.hpp"
 
 thread_t *t_main;
 
@@ -30,9 +30,9 @@ void main(void)
 	
 	extern long kernel_time;
 	
-	localization_init();
+	//localization_init();
 	
-	msleep(2000);
+	//msleep(2000);
 	
 	fprintf(fp,"Average:,%d\n\r",d.ave);
 	fprintf(fp,"Deviation:,%d\n\r",d.devia);
@@ -41,7 +41,8 @@ void main(void)
 	int rotaryc = open("ROTARY_D",0,0);
 	ioctl(rotaryc,ROTARY_BEGIN,NULL);
 	
-	int motora = open("MOTOR_D",0,0);
+	Motor motora("MOTOR_A");
+	//int motora = open("MOTOR_D",0,0);
 	
 	for(float i = 0.0;;i = i + 1.0){
 		float duty = 0;
@@ -52,7 +53,7 @@ void main(void)
 			d.Y*1000 + 56 * sin(d.yaw) + 244 * cos(d.yaw)
 		);*/
 		duty = 99.0*sin(i / 20);
-		ioctl(motora,MOTOR_SET_DUTY,&duty);
+		motora.SetDuty(duty);
 		msleep(1000);
 		int befor = ioctl(rotaryc,ROTARY_GET_COUNT,NULL);
 		msleep(500);

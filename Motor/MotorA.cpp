@@ -97,7 +97,7 @@ long _motor_a::ioctl(unsigned long request,void* attr)
 		ret = this->set_duty(*(float *)attr);
 		break;
 	case MOTOR_SET_FREQUENCY:
-		ret = this->set_frequency(*(float*)attr);
+		ret = this->set_frequency(*(unsigned short*)attr);
 		break;
 	case MOTOR_BEGIN:
 		ret = this->begin();

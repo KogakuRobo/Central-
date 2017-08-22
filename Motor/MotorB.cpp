@@ -70,9 +70,9 @@ long _motor_b::close(_low_file_desc_class* desc)
 	
 	PORTB.DR.BIT.B6 = 0;
 	PORTB.DR.BIT.B7 = 0;
-	PORTB.DDR.BIT.B1 = 1;
-	PORTB.DDR.BIT.B6 = 1;
-	PORTB.DDR.BIT.B7 = 1;
+	PORTB.DDR.BIT.B1 = 0;
+	PORTB.DDR.BIT.B6 = 0;
+	PORTB.DDR.BIT.B7 = 0;
 	
 	return IOCTL_NON_ERROR;
 }
@@ -95,7 +95,7 @@ long _motor_b::ioctl(unsigned long request,void* attr)
 		ret = this->set_duty(*(float *)attr);
 		break;
 	case MOTOR_SET_FREQUENCY:
-		ret = this->set_frequency(*(float *)attr);
+		ret = this->set_frequency(*(unsigned short *)attr);
 		break;
 	case MOTOR_BEGIN:
 		ret = this->begin();

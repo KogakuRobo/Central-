@@ -19,7 +19,10 @@ public:
 	virtual long ioctl(unsigned long,void*);
 
 protected:
-	void set_duty(float);
+	virtual int begin(void);
+	virtual int stop(void);
+	virtual int set_duty(float);
+	virtual int set_frequency(unsigned short);
 }Motor_D;
 
 
@@ -35,38 +38,44 @@ _motor_d::_motor_d(void)
 
 _low_file_desc_class* _motor_d::open(const char* name,long mode)
 {	
+	
+	this->stop();
+	
+	
 	PORTB.DDR.BIT.B5 = 1;
 	PORT2.DDR.BIT.B3 = 1;
 	PORT2.DDR.BIT.B5 = 1;
 	PORT2.DR.BIT.B3 = 0;
 	PORT2.DR.BIT.B5 = 0;
+	MTUB.TOER.BIT.OE4C = 1;
 	
 	MTUB.TRWER.BIT.RWE = 1;
-	
-	MTU10.TCR.BIT.CCLR = 1;
-	MTU10.TCR.BIT.CKEG = 0;
-	MTU10.TCR.BIT.TPSC = 0;
 	
 	MTU10.TMDR.BIT.MD = 2;
 	
 	MTU10.TIORL.BIT.IOC = 6;
 	MTU10.TIORL.BIT.IOD = 5;
 	
-	MTU10.TGRA = 1000;
-	MTU10.TGRC = 1000;
-	MTU10.TGRB = 0;
-	MTU10.TGRD = 0;
+	MTU10.TCR.BIT.CCLR = 1;
 	
-	MTUB.TOER.BIT.OE4C = 1;
+	this->set_frequency(20);
+	this->set_duty(0);
 	
-	MTUB.TSTR.BIT.CST4 = 1;
+	this->begin();
 	
 	return this;
 }
 
 long _motor_d::close(_low_file_desc_class* desc)
 {
-	return 0;
+	this->stop();
+	
+	PORTB.DDR.BIT.B5 = 0;
+	PORT2.DDR.BIT.B3 = 0;
+	PORT2.DDR.BIT.B5 = 0;
+	PORT2.DR.BIT.B3 = 0;
+	PORT2.DR.BIT.B5 = 0;
+	MTUB.TOER.BIT.OE4C = 0;
 }
 
 long _motor_d::read(unsigned char *buf,long count)
@@ -81,15 +90,39 @@ long _motor_d::write(const unsigned char *buf,long count)
 
 long _motor_d::ioctl(unsigned long request,void* attr)
 {
+	int ret;
 	switch(request){
 	case MOTOR_SET_DUTY:
-		this->set_duty(*(float *)attr);
+		ret = this->set_duty(*(float *)attr);
 		break;
+	case MOTOR_SET_FREQUENCY:
+		ret = this->set_frequency(*(unsigned short*)attr);
+		break;
+	case MOTOR_BEGIN:
+		ret = this->begin();
+		break;
+	case MOTOR_STOP:
+		ret = this->stop();
+		break;
+	default:
+		ret = IOCTL_ERROR;
 	}
-	return 0;
+	return ret;
 }
 
-void _motor_d::set_duty(float d)
+int _motor_d::begin(void)
+{
+	MTUB.TSTR.BIT.CST4 = 1;
+	return IOCTL_NON_ERROR;
+}
+
+int _motor_d::stop(void)
+{
+	MTUB.TSTR.BIT.CST4 = 0;
+	return IOCTL_NON_ERROR;
+}
+
+int _motor_d::set_duty(float d)
 {
 	float abs_duty;
 	this->duty = d;
@@ -110,4 +143,22 @@ void _motor_d::set_duty(float d)
 		PORT2.DR.BIT.B5 = 0;
 	}
 	MTU10.TGRD = MTU10.TGRA * (abs_duty / 100.0);
+	return IOCTL_NON_ERROR;
+}
+
+int _motor_d::set_frequency(unsigned short f){
+	const unsigned short MTU10_PSC[6] = {1,4,16,64,256,1024};
+	this->stop();
+	for(int i = 0;i < 6;i++){
+		
+		long temp = (PCK_CLOCK * 1000000) / MTU10_PSC[i] / ( f * 1000) - 1;	//プリスケーラを想定して計算
+		
+		if(temp < ((unsigned short)0xffff)){					//TGRAが設定可能範囲か計算
+			MTU10.TCR.BIT.TPSC = i;						//設定
+			MTU10.TGRA = (unsigned short)temp;
+			return IOCTL_NON_ERROR;
+		}
+	}
+	
+	return IOCTL_ERROR;
 }
