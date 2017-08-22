@@ -46,11 +46,17 @@
 #define O_TRUNC  0x0010 /* The file size is changed to 0 if it is existed. */
 #define O_APPEND 0x0020 /* The position is set for next reading/writing    */
                         /* 0: Top of the file 1: End of file               */
-
+			
 class _low_file_desc_class;
 class _low_file_desc_factor;
 
 class _low_file_desc_class{
+protected:
+	typedef enum{
+		IOCTL_NON_ERROR = 0,
+		IOCTL_ERROR = -1,
+	}ioctl_return_code;
+	
 	_low_file_desc_factor *factor;
 public:
 	virtual _low_file_desc_factor* get_factor(void){return factor;}

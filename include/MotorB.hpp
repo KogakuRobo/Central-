@@ -2,10 +2,9 @@
 #define _MotorB_HPP_
 
 #include"CentralLibrary.h"
+#include"Motor.hpp"
 
 typedef enum{
-	MOTORB_SET_FREQUENCY,
-	MOTORB_SET_DUTY,
 }motor_b_ioctl_cmd;
 
 #endif

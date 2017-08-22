@@ -38,10 +38,10 @@ void main(void)
 	fprintf(fp,"Deviation:,%d\n\r",d.devia);
 	fprintf(fp,"duty,speed\n\r");
 	
-	int rotaryc = open("ROTARY_C",0,0);
+	int rotaryc = open("ROTARY_D",0,0);
 	ioctl(rotaryc,ROTARY_BEGIN,NULL);
 	
-	int motora = open("MOTOR_A",0,0);
+	int motora = open("MOTOR_D",0,0);
 	
 	for(float i = 0.0;;i = i + 1.0){
 		float duty = 0;
@@ -52,7 +52,7 @@ void main(void)
 			d.Y*1000 + 56 * sin(d.yaw) + 244 * cos(d.yaw)
 		);*/
 		duty = 99.0*sin(i / 20);
-		ioctl(motora,MOTORA_SET_DUTY,&duty);
+		ioctl(motora,MOTOR_SET_DUTY,&duty);
 		msleep(1000);
 		int befor = ioctl(rotaryc,ROTARY_GET_COUNT,NULL);
 		msleep(500);

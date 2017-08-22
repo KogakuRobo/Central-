@@ -442,11 +442,11 @@ void Excep_MTU8_TGIA8(void);
 void Excep_MTU8_TGIB8(void);
 
 // MTU8 TCIV8
-#pragma interrupt (Excep_MTU8_TCIV8(vect=155))
+//#pragma interrupt (Excep_MTU8_TCIV8(vect=155))
 void Excep_MTU8_TCIV8(void);
 
 // MTU8 TCIU8
-#pragma interrupt (Excep_MTU8_TCIU8(vect=156))
+//#pragma interrupt (Excep_MTU8_TCIU8(vect=156))
 void Excep_MTU8_TCIU8(void);
 
 // MTU9 TGIA9

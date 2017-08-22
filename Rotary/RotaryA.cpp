@@ -2,8 +2,6 @@
 #include "CentralLibrary.h"
 #include "lowsrc.hpp"
 
-
-
 class _rotary_a:public _low_file_desc_factor,public _low_file_desc_class{
 	static const unsigned char g_rotary_a_path[];
 
