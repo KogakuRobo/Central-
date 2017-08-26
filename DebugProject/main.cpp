@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include "localization.hpp"
-#include "CentralLibrary.h"
-#include "RotaryC.hpp"
 #include "MotorClass.hpp"
+#include "RotaryClass.hpp"
 
 thread_t *t_main;
 
@@ -30,16 +29,15 @@ void main(void)
 	
 	extern long kernel_time;
 	
-	//localization_init();
+	localization_init();
 	
-	//msleep(2000);
+	msleep(2000);
 	
 	fprintf(fp,"Average:,%d\n\r",d.ave);
 	fprintf(fp,"Deviation:,%d\n\r",d.devia);
 	fprintf(fp,"duty,speed\n\r");
 	
-	int rotaryc = open("ROTARY_D",0,0);
-	ioctl(rotaryc,ROTARY_BEGIN,NULL);
+	Rotary rotaryc("ROTARY_D");
 	
 	Motor motora("MOTOR_A");
 	//int motora = open("MOTOR_D",0,0);
@@ -55,9 +53,9 @@ void main(void)
 		duty = 99.0*sin(i / 20);
 		motora.SetDuty(duty);
 		msleep(1000);
-		int befor = ioctl(rotaryc,ROTARY_GET_COUNT,NULL);
+		int befor = rotaryc.GetCount();
 		msleep(500);
-		int after = ioctl(rotaryc,ROTARY_GET_COUNT,NULL);
+		int after = rotaryc.GetCount();
 		
 		fprintf(fp,"%f,%d\n\r",duty,after - befor);
 		

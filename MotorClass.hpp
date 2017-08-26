@@ -1,8 +1,7 @@
 #ifndef _MotorClass_HPP_
 #define _MotorClass_HPP_
 
-
-#include"CentralLibrary.h"
+#include <stddef.h>
 
 class Motor{
 	int motor_dev;
@@ -10,7 +9,7 @@ class Motor{
 	const char *name;
 public:
 	Motor(const char *_n = NULL);
-	int SetDuty(float);
+	virtual int SetDuty(float);
 };
 
 #endif

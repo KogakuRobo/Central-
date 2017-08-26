@@ -23,6 +23,8 @@ typedef struct{
 	float X,Y;
 }data;
 
+//class Localization
+
 extern volatile data d;
 
 extern void* localization_init(void);

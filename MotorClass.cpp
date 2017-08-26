@@ -1,5 +1,6 @@
 #include"MotorClass.hpp"
 #include"Motor.hpp"
+#include"CentralLibrary.h"
 
 Motor::Motor(const char *_n){
 	if(_n != NULL){

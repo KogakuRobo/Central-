@@ -462,6 +462,13 @@
       <ParentItem>40fbc2a3-01f1-4c5f-9faf-d2b4f1b66fef</ParentItem>
       <Property>22999eb3-0905-46d6-9d0a-6edb85191383</Property>
     </Instance>
+    <Instance Guid="1ccc2b16-be43-4ad7-b182-a88bfbe1d1ed">
+      <Name>Rotary.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>Rotary.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>9e74c833-55ea-45bc-abd5-c443ac91611a</ParentItem>
+    </Instance>
     <Instance Guid="f5b5c656-f585-42cf-9a25-37026378db38">
       <Name>RotaryA.hpp</Name>
       <Type>File</Type>
@@ -480,13 +487,6 @@
       <Name>RotaryC.hpp</Name>
       <Type>File</Type>
       <RelativePath>include\RotaryC.hpp</RelativePath>
-      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
-      <ParentItem>9e74c833-55ea-45bc-abd5-c443ac91611a</ParentItem>
-    </Instance>
-    <Instance Guid="1ccc2b16-be43-4ad7-b182-a88bfbe1d1ed">
-      <Name>Rotary.hpp</Name>
-      <Type>File</Type>
-      <RelativePath>Rotary.hpp</RelativePath>
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>9e74c833-55ea-45bc-abd5-c443ac91611a</ParentItem>
     </Instance>
@@ -713,15 +713,15 @@
       <SourceItemType24>CppSource</SourceItemType24>
       <SourceItemGuid25>5c91cecc-39da-4ac8-a790-b5411e962225</SourceItemGuid25>
       <SourceItemType25>CppSource</SourceItemType25>
-      <SourceItemGuid26>0b61510f-2928-401d-a14f-2374ede048d5</SourceItemGuid26>
+      <SourceItemGuid26>f41d42fb-0e2f-4672-bf93-290dc8ef7fda</SourceItemGuid26>
       <SourceItemType26>CppSource</SourceItemType26>
-      <SourceItemGuid27>9a51b1e6-e61c-48b2-975a-597fd2c089e8</SourceItemGuid27>
+      <SourceItemGuid27>3b6dae30-5b76-4035-a92c-705586211689</SourceItemGuid27>
       <SourceItemType27>CppSource</SourceItemType27>
       <SourceItemGuid28>bc64d35d-92f6-455d-85dc-a54d880cf666</SourceItemGuid28>
       <SourceItemType28>CppSource</SourceItemType28>
-      <SourceItemGuid29>3b6dae30-5b76-4035-a92c-705586211689</SourceItemGuid29>
+      <SourceItemGuid29>9a51b1e6-e61c-48b2-975a-597fd2c089e8</SourceItemGuid29>
       <SourceItemType29>CppSource</SourceItemType29>
-      <SourceItemGuid30>f41d42fb-0e2f-4672-bf93-290dc8ef7fda</SourceItemGuid30>
+      <SourceItemGuid30>0b61510f-2928-401d-a14f-2374ede048d5</SourceItemGuid30>
       <SourceItemType30>CppSource</SourceItemType30>
       <SourceItemCount>31</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
@@ -1921,7 +1921,7 @@ E1
       <SourceItem25-IsLockedByUser>False</SourceItem25-IsLockedByUser>
       <SourceItem25-BuildingTarget-0>True</SourceItem25-BuildingTarget-0>
       <SourceItem25-IndividualCompileOption-0>False</SourceItem25-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem26--0>-8586982984552527809</TimeTagModified-SourceItem26--0>
+      <TimeTagModified-SourceItem26--0>-8586982977245235878</TimeTagModified-SourceItem26--0>
       <SourceItem26-IsLockedByUser>False</SourceItem26-IsLockedByUser>
       <SourceItem26-BuildingTarget-0>True</SourceItem26-BuildingTarget-0>
       <SourceItem26-IndividualCompileOption-0>False</SourceItem26-IndividualCompileOption-0>
@@ -1937,7 +1937,7 @@ E1
       <SourceItem29-IsLockedByUser>False</SourceItem29-IsLockedByUser>
       <SourceItem29-BuildingTarget-0>True</SourceItem29-BuildingTarget-0>
       <SourceItem29-IndividualCompileOption-0>False</SourceItem29-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem30--0>-8586982977245235878</TimeTagModified-SourceItem30--0>
+      <TimeTagModified-SourceItem30--0>-8586982984552527809</TimeTagModified-SourceItem30--0>
       <SourceItem30-IsLockedByUser>False</SourceItem30-IsLockedByUser>
       <SourceItem30-BuildingTarget-0>True</SourceItem30-BuildingTarget-0>
       <SourceItem30-IndividualCompileOption-0>False</SourceItem30-IndividualCompileOption-0>
