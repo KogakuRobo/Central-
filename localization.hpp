@@ -2,6 +2,8 @@
 #define _localization_HPP_
 
 #include "CentralLibrary.h"
+//#include "Gyro.hpp"
+#include "L3G4200D.hpp"
 
 //自己位置推定用プログラム
 
@@ -21,13 +23,31 @@ typedef struct{
 	long time;
 	
 	float X,Y;
-}data;
-
-//class Localization
-
-extern volatile data d;
+}loca_data;
 
 extern void* localization_init(void);
 extern void *localization(thread_t*,void*);
+
+class Localization
+{
+private:
+	/*
+	SPI_Bus *spi_bus;
+	Gyro *yaw_gyro;
+
+	int rotary_a;
+	int rotary_b;
+	*/
+public:
+	Localization(void);
+	~Localization(void);
+	//int Begin(void);
+	
+	virtual float GetX(void);			//[m]
+	virtual float GetY(void);			//[m]
+	virtual float GetYaw(void);			//[rad]
+	
+	volatile loca_data &Get_d(void);
+};
 
 #endif

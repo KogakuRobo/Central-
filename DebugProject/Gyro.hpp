@@ -3,6 +3,7 @@
 
 class Gyro{
 public:
+	virtual int Begin(unsigned int) = 0;
 	virtual float getYaw(void) = 0;
 };
 

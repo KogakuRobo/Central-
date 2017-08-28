@@ -7,6 +7,8 @@ class _rotary_a:public _low_file_desc_factor,public _low_file_desc_class{
 
 	//MTU1.TCNTのオーバーフローカウンタ
 	static unsigned short over_count;
+	
+	static int open_counter;
 public:
 	static thread_t thread;
 private:
@@ -37,6 +39,7 @@ private:
 
 const unsigned char _rotary_a::g_rotary_a_path[] = "ROTARY_A";
 unsigned short _rotary_a::over_count;
+int _rotary_a::open_counter;
 thread_t _rotary_a::thread;
 
 _rotary_a::_rotary_a(void){
@@ -50,6 +53,8 @@ _rotary_a::_rotary_a(void){
 
 _low_file_desc_class* _rotary_a::open(const char* name,long mode)
 {
+	if(open_counter != 0)return this;
+	
 	//MTU0.TCNTを24MHzカウントアップ(48MHz / 4 * 2)設定
 	MTU0.TCR.BIT.TPSC = 1;
 	MTU0.TCR.BIT.CKEG = 2;

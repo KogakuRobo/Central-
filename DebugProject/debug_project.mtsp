@@ -92,6 +92,20 @@
       <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
       <ParentItem>3458d23e-464b-4bf4-a866-80114497c3b3</ParentItem>
     </Instance>
+    <Instance Guid="c4feadf8-9f3d-4a53-9276-824fb6d06abc">
+      <Name>RotaryClass.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\RotaryClass.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>3458d23e-464b-4bf4-a866-80114497c3b3</ParentItem>
+    </Instance>
+    <Instance Guid="a0ecaad5-ddef-4d0e-8860-e68ff0cb693b">
+      <Name>RotaryClass.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\RotaryClass.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>3458d23e-464b-4bf4-a866-80114497c3b3</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">
@@ -154,7 +168,9 @@
       <SourceItemType4>CppSource</SourceItemType4>
       <SourceItemGuid5>f1f6d82d-9007-498c-a88d-8f877f189dfa</SourceItemGuid5>
       <SourceItemType5>CppSource</SourceItemType5>
-      <SourceItemCount>6</SourceItemCount>
+      <SourceItemGuid6>a0ecaad5-ddef-4d0e-8860-e68ff0cb693b</SourceItemGuid6>
+      <SourceItemType6>CppSource</SourceItemType6>
+      <SourceItemCount>7</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -649,7 +665,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586981792836463982</TimeTagModified--0>
+      <TimeTagModified--0>-8586977568836904196</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -955,7 +971,7 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586981792836463982</TimeTagModified--0>
+      <TimeTagModified--0>-8586977568836904196</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1069,6 +1085,14 @@ D_2=R_2
       <ItemAddTime>636390697594004115</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="c4feadf8-9f3d-4a53-9276-824fb6d06abc">
+      <ItemAddTime>636393336447273579</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="a0ecaad5-ddef-4d0e-8860-e68ff0cb693b">
+      <ItemAddTime>636393336550482026</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587064615736118577</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
@@ -1090,9 +1114,13 @@ D_2=R_2
       <SourceItem5-IsLockedByUser>False</SourceItem5-IsLockedByUser>
       <SourceItem5-BuildingTarget-0>True</SourceItem5-BuildingTarget-0>
       <SourceItem5-IndividualCompileOption-0>False</SourceItem5-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem6--0>-8586979024304293782</TimeTagModified-SourceItem6--0>
+      <SourceItem6-IsLockedByUser>False</SourceItem6-IsLockedByUser>
+      <SourceItem6-BuildingTarget-0>True</SourceItem6-BuildingTarget-0>
+      <SourceItem6-IndividualCompileOption-0>False</SourceItem6-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
-      <TimeTagModified-SourceItem1--0>-8586981792836463982</TimeTagModified-SourceItem1--0>
+      <TimeTagModified-SourceItem1--0>-8586977568836904196</TimeTagModified-SourceItem1--0>
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
@@ -1112,6 +1140,11 @@ D_2=R_2
   <Class Guid="31a86ad3-37bd-4846-aff2-e08abdc00197">
     <Instance Guid="31a86ad3-37bd-4846-aff2-e08abdc00197">
       <DeviceNameOnCreateStartup>R5F56218BxFP</DeviceNameOnCreateStartup>
+    </Instance>
+  </Class>
+  <Class Guid="606767c3-4bf3-4e65-90c1-19075517355d">
+    <Instance Guid="606767c3-4bf3-4e65-90c1-19075517355d">
+      <CurrentToolKey>6b3ab0e8-8ba1-402c-ac51-963031a63a4a</CurrentToolKey>
     </Instance>
   </Class>
   <Class Guid="8b5af363-dcc2-48e6-919c-6cdb80d50173">
@@ -1643,7 +1676,12 @@ D_2=R_2
   </Class>
   <Class Guid="932085a2-9361-4df9-a3f7-12e6de7681a8">
     <Instance Guid="932085a2-9361-4df9-a3f7-12e6de7681a8">
-      <DebugToolManager>1d1a55cf-2b92-481a-af4f-5975d095c419</DebugToolManager>
+      <DebugToolManager>578d917e-0d0a-4491-a220-37ba42009e0b</DebugToolManager>
+    </Instance>
+  </Class>
+  <Class Guid="104fc540-14b6-4fb9-bd7a-0d4844b95028">
+    <Instance Guid="00000000-0000-0000-0000-000000000000">
+      <SubDebugger>6b3ab0e8-8ba1-402c-ac51-963031a63a4a</SubDebugger>
     </Instance>
   </Class>
   <Class Guid="e4df8d71-236e-4af2-aaea-56345a08da25">
@@ -2297,11 +2335,6 @@ D_2=R_2
       <ChannelColor14>c0317f0c</ChannelColor14>
       <ChannelColor15>c060493e</ChannelColor15>
       <ChannelColor16>c072808e</ChannelColor16>
-    </Instance>
-  </Class>
-  <Class Guid="606767c3-4bf3-4e65-90c1-19075517355d">
-    <Instance Guid="606767c3-4bf3-4e65-90c1-19075517355d">
-      <CurrentToolKey>6b3ab0e8-8ba1-402c-ac51-963031a63a4a</CurrentToolKey>
     </Instance>
   </Class>
   <Class Guid="2a2c2a43-ecdb-4e88-80bd-e75f3e33db90">

@@ -6,9 +6,15 @@
 #include "MotorClass.hpp"
 #include "RotaryClass.hpp"
 
-thread_t *t_main;
-
-volatile data d;
+class adj_Localization :public Localization{
+public:
+	float GetX(void){
+		return Get_d().X*1000 - 244 * sin(Get_d().yaw) + 56 * cos(Get_d().yaw);
+	}
+	float GetY(void){
+		return Get_d().Y*1000 + 56 * sin(Get_d().yaw) + 244 * cos(Get_d().yaw);
+	}
+};
 
 void main(void)
 {
@@ -21,26 +27,21 @@ void main(void)
 	
 	fprintf(fp,"Program Start\n\r");
 	
-	//thread_t loca;
-	//thread_create(&loca,CT_PRIORITY_MAX + 3,localization,&d);
-	
 	PORTA.DDR.BIT.B0 = 1;
 	PORTA.DDR.BIT.B1 = 1;
 	
 	extern long kernel_time;
 	
-	localization_init();
+	adj_Localization loca;
 	
 	msleep(2000);
 	
-	fprintf(fp,"Average:,%d\n\r",d.ave);
-	fprintf(fp,"Deviation:,%d\n\r",d.devia);
+	fprintf(fp,"Average:,%d\n\r",loca.Get_d().ave);
+	fprintf(fp,"Deviation:,%d\n\r",loca.Get_d().devia);
 	fprintf(fp,"duty,speed\n\r");
 	
 	Rotary rotaryc("ROTARY_D");
-	
 	Motor motora("MOTOR_A");
-	//int motora = open("MOTOR_D",0,0);
 	
 	for(float i = 0.0;;i = i + 1.0){
 		float duty = 0;
@@ -58,8 +59,7 @@ void main(void)
 		int after = rotaryc.GetCount();
 		
 		fprintf(fp,"%f,%d\n\r",duty,after - befor);
-		
-		//printf("FFF\n");
+
 	}
 	while(1);
 }
