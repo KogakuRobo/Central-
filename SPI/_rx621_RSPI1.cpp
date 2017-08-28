@@ -1,5 +1,5 @@
 #include"_rx621_RSPI1.hpp"
-#include"./RX621_DTC/_rx621_dtc.hpp"
+#include"./DTC/_rx621_dtc.h"
 #include"stddef.h"
 #include"iodefine.h"
 #include"machine.h"

@@ -18,7 +18,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <machine.h>
-#include "lowsrc.h"
+#include "lowsrc.hpp"
 #include "CentralLibrary.h"
 #include "syscall_table.h"
 #include "Description.h"
