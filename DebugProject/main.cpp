@@ -9,17 +9,17 @@
 class adj_Localization :public Localization{
 public:
 	float GetX(void){
-		return Get_d().X*1000 - 244 * sin(Get_d().yaw) + 56 * cos(Get_d().yaw);
+		return -1 * Get_d().X * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(Get_d().yaw) + 50;
 	}
 	float GetY(void){
-		return Get_d().Y*1000 + 56 * sin(Get_d().yaw) + 244 * cos(Get_d().yaw);
+		return Get_d().Y*1000 + 50 * sin(Get_d().yaw) /*+ 244 * cos(Get_d().yaw)*/;
 	}
 };
 
 void main(void)
 {
 	//SCI0のopenとノンバッファ処理
-	FILE *fp = fopen("E1","w");
+	FILE *fp = fopen("SCI0","w");
 	if(fp == NULL){
 		printf("LKK");
 	}
@@ -45,20 +45,17 @@ void main(void)
 	
 	for(float i = 0.0;;i = i + 1.0){
 		float duty = 0;
-		//msleep(10);
+		msleep(10);
 		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
-		/*fprintf(fp,"%d,%f,%f,%f,%f,%f\n\r",kernel_time,d.X*1000,d.Y*1000,d.yaw,
-			d.X*1000 - 244 * sin(d.yaw) + 56 * cos(d.yaw),
-			d.Y*1000 + 56 * sin(d.yaw) + 244 * cos(d.yaw)
-		);*/
-		duty = 99.0*sin(i / 20);
-		motora.SetDuty(duty);
-		msleep(1000);
-		int befor = rotaryc.GetCount();
-		msleep(500);
-		int after = rotaryc.GetCount();
+		fprintf(fp,"%d,%f,%f,%f,%d\n\r",kernel_time,loca.GetX(),loca.GetY(),loca.GetYaw(),loca.Get_d().count_A);
+		//duty = 99.0*sin(i / 20);
+		//motora.SetDuty(-1*abs(duty));
+		//msleep(500);
+		//int befor = rotaryc.GetCount();
+		//msleep(250);
+		//int after = rotaryc.GetCount();
 		
-		fprintf(fp,"%f,%d\n\r",duty,after - befor);
+		//fprintf(fp,"%f,%d\n\r",duty,after - befor);
 
 	}
 	while(1);

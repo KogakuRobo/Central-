@@ -87,6 +87,9 @@ _low_file_desc_class* _rotary_a::open(const char* name,long mode)
 	PORTC.DDR.BIT.B6 = 0;
 	PORTC.DDR.BIT.B7 = 0;
 	
+	PORTC.PCR.BIT.B6 = 1;
+	PORTC.PCR.BIT.B7 = 1;
+	
 	PORTC.ICR.BIT.B6 = 1;
 	PORTC.ICR.BIT.B7 = 1;
 	

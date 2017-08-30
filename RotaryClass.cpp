@@ -13,6 +13,11 @@ Rotary::Rotary(const char *_n){
 	}
 }
 
-signed long Rotary::GetCount(void){
-	return (signed long)ioctl(rotary_dev,ROTARY_GET_COUNT,NULL);
+int Rotary::SetTGIA(interrupt_stc inte_stc)
+{
+	ioctl(rotary_dev,ROTARYA_SET_TGIA,&inte_stc);
+}
+
+long Rotary::GetCount(void){
+	return ioctl(rotary_dev,ROTARY_GET_COUNT,NULL);
 }

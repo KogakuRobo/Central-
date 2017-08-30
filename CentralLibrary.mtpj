@@ -619,6 +619,9 @@
     <Instance Guid="8be70ac1-22d5-4e42-b55b-2b143bee993c">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="219b5c6d-e840-4baf-a697-65b456bfbad5">
+      <MemoCount>0</MemoCount>
+    </Instance>
     <Instance Guid="b41e465b-4a4d-4d61-adf0-0b4749871a97">
       <MemoCount>0</MemoCount>
     </Instance>
@@ -626,9 +629,6 @@
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="7f9fcca3-9eca-4d5c-807c-16e281efdd1b">
-      <MemoCount>0</MemoCount>
-    </Instance>
-    <Instance Guid="219b5c6d-e840-4baf-a697-65b456bfbad5">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
