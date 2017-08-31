@@ -2,7 +2,7 @@
 #include<stddef.h>
 #include<machine.h>
 #include"iodefine.h"
-#include"task_control_block.h"
+#include"thread_control.hpp"
 #include"syscall_table.h"
 
 int now_tcb_number = 0;
@@ -14,13 +14,6 @@ int user_syscall(int num,void *attr)
 	int_exception(VECT(ICU,SWINT));
 	//ICU.SWINTR.BIT.SWINT = 1;
 }
-
-extern int kernel_create_thread(CreateThreadStruct*);
-extern int kernel_destroy_thread(thread_t*);
-extern int kernel_suspend_thread(thread_t*);
-extern int kernel_resume_thread(thread_t*);
-
-extern int kernel_msleep(unsigned long);
 
 extern long kernel_open(const char*,long,long);
 extern long kernel_write(long,const unsigned char*,long);

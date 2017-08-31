@@ -48,12 +48,12 @@ void main(void)
 		msleep(10);
 		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
 		fprintf(fp,"%d,%f,%f,%f,%d\n\r",kernel_time,loca.GetX(),loca.GetY(),loca.GetYaw(),loca.Get_d().count_A);
-		//duty = 99.0*sin(i / 20);
-		//motora.SetDuty(-1*abs(duty));
-		//msleep(500);
-		//int befor = rotaryc.GetCount();
-		//msleep(250);
-		//int after = rotaryc.GetCount();
+		duty = 99.0*sin(i / 20);
+		motora.SetDuty(-1*abs(duty));
+		msleep(500);
+		int befor = rotaryc.GetCount();
+		msleep(250);
+		int after = rotaryc.GetCount();
 		
 		//fprintf(fp,"%f,%d\n\r",duty,after - befor);
 
