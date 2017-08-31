@@ -9,6 +9,8 @@
 
 #ifdef __cplusplus
 
+#include "thread_mutex.hpp"
+
 #include "../SPI/SPI.hpp"
 #include "../SPI/_rx621_RSPI1.hpp"
 
