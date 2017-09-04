@@ -70,4 +70,7 @@ extern int thread_resume(thread_t*);
 
 extern thread_t* get_tid(void);
 
+extern void set_atomic(void);			//カーネルモード限定
+extern void unset_atomic(void);			//カーネルモード限定
+
 #endif

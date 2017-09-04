@@ -90,11 +90,11 @@ void Excep_CMT0_CMI0(void);
 void Excep_CMT1_CMI1(void);
 
 // CMT2 CMI2
-#pragma interrupt (Excep_CMT2_CMI2(vect=30))
+//#pragma interrupt (Excep_CMT2_CMI2(vect=30))
 void Excep_CMT2_CMI2(void);
 
 // CMT3 CMI3
-#pragma interrupt (Excep_CMT3_CMI3(vect=31))
+//#pragma interrupt (Excep_CMT3_CMI3(vect=31))
 void Excep_CMT3_CMI3(void);
 
 // ETHER EINT

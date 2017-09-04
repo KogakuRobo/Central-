@@ -158,9 +158,9 @@ long _rotary_a::set_tgia(void *argp){
 
 void* _rotary_a::mtu_tgia_inte(thread_t* tid,void *attr){
 	while(!thread_suspend(tid)){
-	IEN(MTU0,TGIA0) = 0;
+		IEN(MTU0,TGIA0) = 0;
 		Rotary_a.function(tid,Rotary_a.arg);
-	IEN(MTU0,TGIA0) = 1;
+		IEN(MTU0,TGIA0) = 1;
 	}
 }
 
