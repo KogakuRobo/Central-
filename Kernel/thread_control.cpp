@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <machine.h>
 #include "task_control_block.h"
 #include "task_que.hpp"
 #include "syscall_table.h"
@@ -165,4 +166,13 @@ int context_switch(thread_t* old_tid,thread_t* new_tid){
 
 thread_t* get_tid(void){
 	return current_thread;
+}
+
+void set_atomic(void){
+	clrpsw_i();
+}
+
+void unset_atomic(void)
+{
+	setpsw_i();
 }
