@@ -154,7 +154,7 @@ int _motor_b::set_frequency(unsigned short f){
 		
 		if(temp < ((unsigned short)0xffff)){					//TGRA‚ªÝ’è‰Â”\”ÍˆÍ‚©ŒvŽZ
 			MTU9.TCR.BIT.TPSC = i;						//Ý’è
-			MTU9.TGRA = (unsigned short)temp;
+			MTU9.TGRC = (unsigned short)temp;
 			return IOCTL_NON_ERROR;
 		}
 	}
