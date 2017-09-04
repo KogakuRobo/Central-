@@ -75,8 +75,8 @@ volatile loca_data &Localization::Get_d(void)
 
 void* localization_init(void)
 {
-	static thread_t loca;
-	thread_create(&loca,CT_PRIORITY_MAX + 3,localization,(void*)&d);
+	//static thread_t loca;
+	//thread_create(&loca,CT_PRIORITY_MAX + 3,localization,(void*)&d);
 	
 	static RSPI1_Bus spi_bus;
 	spi_bus.Begin(0);
@@ -98,11 +98,12 @@ void* localization_init(void)
 	stc.argp = (void*)&d;
 	stc.attr = CT_PRIORITY_MAX + 3;
 	
-	rotary_a = open("ROTARY_A",0,0);
-	ioctl(rotary_a,ROTARYA_SET_TGIA,&stc);
-	close(rotary_a);
+	//rotary_a = open("ROTARY_A",0,0);
+	//ioctl(rotary_a,ROTARYA_SET_TGIA,&stc);
+	//close(rotary_a);
 	
 	rotaryc_a = new Rotary("ROTARY_A");
+	rotaryc_a->SetTGIA(stc);
 	rotaryc_b = new Rotary("ROTARY_B");
 	
 	return 0;
@@ -121,7 +122,7 @@ void* localization(thread_t* tid,void *attr){
 	static float point[2] = {0,0};
 	static long b_count[2] = {0,0};
 	
-	const float parameter_K = 3.6816E-5;
+	const float parameter_K = 7.540E-5;
 	//parameter_K :エンコーダのカウント差分から取り付けられたタイヤの接線速度を算出するための変数 
 	//parameter_K = r * pi / ( 2 * PPR)
 	//r: タイヤ半径[m]
@@ -129,7 +130,7 @@ void* localization(thread_t* tid,void *attr){
 	//PPR : エンコーダのパルス数[pulse per revolve]
 	// = 0.024[m] * 3.1415926535 / ( 2 * 1024)
 	
-	long hensa[2];
+	static long hensa[2];
 	
 	((loca_data*)attr)->yaw = yaw;
 	((loca_data*)attr)->count_A = count[Y];

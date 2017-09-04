@@ -2,6 +2,7 @@
 #define _RotaryClass_HPP_
 
 #include <stddef.h>
+#include "RotaryA.hpp"
 
 class Rotary{
 	int rotary_dev;
@@ -9,7 +10,8 @@ class Rotary{
 	
 public:
 	Rotary(const char * = NULL);
-	virtual signed long GetCount(void);
+	virtual int SetTGIA(interrupt_stc);
+	virtual long GetCount(void);
 };
 
 #endif
