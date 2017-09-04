@@ -653,6 +653,19 @@
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>21bd3f30-f3b6-4fde-9ff7-4a5d8b67fad7</ParentItem>
     </Instance>
+    <Instance Guid="e7f61cfc-9b3d-4c9a-9226-b61c0707f534">
+      <Name>include</Name>
+      <Type>Category</Type>
+      <ParentItem>7f6c8c17-12de-46ab-94bc-ba668abaa42f</ParentItem>
+      <Property>09da2bd8-9b62-4e68-9929-ac30d0f0956b</Property>
+    </Instance>
+    <Instance Guid="2edcd0fb-15a4-4734-97de-1a560d8f664e">
+      <Name>GPIO.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>include\GPIO.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>e7f61cfc-9b3d-4c9a-9226-b61c0707f534</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="9033e9fb-2b12-4437-a25e-27b28d42582b">
     <Instance Guid="cb8ff3f4-7404-4ab1-acc2-5f0f68da2d3e">
@@ -719,6 +732,9 @@
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="7f9fcca3-9eca-4d5c-807c-16e281efdd1b">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="09da2bd8-9b62-4e68-9929-ac30d0f0956b">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>

@@ -665,11 +665,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-<<<<<<< HEAD
-      <TimeTagModified--0>-8586971131142609141</TimeTagModified--0>
-=======
       <TimeTagModified--0>-8586974730379666373</TimeTagModified--0>
->>>>>>> 開発：interruptクラス
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -975,11 +971,7 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-<<<<<<< HEAD
-      <TimeTagModified--0>-8586971131142609141</TimeTagModified--0>
-=======
       <TimeTagModified--0>-8586974730379666373</TimeTagModified--0>
->>>>>>> 開発：interruptクラス
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1128,11 +1120,7 @@ D_2=R_2
       <SourceItem6-IndividualCompileOption-0>False</SourceItem6-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
-<<<<<<< HEAD
-      <TimeTagModified-SourceItem1--0>-8586971131142609141</TimeTagModified-SourceItem1--0>
-=======
       <TimeTagModified-SourceItem1--0>-8586974730379666373</TimeTagModified-SourceItem1--0>
->>>>>>> 開発：interruptクラス
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
@@ -1152,11 +1140,6 @@ D_2=R_2
   <Class Guid="31a86ad3-37bd-4846-aff2-e08abdc00197">
     <Instance Guid="31a86ad3-37bd-4846-aff2-e08abdc00197">
       <DeviceNameOnCreateStartup>R5F56218BxFP</DeviceNameOnCreateStartup>
-    </Instance>
-  </Class>
-  <Class Guid="606767c3-4bf3-4e65-90c1-19075517355d">
-    <Instance Guid="606767c3-4bf3-4e65-90c1-19075517355d">
-      <CurrentToolKey>980229aa-cc4c-40c7-be19-a84e15ec314e</CurrentToolKey>
     </Instance>
   </Class>
   <Class Guid="8b5af363-dcc2-48e6-919c-6cdb80d50173">
@@ -1688,12 +1671,7 @@ D_2=R_2
   </Class>
   <Class Guid="932085a2-9361-4df9-a3f7-12e6de7681a8">
     <Instance Guid="932085a2-9361-4df9-a3f7-12e6de7681a8">
-      <DebugToolManager>578d917e-0d0a-4491-a220-37ba42009e0b</DebugToolManager>
-    </Instance>
-  </Class>
-  <Class Guid="104fc540-14b6-4fb9-bd7a-0d4844b95028">
-    <Instance Guid="00000000-0000-0000-0000-000000000000">
-      <SubDebugger>980229aa-cc4c-40c7-be19-a84e15ec314e</SubDebugger>
+      <DebugToolManager>1d1a55cf-2b92-481a-af4f-5975d095c419</DebugToolManager>
     </Instance>
   </Class>
   <Class Guid="e4df8d71-236e-4af2-aaea-56345a08da25">
@@ -2347,6 +2325,11 @@ D_2=R_2
       <ChannelColor14>c0317f0c</ChannelColor14>
       <ChannelColor15>c060493e</ChannelColor15>
       <ChannelColor16>c072808e</ChannelColor16>
+    </Instance>
+  </Class>
+  <Class Guid="606767c3-4bf3-4e65-90c1-19075517355d">
+    <Instance Guid="606767c3-4bf3-4e65-90c1-19075517355d">
+      <CurrentToolKey>980229aa-cc4c-40c7-be19-a84e15ec314e</CurrentToolKey>
     </Instance>
   </Class>
   <Class Guid="2a2c2a43-ecdb-4e88-80bd-e75f3e33db90">
