@@ -13,9 +13,6 @@ public:
 	virtual _low_file_desc_class* open(const char*,long);
 	virtual long close(_low_file_desc_class*);
 	
-	virtual long read(unsigned char*,long);
-	virtual long write(const unsigned char*,long);
-	
 	virtual long ioctl(unsigned long,void*);
 
 protected:
@@ -76,17 +73,7 @@ long _motor_a::close(_low_file_desc_class* desc)
 	PORTB.DDR.BIT.B2 = 0;
 	PORTB.DDR.BIT.B3 = 0;
 	
-	return IOCTL_NON_ERROR;
-}
-
-long _motor_a::read(unsigned char *buf,long count)
-{
-	return -1;
-}
-
-long _motor_a::write(const unsigned char *buf,long count)
-{
-	return -1;
+	return CLOSE_NON_ERROR;
 }
 
 long _motor_a::ioctl(unsigned long request,void* attr)
