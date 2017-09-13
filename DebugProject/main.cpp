@@ -5,6 +5,7 @@
 #include "localization.hpp"
 #include "MotorClass.hpp"
 #include "RotaryClass.hpp"
+#include "servo_lib.hpp"
 
 class Robot{
 	Localization *loca;
@@ -52,10 +53,10 @@ void main(void)
 	
 	extern long kernel_time;
 	
-	Localization loca;
+	//Localization loca;
 	
 	msleep(2000);
-	
+	/* é©å»à íuêÑíË
 	fprintf(fp,"Average:,%d\n\r",loca.Get_d().ave);
 	fprintf(fp,"Deviation:,%d\n\r",loca.Get_d().devia);
 	fprintf(fp,"duty,speed\n\r");
@@ -66,13 +67,24 @@ void main(void)
 	Motor motorc("MOTOR_C");
 	
 	Robot robo(&loca,&motora,&motorb,&motorc);
+	//*/
+	
+	//*
+	servo_d servo;
+	//*/
 	for(float i = 0.0;;i = i + 1.0){
-		float duty = 0;
-		msleep(50);
+		static float duty = 0;
+		servo.set_pos(0);
+		msleep(2000);
+		servo.set_pos(1.0);
+		msleep(2000);
+		servo.set_pos(11.0);
+		msleep(2000);
+		
 		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
-		robo.Safe();
-		fprintf(fp,"%d,%f,%f,%f,%d\n\r",kernel_time,loca.GetX(),loca.GetY(),loca.GetYaw(),loca.Get_d().count_A);
-		//duty = 99.0*sin(i / 20);
+		//robo.Safe();
+		//fprintf(fp,"%d,%f,%f,%f,%d\n\r",kernel_time,loca.GetX(),loca.GetY(),loca.GetYaw(),loca.Get_d().count_A);
+		//duty = 6*sin(i / 20) + 6;
 		//motora.SetDuty(duty);
 		//motorb.SetDuty(duty);
 		//motorc.SetDuty(duty);
@@ -80,7 +92,8 @@ void main(void)
 		//int befor = rotaryc.GetCount();
 		//msleep(250);
 		//int after = rotaryc.GetCount();
-		
+		//servo.set_pos(duty);
+		//fprintf(fp,"duty,%f\n\r",duty);
 		//fprintf(fp,"%f,%d\n\r",duty,after - befor);
 
 	}

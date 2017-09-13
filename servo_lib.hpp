@@ -20,7 +20,7 @@ class servo_a{
 			if(temp < ((unsigned short)0xffff)){					//TGRAが設定可能範囲か計算
 				MTU6.TCR.BIT.TPSC = i;						//設定
 				MTU6.TGRA = (unsigned short)temp;
-				return IOCTL_NON_ERROR;
+				return ;
 			}
 		}
 	}
@@ -41,9 +41,9 @@ public:
 		MTUB.TSTR.BIT.CST0 = 1;
 	}
 	void set_pos(float d){
-		float ads_duty;
+		float abs_duty;
 		
-		if(duty < 0){
+		if(d < 0){
 			abs_duty = -1 * d;
 		}
 		else abs_duty = d;
@@ -61,9 +61,10 @@ class servo_b{
 			long temp = (PCK_CLOCK * 1000000) / MTU6_PSC[i] / ( f) - 1;	//プリスケーラを想定して計算
 		
 			if(temp < ((unsigned short)0xffff)){					//TGRAが設定可能範囲か計算
-				MTU6.TCR.BIT.TPSC = i;						//設定
+				MTU6.TCR.BIT.TPSC = i;
+				MTU6.TGRA = (unsigned short)temp;//設定
 				MTU6.TGRC = (unsigned short)temp;
-				return IOCTL_NON_ERROR;
+				return ;
 			}
 		}
 	}
@@ -74,8 +75,8 @@ public:
 		PORTA.DDR.BIT.B2 = 1;
 		MTU6.TMDR.BIT.MD = 2;
 		
-		MTU6.TIORH.BIT.IOC = 6;
-		MTU6.TIORH.BIT.IOD = 5;
+		MTU6.TIORL.BIT.IOC = 6;
+		MTU6.TIORL.BIT.IOD = 5;
 	
 		MTU6.TCR.BIT.CCLR = 1;
 		
@@ -84,9 +85,9 @@ public:
 		MTUB.TSTR.BIT.CST0 = 1;
 	}
 	void set_pos(float d){
-		float ads_duty;
+		float abs_duty;
 		
-		if(duty < 0){
+		if(d < 0){
 			abs_duty = -1 * d;
 		}
 		else abs_duty = d;
@@ -105,7 +106,7 @@ class servo_c{
 			if(temp < ((unsigned short)0xffff)){					//TGRAが設定可能範囲か計算
 				MTU7.TCR.BIT.TPSC = i;						//設定
 				MTU7.TGRA = (unsigned short)temp;
-				return IOCTL_NON_ERROR;
+				return;
 			}
 		}
 	}
@@ -126,9 +127,9 @@ public:
 		MTUB.TSTR.BIT.CST1 = 1;
 	}
 	void set_pos(float d){
-		float ads_duty;
+		float abs_duty;
 		
-		if(duty < 0){
+		if(d < 0){
 			abs_duty = -1 * d;
 		}
 		else abs_duty = d;
@@ -147,12 +148,12 @@ class servo_d{
 			if(temp < ((unsigned short)0xffff)){					//TGRAが設定可能範囲か計算
 				MTU8.TCR.BIT.TPSC = i;						//設定
 				MTU8.TGRA = (unsigned short)temp;
-				return IOCTL_NON_ERROR;
+				return ;
 			}
 		}
 	}
 public:
-	servo_c(void){
+	servo_d(void){
 		MSTP(MTU8) = 0;
 		
 		PORTA.DDR.BIT.B6 = 1;
@@ -168,9 +169,9 @@ public:
 		MTUB.TSTR.BIT.CST2 = 1;
 	}
 	void set_pos(float d){
-		float ads_duty;
+		float abs_duty;
 		
-		if(duty < 0){
+		if(d < 0){
 			abs_duty = -1 * d;
 		}
 		else abs_duty = d;
