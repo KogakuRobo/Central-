@@ -184,7 +184,11 @@
       <SourceItemType5>CppSource</SourceItemType5>
       <SourceItemGuid6>f1f6d82d-9007-498c-a88d-8f877f189dfa</SourceItemGuid6>
       <SourceItemType6>CppSource</SourceItemType6>
+<<<<<<< HEAD
       <SourceItemGuid7>a0ecaad5-ddef-4d0e-8860-e68ff0cb693b</SourceItemGuid7>
+=======
+      <SourceItemGuid7>9f245222-cca0-46f8-84e7-25913934ab01</SourceItemGuid7>
+>>>>>>> develop_GPIO
       <SourceItemType7>CppSource</SourceItemType7>
       <SourceItemCount>8</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
@@ -681,7 +685,11 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
+<<<<<<< HEAD
       <TimeTagModified--0>-8586963289175969576</TimeTagModified--0>
+=======
+      <TimeTagModified--0>-8586964880438614930</TimeTagModified--0>
+>>>>>>> develop_GPIO
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -987,7 +995,11 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
+<<<<<<< HEAD
       <TimeTagModified--0>-8586963289175969576</TimeTagModified--0>
+=======
+      <TimeTagModified--0>-8586964880438614930</TimeTagModified--0>
+>>>>>>> develop_GPIO
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1142,13 +1154,21 @@ D_2=R_2
       <SourceItem6-IsLockedByUser>False</SourceItem6-IsLockedByUser>
       <SourceItem6-BuildingTarget-0>True</SourceItem6-BuildingTarget-0>
       <SourceItem6-IndividualCompileOption-0>False</SourceItem6-IndividualCompileOption-0>
+<<<<<<< HEAD
       <TimeTagModified-SourceItem7--0>-8586979024304293782</TimeTagModified-SourceItem7--0>
+=======
+      <TimeTagModified-SourceItem7--0>-8586964879360551396</TimeTagModified-SourceItem7--0>
+>>>>>>> develop_GPIO
       <SourceItem7-IsLockedByUser>False</SourceItem7-IsLockedByUser>
       <SourceItem7-BuildingTarget-0>True</SourceItem7-BuildingTarget-0>
       <SourceItem7-IndividualCompileOption-0>False</SourceItem7-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
+<<<<<<< HEAD
       <TimeTagModified-SourceItem1--0>-8586963289175979571</TimeTagModified-SourceItem1--0>
+=======
+      <TimeTagModified-SourceItem1--0>-8586964880438634944</TimeTagModified-SourceItem1--0>
+>>>>>>> develop_GPIO
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
