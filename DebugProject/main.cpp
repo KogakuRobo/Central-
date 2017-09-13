@@ -12,15 +12,16 @@ class Robot{
 public:
 	Robot(Localization *_l,Motor* _m1,Motor* _m2,Motor* _m3):loca(_l),m1(_m1),m2(_m2),m3(_m3){
 	}
+	
 	void Safe(void){
 		int K = 100;
 		
 		float e =  0 - loca->GetYaw();
 		float ref = e * K;
-		if((ref < 10) && ( ref > -10))ref = 0; 
-		m1->SetDuty(-ref);
-		m2->SetDuty(-ref);
-		m3->SetDuty(-ref);
+		if((ref < 5) && ( ref > -5))ref = 0; 
+		m1->SetDuty(ref);
+		m2->SetDuty(ref);
+		m3->SetDuty(ref);
 	}
 };
 
@@ -38,7 +39,7 @@ public:
 void main(void)
 {
 	//SCI0のopenとノンバッファ処理
-	FILE *fp = fopen("SCI0","w");
+	FILE *fp = fopen("E1","w");
 	if(fp == NULL){
 		printf("LKK");
 	}
@@ -62,12 +63,12 @@ void main(void)
 	Rotary rotaryc("ROTARY_D");
 	Motor motora("MOTOR_A");
 	Motor motorb("MOTOR_B");
-	Motor motorc("MOTOR_D");
+	Motor motorc("MOTOR_C");
 	
 	Robot robo(&loca,&motora,&motorb,&motorc);
 	for(float i = 0.0;;i = i + 1.0){
 		float duty = 0;
-		msleep(100);
+		msleep(50);
 		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
 		robo.Safe();
 		fprintf(fp,"%d,%f,%f,%f,%d\n\r",kernel_time,loca.GetX(),loca.GetY(),loca.GetYaw(),loca.Get_d().count_A);

@@ -62,12 +62,17 @@ public:
 	virtual _low_file_desc_factor* get_factor(void){return factor;}
 	virtual void set_factor(_low_file_desc_factor* fac){factor = fac;}
 
-	virtual long read	(unsigned char*, long) 		= 0;
-	virtual long write	(const unsigned char*, long) 	= 0;
-	virtual long ioctl	(unsigned long,void *){return -1;}
+	virtual long read	(unsigned char*, long)		{return -1;}
+	virtual long write	(const unsigned char*, long)	{return -1;}
+	virtual long ioctl	(unsigned long,void *)		{return -1;}
 };
 			
 class _low_file_desc_factor{
+protected:
+	typedef enum{
+		CLOSE_NON_ERROR = 0,
+		CLOSE_ERROR = -1,
+	}close_return_code;
 public:
 	virtual const unsigned char*	get_name(void) 			= 0;
 	virtual _low_file_desc_class* 	open(const char *,long) 	= 0;
