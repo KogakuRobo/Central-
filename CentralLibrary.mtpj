@@ -263,6 +263,12 @@
       <ParentItem>619edd47-2574-4e73-a4ac-0290f97f6a52</ParentItem>
       <Property>016d4818-ffd1-4082-86cb-21659afbab83</Property>
     </Instance>
+    <Instance Guid="491953c7-c42f-45bc-a56c-a74eb2707414">
+      <Name>semaphore</Name>
+      <Type>Category</Type>
+      <ParentItem>619edd47-2574-4e73-a4ac-0290f97f6a52</ParentItem>
+      <Property>c5f30a4e-b0de-4eb6-9ada-3409cc16bb7c</Property>
+    </Instance>
     <Instance Guid="804e0ab7-f93c-45c5-b2a8-56a30a108ee7">
       <Name>thread_control.cpp</Name>
       <Type>File</Type>
@@ -311,6 +317,20 @@
       <RelativePath>kernel_thread_mutex.hpp</RelativePath>
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>308e1e44-6c44-4274-9427-1196ade5cdc8</ParentItem>
+    </Instance>
+    <Instance Guid="de0f2d54-f526-4497-aa48-00506b49be91">
+      <Name>semaphore.h</Name>
+      <Type>File</Type>
+      <RelativePath>semaphore.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>491953c7-c42f-45bc-a56c-a74eb2707414</ParentItem>
+    </Instance>
+    <Instance Guid="8f05b75e-e4c2-4b0c-b36e-45c3790edc95">
+      <Name>semaphore.c</Name>
+      <Type>File</Type>
+      <RelativePath>semaphore.c</RelativePath>
+      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>491953c7-c42f-45bc-a56c-a74eb2707414</ParentItem>
     </Instance>
     <Instance Guid="ab30a0f1-5d4c-42d7-bbf4-51f289e4cbaf">
       <Name>CentralLibrary.h</Name>
@@ -772,6 +792,9 @@
     <Instance Guid="09da2bd8-9b62-4e68-9929-ac30d0f0956b">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="c5f30a4e-b0de-4eb6-9ada-3409cc16bb7c">
+      <MemoCount>0</MemoCount>
+    </Instance>
   </Class>
   <Class Guid="8fb9c1f6-d351-4d10-8d99-bf5b3015b84c">
     <Instance Guid="00000000-0000-0000-0000-000000000000">
@@ -889,7 +912,9 @@
       <SourceItemType37>CppSource</SourceItemType37>
       <SourceItemGuid38>2da9d44b-5500-40bd-9870-2c4f97e50176</SourceItemGuid38>
       <SourceItemType38>CppSource</SourceItemType38>
-      <SourceItemCount>39</SourceItemCount>
+      <SourceItemGuid39>8f05b75e-e4c2-4b0c-b36e-45c3790edc95</SourceItemGuid39>
+      <SourceItemType39>CSource</SourceItemType39>
+      <SourceItemCount>40</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -1397,7 +1422,7 @@ E1
       <LinkOptionOtherAdditionalOptionsForConvertFile-DefaultValue />
       <LinkOptionCommandLine-DefaultValue />
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586970892353911961</TimeTagModified--0>
+      <TimeTagModified--0>-8586949030945012895</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -1582,7 +1607,7 @@ E1
 -exit
 </LibOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586970892353911961</TimeTagModified--0>
+      <TimeTagModified--0>-8586949030945022902</TimeTagModified--0>
       <LibOptionForm-0>Relocate</LibOptionForm-0>
       <LibOptionInput-0 />
       <LibOptionListShow-0>List</LibOptionListShow-0>
@@ -1688,7 +1713,7 @@ E1
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8587064648920031377</TimeTagModified--0>
+      <TimeTagModified--0>-8586949040973528757</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>None</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -2081,6 +2106,14 @@ E1
       <ItemAddTime>636403196264970243</ItemAddTime>
       <ItemAddTimeCount>3</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="de0f2d54-f526-4497-aa48-00506b49be91">
+      <ItemAddTime>636423327046821136</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="8f05b75e-e4c2-4b0c-b36e-45c3790edc95">
+      <ItemAddTime>636423329909782927</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587053131081535201</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
@@ -2110,13 +2143,13 @@ E1
       <SourceItem12-IsLockedByUser>False</SourceItem12-IsLockedByUser>
       <SourceItem12-BuildingTarget-0>True</SourceItem12-BuildingTarget-0>
       <SourceItem12-IndividualCompileOption-0>False</SourceItem12-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem13--0>-8586974862818965075</TimeTagModified-SourceItem13--0>
+      <TimeTagModified-SourceItem13--0>-8586949041022766857</TimeTagModified-SourceItem13--0>
       <SourceItem13-IsLockedByUser>False</SourceItem13-IsLockedByUser>
-      <SourceItem13-BuildingTarget-0>True</SourceItem13-BuildingTarget-0>
+      <SourceItem13-BuildingTarget-0>False</SourceItem13-BuildingTarget-0>
       <SourceItem13-IndividualCompileOption-0>False</SourceItem13-IndividualCompileOption-0>
-      <TimeTagModified-SourceItem14--0>-8586974729711533684</TimeTagModified-SourceItem14--0>
+      <TimeTagModified-SourceItem14--0>-8586949040973538495</TimeTagModified-SourceItem14--0>
       <SourceItem14-IsLockedByUser>False</SourceItem14-IsLockedByUser>
-      <SourceItem14-BuildingTarget-0>True</SourceItem14-BuildingTarget-0>
+      <SourceItem14-BuildingTarget-0>False</SourceItem14-BuildingTarget-0>
       <SourceItem14-IndividualCompileOption-0>False</SourceItem14-IndividualCompileOption-0>
       <TimeTagModified-SourceItem16--0>-8587053106876168404</TimeTagModified-SourceItem16--0>
       <SourceItem16-IsLockedByUser>False</SourceItem16-IsLockedByUser>
@@ -2228,6 +2261,10 @@ E1
       <SourceItem19-IsLockedByUser>False</SourceItem19-IsLockedByUser>
       <SourceItem19-BuildingTarget-0>True</SourceItem19-BuildingTarget-0>
       <SourceItem19-IndividualCompileOption-0>False</SourceItem19-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem39--0>-8586949030913333499</TimeTagModified-SourceItem39--0>
+      <SourceItem39-IsLockedByUser>False</SourceItem39-IsLockedByUser>
+      <SourceItem39-BuildingTarget-0>True</SourceItem39-BuildingTarget-0>
+      <SourceItem39-IndividualCompileOption-0>False</SourceItem39-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="c20a78d9-8038-46fe-9b87-bc2fa2aa9bdc">
       <TimeTagModified-SourceItem8--0>-8587061360804165090</TimeTagModified-SourceItem8--0>

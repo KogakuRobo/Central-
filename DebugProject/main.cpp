@@ -56,17 +56,17 @@ void main(void)
 	//Localization loca;
 	
 	msleep(2000);
-	/* é©å»à íuêÑíË
-	fprintf(fp,"Average:,%d\n\r",loca.Get_d().ave);
-	fprintf(fp,"Deviation:,%d\n\r",loca.Get_d().devia);
-	fprintf(fp,"duty,speed\n\r");
+	//* é©å»à íuêÑíË
+	//fprintf(fp,"Average:,%d\n\r",loca.Get_d().ave);
+	//fprintf(fp,"Deviation:,%d\n\r",loca.Get_d().devia);
+	//fprintf(fp,"duty,speed\n\r");
 	
-	Rotary rotaryc("ROTARY_D");
+	//Rotary rotaryc("ROTARY_D");
 	Motor motora("MOTOR_A");
 	Motor motorb("MOTOR_B");
 	Motor motorc("MOTOR_C");
 	
-	Robot robo(&loca,&motora,&motorb,&motorc);
+	//Robot robo(&loca,&motora,&motorb,&motorc);
 	//*/
 	
 	//*
@@ -74,26 +74,40 @@ void main(void)
 	//*/
 	for(float i = 0.0;;i = i + 1.0){
 		static float duty = 0;
-		servo.set_pos(0);
-		msleep(2000);
-		servo.set_pos(1.0);
-		msleep(2000);
-		servo.set_pos(11.0);
-		msleep(2000);
+		//servo.set_pos(0);
+		//msleep(2000);
+		//servo.set_pos(1.0);
+		//msleep(2000);
+		//servo.set_pos(11.0);
+		//msleep(2000);
 		
 		//fprintf(fp,"%d,%f\n\r",d.time,d.yaw);
 		//robo.Safe();
 		//fprintf(fp,"%d,%f,%f,%f,%d\n\r",kernel_time,loca.GetX(),loca.GetY(),loca.GetYaw(),loca.Get_d().count_A);
-		//duty = 6*sin(i / 20) + 6;
+		//duty = 90.0*sin(i / 20);
 		//motora.SetDuty(duty);
 		//motorb.SetDuty(duty);
 		//motorc.SetDuty(duty);
-		//msleep(500);
+		//msleep(1000);
 		//int befor = rotaryc.GetCount();
 		//msleep(250);
 		//int after = rotaryc.GetCount();
 		//servo.set_pos(duty);
-		//fprintf(fp,"duty,%f\n\r",duty);
+		
+		if(PORTD.PORT.BIT.B3 == 0){
+			motora.SetDuty(20);
+			motorb.SetDuty(20);
+		}
+		else if(PORTD.PORT.BIT.B1 == 0){
+			motora.SetDuty(-20);
+			motorb.SetDuty(-20);
+		}
+		else{
+			motora.SetDuty(0);
+			motorb.SetDuty(0);
+		}
+		
+		fprintf(fp,"duty,%f\n\r",duty);
 		//fprintf(fp,"%f,%d\n\r",duty,after - befor);
 
 	}

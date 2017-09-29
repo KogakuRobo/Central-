@@ -12,7 +12,6 @@ _task_control_block TCBs[NUMBER_OF_MAX_TASK];
 int user_syscall(int num,void *attr)
 {
 	int_exception(VECT(ICU,SWINT));
-	//ICU.SWINTR.BIT.SWINT = 1;
 }
 
 extern long kernel_open(const char*,long,long);
