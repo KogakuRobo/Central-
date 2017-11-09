@@ -92,6 +92,18 @@
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
     </Instance>
+    <Instance Guid="99e69ab3-a7bc-4951-99e4-5050773233ef">
+      <Name>MotorSytem</Name>
+      <Type>Category</Type>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+      <Property>61616fba-317b-4e1b-844f-08251ef69d66</Property>
+    </Instance>
+    <Instance Guid="b0c90de0-3605-4eca-a1ee-46698b68a003">
+      <Name>can_bus</Name>
+      <Type>Category</Type>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+      <Property>43295036-f2c0-4573-8eeb-cecbb3bc0775</Property>
+    </Instance>
     <Instance Guid="e544caf6-84b0-4922-a488-c7f78e3b0898">
       <Name>MotorClass.hpp</Name>
       <Type>File</Type>
@@ -120,6 +132,34 @@
       <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
       <ParentItem>3458d23e-464b-4bf4-a866-80114497c3b3</ParentItem>
     </Instance>
+    <Instance Guid="3c602bef-2c11-45bd-96c7-86b3c79a5700">
+      <Name>MotorSystem_Control.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\MotorSystem_Control.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>99e69ab3-a7bc-4951-99e4-5050773233ef</ParentItem>
+    </Instance>
+    <Instance Guid="ca8be3f1-2ad0-4114-b2dc-9eb465f656e6">
+      <Name>MotorSystem_Control.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\MotorSystem_Control.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>99e69ab3-a7bc-4951-99e4-5050773233ef</ParentItem>
+    </Instance>
+    <Instance Guid="9f23d098-fbf7-42ea-b12f-af97df4ae263">
+      <Name>can_bus_setting.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\can_bus_setting.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>b0c90de0-3605-4eca-a1ee-46698b68a003</ParentItem>
+    </Instance>
+    <Instance Guid="401a1c84-700d-4076-90d0-b90fc1731373">
+      <Name>can_bus_setting.hpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\can_bus_setting.hpp</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>b0c90de0-3605-4eca-a1ee-46698b68a003</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">
@@ -129,6 +169,12 @@
   </Class>
   <Class Guid="78a5c5cd-76cb-4bcc-a031-3020011fbc9a">
     <Instance Guid="d94c0e17-b6a7-48bc-a0e6-98f58cba274f">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="61616fba-317b-4e1b-844f-08251ef69d66">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="43295036-f2c0-4573-8eeb-cecbb3bc0775">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
@@ -186,7 +232,11 @@
       <SourceItemType6>CppSource</SourceItemType6>
       <SourceItemGuid7>a0ecaad5-ddef-4d0e-8860-e68ff0cb693b</SourceItemGuid7>
       <SourceItemType7>CppSource</SourceItemType7>
-      <SourceItemCount>8</SourceItemCount>
+      <SourceItemGuid8>3c602bef-2c11-45bd-96c7-86b3c79a5700</SourceItemGuid8>
+      <SourceItemType8>CppSource</SourceItemType8>
+      <SourceItemGuid9>9f23d098-fbf7-42ea-b12f-af97df4ae263</SourceItemGuid9>
+      <SourceItemType9>CppSource</SourceItemType9>
+      <SourceItemCount>10</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -681,7 +731,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586949049631009610</TimeTagModified--0>
+      <TimeTagModified--0>-8586914026013793725</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -987,7 +1037,7 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586949049631009610</TimeTagModified--0>
+      <TimeTagModified--0>-8586914026013793725</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1117,6 +1167,22 @@ D_2=R_2
       <ItemAddTime>636407481717685244</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="3c602bef-2c11-45bd-96c7-86b3c79a5700">
+      <ItemAddTime>636458335220547385</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="ca8be3f1-2ad0-4114-b2dc-9eb465f656e6">
+      <ItemAddTime>636458335220547385</ItemAddTime>
+      <ItemAddTimeCount>1</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="9f23d098-fbf7-42ea-b12f-af97df4ae263">
+      <ItemAddTime>636458342359814930</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="401a1c84-700d-4076-90d0-b90fc1731373">
+      <ItemAddTime>636458344745189388</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587064615736118577</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
@@ -1146,9 +1212,17 @@ D_2=R_2
       <SourceItem7-IsLockedByUser>False</SourceItem7-IsLockedByUser>
       <SourceItem7-BuildingTarget-0>True</SourceItem7-BuildingTarget-0>
       <SourceItem7-IndividualCompileOption-0>False</SourceItem7-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem8--0>-8586914025634228423</TimeTagModified-SourceItem8--0>
+      <SourceItem8-IsLockedByUser>False</SourceItem8-IsLockedByUser>
+      <SourceItem8-BuildingTarget-0>True</SourceItem8-BuildingTarget-0>
+      <SourceItem8-IndividualCompileOption-0>False</SourceItem8-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem9--0>-8586914018494960878</TimeTagModified-SourceItem9--0>
+      <SourceItem9-IsLockedByUser>False</SourceItem9-IsLockedByUser>
+      <SourceItem9-BuildingTarget-0>True</SourceItem9-BuildingTarget-0>
+      <SourceItem9-IndividualCompileOption-0>False</SourceItem9-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
-      <TimeTagModified-SourceItem1--0>-8586949049631009610</TimeTagModified-SourceItem1--0>
+      <TimeTagModified-SourceItem1--0>-8586914026013793725</TimeTagModified-SourceItem1--0>
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
