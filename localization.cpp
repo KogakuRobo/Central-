@@ -117,7 +117,7 @@ enum{
 
 void* localization(thread_t* tid,void *attr){
 	float yaw = g_gyro->getYaw();
-	long count[2] = {rotaryc_a->GetCount(),rotaryc_b->GetCount()};		//この変数は同時性を保証しなければならないのでアクセス方法が特殊
+	long count[2] = {rotaryc_b->GetCount(),rotaryc_a->GetCount()};		//この変数は同時性を保証しなければならないのでアクセス方法が特殊
 	static float point[2] = {0,0};
 	static long b_count[2] = {0,0};
 	

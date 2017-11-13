@@ -7,6 +7,7 @@
 #include "RotaryClass.hpp"
 #include "can_bus_setting.hpp"
 #include "MotorSystem_Control.hpp"
+#include "PID.hpp"
 
 class Robot{
 	Localization *loca;
@@ -14,21 +15,49 @@ class Robot{
 	MotorSystem* motorb;
 	MotorSystem* motorc;
 	MotorSystem* motord;
+	
+	PID<float> x_pid;
+	PID<float> y_pid;
+	PID<float> yaw_pid;
+	
+	float PI;
 public:
 	Robot(Localization *_l,
 	MotorSystem* _motora,
 	MotorSystem* _motorb,
 	MotorSystem* _motorc,
 	MotorSystem* _motord
-	) : loca(_l), motora(_motora), motorb(_motorb), motorc(_motorc), motord(_motord)
+	) : loca(_l), motora(_motora), motorb(_motorb), motorc(_motorc), motord(_motord),
+	x_pid(1000,10000000,0,0.01),
+	y_pid(1000,10000000,0,0.01),
+	yaw_pid(7000.0,10000000,0,0.01)
 	{
+		PI = 3.1415926535;
 	}
 	
 	void Safe(void){
-		motora->SetVelocity(100);
-		motorb->SetVelocity(100);
-		motorc->SetVelocity(100);
-		motord->SetVelocity(100);
+		//*/
+		float yaw_ref = 0;
+		float yaw = loca->GetYaw();
+		float terget = yaw_pid.Run(yaw,yaw_ref);
+		
+		float x_ref = 0;
+		float x = loca->GetX();
+		float x_terget = x_pid.Run(x,x_ref);
+		
+		float y_ref = 0;
+		float y = loca->GetY();
+		float y_terget = y_pid.Run(y,y_ref);
+		//*/
+		motora->SetVelocity(- x_terget * sin(       PI / 4  - yaw) + y_terget * cos(       PI / 4  - yaw) - terget);
+		motorb->SetVelocity(- x_terget * sin(   3 * PI / 4  - yaw) + y_terget * cos(   3 * PI / 4  - yaw) - terget);
+		motorc->SetVelocity(- x_terget * sin( - 3 * PI / 4  - yaw) + y_terget * cos( - 3 * PI / 4  - yaw) - terget);
+		motord->SetVelocity(- x_terget * sin( - 1 * PI / 4  - yaw) + y_terget * cos( - 1 * PI / 4  - yaw) - terget);
+		//*/
+		
+		//printf("X,%f,Y,%f,yaw,%f\n\r",loca->GetX(),loca->GetY(),loca->GetYaw());
+		printf("X,%f,Y,%f,yaw,%f\n\r",x_terget,y_terget,terget);
+		
 	}
 };
 
@@ -40,6 +69,7 @@ public:
 	float GetY(void){
 		return Get_d().Y*1000 + 50 * sin(Get_d().yaw) /*+ 244 * cos(Get_d().yaw)*/;
 	}
+	
 	
 };
 
@@ -62,10 +92,10 @@ void main(void)
 	_rx621_CAN_bus can_bus;
 	can_bus_driver(&can_bus);
 	
-	MotorSystem* motora = new MotorSystem(&can_bus,0x01);
-	MotorSystem* motorb = new MotorSystem(&can_bus,0x02);
-	MotorSystem* motorc = new MotorSystem(&can_bus,0x04);
-	MotorSystem* motord = new MotorSystem(&can_bus,0x08);
+	MotorSystem motora(&can_bus,0x01);
+	MotorSystem motorb(&can_bus,0x02);
+	MotorSystem motorc(&can_bus,0x04);
+	MotorSystem motord(&can_bus,0x08);
 	
 	Localization loca;
 	
@@ -75,7 +105,7 @@ void main(void)
 	fprintf(fp,"Deviation:,%d\n\r",loca.Get_d().devia);
 	fprintf(fp,"duty,speed\n\r");
 	
-	Robot robo(&loca,motora,motorb,motorc,motord);
+	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
 	//*/
 	
 	/*
@@ -84,7 +114,7 @@ void main(void)
 	for(float i = 0.0;;i = i + 1.0){
 		static float duty = 0;
 		robo.Safe();
-	msleep(500);
+		msleep(10);
 	}
 	while(1);
 }
