@@ -21,6 +21,8 @@ class Robot{
 	PID<float> yaw_pid;
 	
 	float PI;
+	
+	thread_t th_control;
 public:
 	Robot(Localization *_l,
 	MotorSystem* _motora,
@@ -33,6 +35,11 @@ public:
 	yaw_pid(7000.0,10000000,0,0.01)
 	{
 		PI = 3.1415926535;
+	}
+	
+	
+	void Begin(void){
+		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
 	}
 	
 	void Safe(void){
@@ -56,8 +63,18 @@ public:
 		//*/
 		
 		//printf("X,%f,Y,%f,yaw,%f\n\r",loca->GetX(),loca->GetY(),loca->GetYaw());
-		printf("X,%f,Y,%f,yaw,%f\n\r",x_terget,y_terget,terget);
+		//printf("X,%f,Y,%f,yaw,%f\n\r",x_terget,y_terget,terget);
 		
+	}
+	
+private :
+	static void *thread_handle(thread_t *t,void *attr){
+		Robot *This = (Robot *)attr;
+		while(1){
+			This->Safe();
+			msleep(10);
+		}
+		return NULL;
 	}
 };
 
@@ -76,19 +93,19 @@ public:
 void main(void)
 {
 	//SCI0のopenとノンバッファ処理
-	FILE *fp = fopen("E1","w");
+	FILE *fp = fopen("E1","rw");
 	if(fp == NULL){
 		printf("LKK");
 	}
 	setvbuf(fp,(char*)fp->_Buf,_IONBF,1);
 	
-	fprintf(fp,"Program Start\n\r");
+	printf("Program Start\n\r");
 	
 	PORTA.DDR.BIT.B0 = 1;
 	PORTA.DDR.BIT.B1 = 1;
 	
 	extern long kernel_time;
-	
+	//*/
 	_rx621_CAN_bus can_bus;
 	can_bus_driver(&can_bus);
 	
@@ -107,13 +124,15 @@ void main(void)
 	
 	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
 	//*/
-	
+	robo.Begin();
 	/*
 	servo_d servo;
 	//*/
 	for(float i = 0.0;;i = i + 1.0){
 		static float duty = 0;
-		robo.Safe();
+		//robo.Safe();
+		//printf("%f\n",duty);
+		//if(printf("DD:%d",scanf("%f",&duty)))fflush(stdin);
 		msleep(10);
 	}
 	while(1);

@@ -105,7 +105,11 @@ long sci0_file_desc::read(
 	unsigned char *buf,
 	long count)
 {
-	return -1;
+	SCI0.SCR.BIT.RE = 1;
+	while(SCI0.SSR.BIT.RDRF != 1);
+	buf[0] = SCI0.RDR;
+	SCI0.SCR.BIT.RE = 0;
+	return 1;
 }
 
 sci0_file_desc_factor::sci0_file_desc_factor(void)

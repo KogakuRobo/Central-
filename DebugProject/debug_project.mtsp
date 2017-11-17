@@ -430,6 +430,7 @@
 -obj_path=%BuildModeName%
 -debug
 -nologo
+-exec_time
 </COptionCommandLine-DefaultValue>
       <COptionDefine-DefaultValue />
       <COptionInline-DefaultValue>Auto</COptionInline-DefaultValue>
@@ -538,6 +539,7 @@
 -obj_path=%BuildModeName%
 -debug
 -nologo
+-exec_time
 </COptionCommandLine-0>
       <COptionDefine-0 />
       <COptionInline-0>Auto</COptionInline-0>
@@ -621,6 +623,7 @@
 -obj_path=%BuildModeName%
 -debug
 -nologo
+-exec_time
 </AsmOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
       <TimeTagModified--0>-8587064642860264863</TimeTagModified--0>
@@ -649,6 +652,7 @@
 -obj_path=%BuildModeName%
 -debug
 -nologo
+-exec_time
 </AsmOptionCommandLine-0>
     </Instance>
     <Instance Guid="dbb16727-3e81-4169-956a-790355cab4a1">
@@ -741,7 +745,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586910692834720756</TimeTagModified--0>
+      <TimeTagModified--0>-8586907372867337960</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -1051,7 +1055,7 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586910692834720756</TimeTagModified--0>
+      <TimeTagModified--0>-8586907372867337960</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1241,7 +1245,7 @@ D_2=R_2
       <SourceItem9-IndividualCompileOption-0>False</SourceItem9-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
-      <TimeTagModified-SourceItem1--0>-8586910692834720756</TimeTagModified-SourceItem1--0>
+      <TimeTagModified-SourceItem1--0>-8586907372867337960</TimeTagModified-SourceItem1--0>
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
@@ -2274,7 +2278,7 @@ D_2=R_2
       <DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-Endian>Little</DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-Endian>
       <DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-EndianMCUSetting>Same</DebuggerProperty-OptionalProperty-Memory-MemoryMappings-MemoryMapItem20-EndianMCUSetting>
       <DebuggerProperty-OptionalProperty-Memory-VerifyCheck>Yes</DebuggerProperty-OptionalProperty-Memory-VerifyCheck>
-      <DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>Yes</DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>
+      <DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>No</DebuggerProperty-OptionalProperty-MemoryAccess-PermitToStopAndRead>
       <DebuggerProperty-OptionalProperty-AccessMemory-UpdateDisplayInExecution>Yes</DebuggerProperty-OptionalProperty-AccessMemory-UpdateDisplayInExecution>
       <DebuggerProperty-OptionalProperty-AccessMemory-UpdateInterval>100</DebuggerProperty-OptionalProperty-AccessMemory-UpdateInterval>
       <DebuggerProperty-OptionalProperty-AccessMemory-AutoSetRrmArea>Yes</DebuggerProperty-OptionalProperty-AccessMemory-AutoSetRrmArea>

@@ -4,14 +4,39 @@
 #include "../lowsrc.hpp"
 #include "E1_lib.hpp"
 
+#include "user_system_call.h"
 const unsigned char E1_file_desc_factor::g_e1_path[] = E1_PATH;
 
+/*/
 extern "C"{
-/* Output one character to standard output */
+// Output one character to standard output
 extern void charput(unsigned char);
-/* Input one character from standard input */
+// Input one character from standard input
 extern unsigned char charget(void);
 }
+
+//*/
+void charput(unsigned char data){
+	volatile const unsigned long TXFL0EN = (volatile const unsigned long)0x00000100;
+	volatile const unsigned long *DBGSTAT = (volatile const unsigned long *)0x000840C0;
+	volatile unsigned long *FC2E0 = (volatile unsigned long *)0x00084080;
+	
+	
+	while(((*DBGSTAT) & (TXFL0EN)));
+	*FC2E0 = data;
+	return;
+	
+}
+unsigned char charget(void){
+	volatile const unsigned long RXFL0EN = (volatile const unsigned long)0x00001000;
+	volatile const unsigned long *DBGSTAT = (volatile const unsigned long *)0x000840C0;
+	volatile unsigned long *FE2C0 = (volatile unsigned long *)0x00084090;
+	
+	
+	while(!((*DBGSTAT) & (RXFL0EN)));
+	return *FE2C0;
+}
+//*/
 
 _low_file_desc_class* E1_file_desc_factor::open(const char* path,long mode)
 {
