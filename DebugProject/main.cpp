@@ -9,12 +9,22 @@
 #include "Robot.hpp"
 
 class adj_Localization :public Localization{
+	float adj_x;
+	float adj_y;
+	
 public:
 	float GetX(void){
-		return -1 * Get_d().X * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(Get_d().yaw) + 50;
+		return -1 * this->Localization::GetX() * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(this->Localization::GetYaw()) + 50;
 	}
 	float GetY(void){
-		return Get_d().Y*1000 + 50 * sin(Get_d().yaw) /*+ 244 * cos(Get_d().yaw)*/;
+		return this->Localization::GetY()*1000 + 50 * sin(this->Localization::GetYaw()) /*+ 244 * cos(Get_d().yaw)*/;
+	}
+	
+	void SetAbjX(float x){
+		adj_x = x;
+	}
+	void SetAdjY(float y){
+		adj_y = y;
 	}
 	
 	
@@ -45,12 +55,9 @@ void main(void)
 	MotorSystem motord(&can_bus,0x08);
 	
 	Localization loca;
+	loca.Begin();
 	
 	msleep(2000);
-	//* é©å»à íuêÑíË
-	fprintf(fp,"Average:,%d\n\r",loca.Get_d().ave);
-	fprintf(fp,"Deviation:,%d\n\r",loca.Get_d().devia);
-	fprintf(fp,"duty,speed\n\r");
 	
 	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
 	//*/

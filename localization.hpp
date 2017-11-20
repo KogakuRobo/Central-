@@ -4,6 +4,7 @@
 #include "CentralLibrary.h"
 //#include "Gyro.hpp"
 #include "L3G4200D.hpp"
+#include "RotaryClass.hpp"
 
 //自己位置推定用プログラム
 
@@ -11,43 +12,44 @@
 //CMT1	(ジャイロセンサのデータ取得周期生成）
 //RSPI1　（ジャイロセンサーとの通信）
 
-typedef struct{
-	long ave;
-	long devia;
-	float yaw;
-	
-	long count_A;
-	
-	long count_B;
-	
-	long time;
-	
-	float X,Y;
-}loca_data;
-
-extern void* localization_init(void);
-extern void *localization(thread_t*,void*);
-
 class Localization
 {
 private:
-	/*
+	
 	SPI_Bus *spi_bus;
-	Gyro *yaw_gyro;
+	L3G4200D *yaw_gyro;
 
-	int rotary_a;
-	int rotary_b;
-	*/
+	Rotary* rotaryc_a;
+	Rotary* rotaryc_b;
+	
+	float yaw;
+	long count_A;
+	long count_B;
+	
+	float X;
+	float Y;
+	
+	long encorder_ppr;
+	
+	//parameter_K :エンコーダのカウント差分から取り付けられたタイヤの接線速度を算出するための変数 
+	//parameter_K = r * pi / ( 2 * PPR)
+	//r: タイヤ半径[m]
+	//pi : 円周率
+	//PPR : エンコーダのパルス数[pulse per revolve]
+	// = 0.024[m] * 3.1415926535 / ( 2 * 1024)
+	float parameter_K;
+	
+	static void* localization(thread_t*,void*);
 public:
 	Localization(void);
 	~Localization(void);
-	//int Begin(void);
+	int Begin(void);
 	
 	virtual float GetX(void);			//[m]
 	virtual float GetY(void);			//[m]
 	virtual float GetYaw(void);			//[rad]
 	
-	volatile loca_data &Get_d(void);
+	void set_encorder_ppr(long p);
 };
 
 #endif
