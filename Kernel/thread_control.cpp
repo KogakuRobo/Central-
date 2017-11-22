@@ -15,6 +15,13 @@ void user_kernel_des(void);
 int kernel_ready_thread(thread_t *);
 void* idle_task(thread_t*,void*);
 
+#pragma stacksize su=4000
+#pragma stacksize si=4000
+
+//à»â∫ÇÃéÆÇ™ê¨ÇËóßÇΩÇ»ÇØÇÍÇŒÇ»ÇÁÇ»Ç¢ÅB
+//su = NUMBER_OF_MAX_TASK * SIZE_OF_USER_STACK
+//si = NUMBER_OF_MAX_TASK * SIZE_OF_KERNEL_STACK
+
 struct{
 	long su_addr;
 	long si_addr;
