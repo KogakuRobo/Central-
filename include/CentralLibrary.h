@@ -16,9 +16,9 @@
 
 #include "../CAN/_rx621_can_driver.hpp"
 
-#include "../CMT1/cmt1.hpp"
-#include "../CMT2/cmt2.hpp"
-#include "../CMT3/cmt3.hpp"
+#include "../kernel/CMT1/cmt1.hpp"
+#include "../kernel/CMT2/cmt2.hpp"
+#include "../kernel/CMT3/cmt3.hpp"
 
 #endif
 
