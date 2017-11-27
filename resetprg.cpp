@@ -25,8 +25,11 @@
 //#include	<stddef.h>					// Remove the comment when you use errno
 //#include 	<stdlib.h>					// Remove the comment when you use rand()
 #include	"typedefine.h"		// Define Types
-#include	"stacksct.h"		// Stack Sizes (Interrupt and User)
 #include	"CentralLibrary.h"
+#include	"task_control_block.h"
+
+#pragma stacksize su=STACK_USER_SIZE
+#pragma stacksize si=STACK_KERNEL_SIZE
 
 #ifdef __cplusplus
 extern "C" {

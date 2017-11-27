@@ -39,8 +39,10 @@ public:
 		Differentiation = 0;
 		
 		Proportion = K * error;
-		//Integration = K / Ti * sum;
-		//Differentiation = K * Td * (error - befor) / delta_time;
+		if(Ti != 0.0){
+			Integration = K / Ti * sum;
+		}
+		Differentiation = K * Td * (error - befor) / delta_time;
 		
 		befor = error;
 		ret = Proportion + Integration + Differentiation;

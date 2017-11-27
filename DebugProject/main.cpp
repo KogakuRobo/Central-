@@ -33,11 +33,18 @@ public:
 void main(void)
 {
 	//SCI0のopenとノンバッファ処理
-	FILE *fp = fopen("E1","rw");
-	if(fp == NULL){
+	FILE *fout = fopen("SCI0","w");
+	if(fout == NULL){
 		printf("LKK");
 	}
-	setvbuf(fp,(char*)fp->_Buf,_IONBF,1);
+	setvbuf(fout,(char*)fout->_Buf,_IONBF,1);
+	
+	//SCI0のopenとノンバッファ処理
+	FILE *fin = fopen("SCI0","r");
+	if(fin == NULL){
+		printf("LKK");
+	}
+	setvbuf(fin,(char*)fin->_Buf,_IONBF,1);
 	
 	printf("Program Start\n\r");
 	
@@ -53,24 +60,53 @@ void main(void)
 	MotorSystem motorb(&can_bus,0x02);
 	MotorSystem motorc(&can_bus,0x04);
 	MotorSystem motord(&can_bus,0x08);
-	
+	//*/
 	Localization loca;
 	loca.Begin();
 	
 	msleep(2000);
-	
+	//*/
 	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
 	//*/
 	robo.Begin();
 	/*
 	servo_d servo;
 	//*/
+	//fprintf(fout,"ProgramStart\n\r");
 	for(float i = 0.0;;i = i + 1.0){
+		int cmd;
+		static int count = 0;
 		static float duty = 0;
+		float x,y,yaw;
+		
 		//robo.Safe();
 		//printf("%f\n",duty);
 		//if(printf("DD:%d",scanf("%f",&duty)))fflush(stdin);
-		msleep(10);
+		cmd = fgetc(fin);
+		printf("GET:%d[%d]\n",cmd,count);
+		switch(cmd){
+		case '0':
+			fprintf(fout,"%f\n",loca.GetX());
+			break;
+		case '1':
+			fprintf(fout,"%f\n",loca.GetY());
+			break;
+		case '2':
+			fprintf(fout,"%f\n",loca.GetYaw());
+			break;
+		case '3':
+			fscanf(fin,"%f",&x);
+			fgetc(fin);
+			fscanf(fin,"%f",&y);
+			fgetc(fin);
+			fscanf(fin,"%f",&yaw);
+			fgetc(fin);
+			printf("x,%f,y,%f,yaw,%f\n",x,y,yaw);
+			robo.SetPostionNode(x,y,yaw,0,0,0);
+			break;
+		default:
+			printf("Un Set command\n\r");
+		}
 	}
 	while(1);
 }

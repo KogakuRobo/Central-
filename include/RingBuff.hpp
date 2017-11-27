@@ -35,21 +35,32 @@ public:
 		if(tall == head)Flags.full = true;
 		
 	}
-	type dequeue(void)
+	int dequeue(type &t){return this->dequeue(&t);}
+	int dequeue(type *t)
 	{
-		type t;
 		if(isEmpty()){
 			return -1;
 		}
-		t = buff[head];
+		*t = buff[head];
 		head++;
 		Flags.full = false;
 		
 		if(head == lenght)head = 0;
 		if(head == tall)Flags.empty = true;
 		
-		return t;
+		return 0;
 	}
+	
+	int get_front(type *t)
+	{
+		if(isEmpty()){
+			return -1;
+		}
+		*t = buff[head];
+		
+		return 0;
+	}
+	
 	bool isEmpty(void)
 	{
 		return Flags.empty;
