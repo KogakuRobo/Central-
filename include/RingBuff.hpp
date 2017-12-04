@@ -3,6 +3,7 @@
 
 template<typename type,unsigned int size>
 class RingBuff{
+protected:
 	type buff[size];
 	
 	unsigned short head;	//“Ço‚µˆÊ’u
@@ -22,7 +23,7 @@ public:
 		Flags.empty = true;
 		Flags.full = false;
 	}
-	int enqueue(type t)
+	virtual int enqueue(type t)
 	{
 		if(isFull()){
 			return -1;
@@ -35,8 +36,8 @@ public:
 		if(tall == head)Flags.full = true;
 		
 	}
-	int dequeue(type &t){return this->dequeue(&t);}
-	int dequeue(type *t)
+	virtual int dequeue(type &t){return this->dequeue(&t);}
+	virtual int dequeue(type *t)
 	{
 		if(isEmpty()){
 			return -1;
@@ -51,7 +52,7 @@ public:
 		return 0;
 	}
 	
-	int get_front(type *t)
+	virtual int get_front(type *t)
 	{
 		if(isEmpty()){
 			return -1;
@@ -61,11 +62,11 @@ public:
 		return 0;
 	}
 	
-	bool isEmpty(void)
+	virtual bool isEmpty(void)
 	{
 		return Flags.empty;
 	}
-	bool isFull(void)
+	virtual bool isFull(void)
 	{
 		return Flags.full;
 	}

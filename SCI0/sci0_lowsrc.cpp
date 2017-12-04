@@ -1,13 +1,16 @@
 #include "CentralLibrary.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include <machine.h>
 #include "../lowsrc.hpp"
 #include "sci0_lowsrc.hpp"
 #include "sci0_dev_driver.hpp"
 #include "_rx621_dtc.h"
+#include "_dtc_ring_buff.hpp"
 
 #include "CentralLibrary.h"
 #include "syscall_table.h"
+#include "thread_control.hpp"
 
 #define IS_OPEN_FILE_NOTHING	(n_openfile == 0)
 
@@ -40,20 +43,15 @@ thread_t		sci0_file_desc::tx_control_thread;
 
 
 thread_t	*rx_wait_t;
-static struct{
-	//wait_flag:起動中0,停止中(wait)1.
-	unsigned char thread_wait:1;
-}rx_control_thread_flags;
-thread_t		sci0_file_desc::rx_control_thread;
-
 RingBuff<unsigned char,256> rx_buff;
+DtcRingBuff<unsigned char,16> *rx_buff_2;
 
 
 //SCI0デバイスドライバロード関数（コンストラクタ）
 //SCIモジュールを動作させ、カーネルに通知します。
 sci0_file_desc_factor::sci0_file_desc_factor(void)
 {
-	MSTP(SCI0) = 0;
+	_sci0_init_module();
 	set_io_driver(&sci0_factor);
 }
 
@@ -64,34 +62,37 @@ _low_file_desc_class* sci0_file_desc_factor::open(
 	const char *path,
 	long mode)
 {
+	static sci0_file_desc * file;
 	if(IS_OPEN_FILE_NOTHING){
 		
-		_sci0_set_baudrate(9600);
-		_sci0_use_parity_bit(false);
+		SCI0.SCR.BYTE = 0;
 		
 		_sci0_gpio_enable(true);
+		_sci0_use_parity_bit(false);
+		_sci0_set_baudrate(9600);
 		
-		IPR(SCI0,TXI0) = 13;
-		IPR(SCI0,TEI0) = 12;
-		IPR(SCI0,RXI0) = 14;
-		IPR(SCI0,ERI0) = 13;
+		nop();
+		nop();
 		
-		IEN(SCI0,RXI0) = 1;
-		IEN(SCI0,ERI0) = 1;
+		_sci0_rx_interrupt_enable(true);
+		
+		rx_buff_2 = new DtcRingBuff<unsigned char,16>(VECT(SCI0,RXI0));
+		rx_buff_2->enable((void*)&SCI0.RDR);
+		DTCE(SCI0,RXI0) = 1;
 		
 		SCI0.SCR.BYTE = 0xf4;
 		char dumy = SCI0.RDR;
 		
 		rx_wait_t = NULL;
+		file = new sci0_file_desc;
 	}
 	n_openfile++;
-	return new sci0_file_desc;
+	return file;
 }
 
 
 sci0_file_desc::sci0_file_desc(void)
 {
-	rx_control_thread_flags.thread_wait = 0;
 	tx_control_thread_flags.thread_wait = 0;
 	if(this->tx_table == NULL){
 		this->tx_table = (DTC_TABLE*)DTC_CreateVect(VECT(SCI0,TXI0));
@@ -99,7 +100,6 @@ sci0_file_desc::sci0_file_desc(void)
 	}
 	
 	thread_create(&tx_control_thread,CT_PRIORITY_MAX + 1,sci0_file_desc::_tx_control_handle,(void*)this);
-	thread_create(&rx_control_thread,CT_PRIORITY_MAX + 1,sci0_file_desc::_rx_control_handle,(void*)this);
 }
 
 long sci0_file_desc_factor::close(_low_file_desc_class* desc)
@@ -222,7 +222,7 @@ void SCI0_TEI0(void)
 {
 	SCI0.SSR.BIT.TEND = 0;
 	IEN(SCI0,TEI0) = 0;
-	thread_resume(&sci0_file_desc::tx_control_thread);
+	kernel_resume_thread(&sci0_file_desc::tx_control_thread);
 }
 
 #pragma interrupt SCI0_RXI0(vect = VECT(SCI0,RXI0))
@@ -231,9 +231,8 @@ void SCI0_RXI0(void)
 	thread_t *temp;
 	rx_buff.enqueue(SCI0.RDR);
 	if(rx_wait_t != NULL){
-		temp = rx_wait_t;
-		rx_wait_t = NULL;
-		thread_resume(temp);
+		kernel_resume_thread(rx_wait_t);
+		rx_wait_t =NULL;
 	}
 }
 

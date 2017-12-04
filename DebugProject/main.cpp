@@ -68,17 +68,15 @@ void main(void)
 	//*/
 	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
 	//*/
-	robo.Begin();
+	//robo.Begin();
 	/*
 	servo_d servo;
 	//*/
 	//fprintf(fout,"ProgramStart\n\r");
+	
 	for(float i = 0.0;;i = i + 1.0){
 		int cmd;
 		static int count = 0;
-		static float duty = 0;
-		float x,y,yaw;
-		
 		//robo.Safe();
 		//printf("%f\n",duty);
 		//if(printf("DD:%d",scanf("%f",&duty)))fflush(stdin);
@@ -95,14 +93,54 @@ void main(void)
 			fprintf(fout,"%f\n",loca.GetYaw());
 			break;
 		case '3':
-			fscanf(fin,"%f",&x);
-			fgetc(fin);
+			float x,y,yaw;
+			fscanf(fin,"%f\n",&x);
 			fscanf(fin,"%f",&y);
 			fgetc(fin);
 			fscanf(fin,"%f",&yaw);
 			fgetc(fin);
 			printf("x,%f,y,%f,yaw,%f\n",x,y,yaw);
 			robo.SetPostionNode(x,y,yaw,0,0,0);
+			break;
+		case '4':
+			float temp[3];
+			fscanf(fin,"%f",&temp[0]);
+			fgetc(fin);
+			fscanf(fin,"%f",&temp[1]);
+			fgetc(fin);
+			fscanf(fin,"%f",&temp[2]);
+			fgetc(fin);
+			robo.GetXPID().SetK(temp[0]);
+			robo.GetXPID().SetTi(temp[1]);
+			robo.GetXPID().SetTd(temp[2]);
+			break;
+		case '5':
+			fscanf(fin,"%f",&temp[0]);
+			fgetc(fin);
+			fscanf(fin,"%f",&temp[1]);
+			fgetc(fin);
+			fscanf(fin,"%f",&temp[2]);
+			fgetc(fin);
+			robo.GetYPID().SetK(temp[0]);
+			robo.GetYPID().SetTi(temp[1]);
+			robo.GetYPID().SetTd(temp[2]);
+			break;
+		case '6':
+			fscanf(fin,"%f",&temp[0]);
+			fgetc(fin);
+			fscanf(fin,"%f",&temp[1]);
+			fgetc(fin);
+			fscanf(fin,"%f",&temp[2]);
+			fgetc(fin);
+			robo.GetYawPID().SetK(temp[0]);
+			robo.GetYawPID().SetTi(temp[1]);
+			robo.GetYawPID().SetTd(temp[2]);
+			break;
+		case '8':
+			robo.Stop();
+			break;
+		case '9':
+			robo.Begin();
 			break;
 		default:
 			printf("Un Set command\n\r");

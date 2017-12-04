@@ -3,6 +3,16 @@
 
 #include <math.h>
 
+int _sci0_init_module(void)
+{
+	MSTP(SCI0) = 0;
+	
+	IPR(SCI0,TXI0) = 13;
+	IPR(SCI0,TEI0) = 12;
+	IPR(SCI0,RXI0) = 15;
+	IPR(SCI0,ERI0) = 13;
+}
+
 int _sci0_set_baudrate(unsigned long rate)
 {
 	unsigned short N = 0;
@@ -36,9 +46,11 @@ int _sci0_set_parity_bit(unsigned char c)
 int _sci0_gpio_enable(bool t)
 {
 	if(t){
+		PORT2.ODR.BIT.B0 = 1;
+		PORT2.ODR.BIT.B1 = 1;
+		PORT2.DR.BIT.B0 = 1;		//TEbitを0にすると信号線が経ち下がるため
 		PORT2.DDR.BIT.B1 = 0;		//RxD1
 		PORT2.DDR.BIT.B0 = 1;		//TxD1
-		PORT2.DR.BIT.B0 = 1;		//TEbitを0にすると信号線が経ち下がるため
 		PORT2.ICR.BIT.B1 = 1;
 	}
 	else{
@@ -46,6 +58,19 @@ int _sci0_gpio_enable(bool t)
 		PORT2.DR.BIT.B0 = 1;
 		PORT2.DDR.BIT.B1 = 0;		//RxD1
 		PORT2.DDR.BIT.B0 = 0;		//TxD1
+	}
+	return 0;
+}
+
+int _sci0_rx_interrupt_enable(bool t)
+{
+	if(t){
+		IEN(SCI0,RXI0) = 1;
+		IEN(SCI0,ERI0) = 1;
+	}
+	else{
+		IEN(SCI0,RXI0) = 0;
+		IEN(SCI0,ERI0) = 0;
 	}
 	return 0;
 }

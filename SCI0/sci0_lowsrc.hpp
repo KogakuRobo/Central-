@@ -30,7 +30,6 @@ class sci0_file_desc:public _low_file_desc_class{
 
 public:
 	static thread_t tx_control_thread;
-	static thread_t rx_control_thread;
 
 private:
 	int buf_allocate(int);

@@ -27,6 +27,21 @@ public:
 		befor = 0;
 	}
 	
+	void SetK(inner_val_type _k)
+	{
+		K = _k;
+	}
+	
+	void SetTi(inner_val_type _ti)
+	{
+		Ti = _ti;
+	}
+	
+	void SetTd(inner_val_type _td)
+	{
+		Td = _td;
+	}
+	
 	inner_val_type Run(type data,type ref)
 	{
 		inner_val_type error;

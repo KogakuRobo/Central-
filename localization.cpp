@@ -14,6 +14,9 @@ extern void* i_GyroAnalysis(thread_t*,void*);
 Localization::Localization(void)
 {
 	set_encorder_ppr(2048);
+	X = 0;
+	Y = 0;
+	yaw = 0;
 	return;
 }
 

@@ -57,6 +57,8 @@ extern void DTC_init(void);
 extern volatile DTC_TABLE *DTC_CreateVect(unsigned int);
 extern int DTC_SetTable(unsigned int,volatile DTC_TABLE*);
 
+extern int DTC_IsACT(unsigned char vect);
+
 #ifdef __cplusplus
 }
 #endif

@@ -10,9 +10,9 @@ Robot::Robot(Localization *_l,
 	MotorSystem* _motorc,
 	MotorSystem* _motord
 ) : loca(_l), leg_motora(_motora), leg_motorb(_motorb), leg_motorc(_motorc), leg_motord(_motord),
-x_pid(1200,5,0.0001,0.01),
-y_pid(1200,5,0.0001,0.01),
-yaw_pid(5000.0,0,0,0.01)
+x_pid(100,0,0,0.01),
+y_pid(100,0,0,0.01),
+yaw_pid(50.0,0,0,0.01)
 {
 	PI = 3.1415926535;
 	
@@ -35,13 +35,16 @@ void Robot::Begin(long position_period){
 	Set_MotorSystemCGain(leg_motorb,4.0,0.3,0.0);
 	Set_MotorSystemCGain(leg_motorc,4.0,0.3,0.0);
 	Set_MotorSystemCGain(leg_motord,4.0,0.3,0.0);
-		
-	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.00001);
-	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.00001);
-	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.00001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.00001);
-		
+	
+	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);	
 	thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
+}
+
+void Robot::Stop(void){
+	thread_destroy(&th_control);
 }
 
 void Robot::Safe(void){
@@ -86,6 +89,21 @@ int Robot::SetPostionNode(float x,float y,float yaw,float vx,float vy,float vyaw
 	this->Vyaw_ref = vyaw;
 	
 	return 0;
+}
+
+PID<float>& Robot::GetXPID(void)
+{
+	return x_pid;
+}
+
+PID<float>& Robot::GetYPID(void)
+{
+	return y_pid;
+}
+
+PID<float>& Robot::GetYawPID(void)
+{
+	return yaw_pid;
 }
 
 void Set_MotorSystemCGain(MotorSystem *ms,float K,float Ti,float Td){
