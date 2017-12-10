@@ -44,7 +44,7 @@ thread_t		sci0_file_desc::tx_control_thread;
 
 thread_t	*rx_wait_t;
 RingBuff<unsigned char,256> rx_buff;
-DtcRingBuff<unsigned char,16> *rx_buff_2;
+DtcRingBuff<unsigned char,32> *rx_buff_2;
 
 
 //SCI0デバイスドライバロード関数（コンストラクタ）
@@ -69,14 +69,14 @@ _low_file_desc_class* sci0_file_desc_factor::open(
 		
 		_sci0_gpio_enable(true);
 		_sci0_use_parity_bit(false);
-		_sci0_set_baudrate(9600);
+		_sci0_set_baudrate(57600);
 		
 		nop();
 		nop();
 		
 		_sci0_rx_interrupt_enable(true);
 		
-		rx_buff_2 = new DtcRingBuff<unsigned char,16>(VECT(SCI0,RXI0));
+		rx_buff_2 = new DtcRingBuff<unsigned char,32>(VECT(SCI0,RXI0));
 		rx_buff_2->enable((void*)&SCI0.RDR);
 		DTCE(SCI0,RXI0) = 1;
 		
@@ -136,11 +136,11 @@ long sci0_file_desc::read(
 	long count)
 {
 	for(int i =0;i < count;i++){
-		if(rx_buff.isEmpty()){
+		if(rx_buff_2->isEmpty()){
 			rx_wait_t = get_tid();
 			thread_suspend(rx_wait_t);
 		}
-		rx_buff.dequeue(buf[i]);
+		rx_buff_2->dequeue(buf[i]);
 		
 	}
 		
@@ -228,8 +228,7 @@ void SCI0_TEI0(void)
 #pragma interrupt SCI0_RXI0(vect = VECT(SCI0,RXI0))
 void SCI0_RXI0(void)
 {
-	thread_t *temp;
-	rx_buff.enqueue(SCI0.RDR);
+	//rx_buff.enqueue(SCI0.RDR);
 	if(rx_wait_t != NULL){
 		kernel_resume_thread(rx_wait_t);
 		rx_wait_t =NULL;

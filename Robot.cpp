@@ -23,32 +23,42 @@ yaw_pid(50.0,0,0,0.01)
 	Vx_ref = 0;
 	Vy_ref= 0;
 	Vyaw_ref= 0;
+	
+	state = INIT;
+		
 }
 
 void Robot::Begin(long position_period){
+	if(state == INIT){
+		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
+	}
 	leg_motora->SetVcc(12);
 	leg_motorb->SetVcc(12);
 	leg_motorc->SetVcc(12);
 	leg_motord->SetVcc(12);
 	
-	Set_MotorSystemCGain(leg_motora,4.0,0.3,0.0);
-	Set_MotorSystemCGain(leg_motorb,4.0,0.3,0.0);
-	Set_MotorSystemCGain(leg_motorc,4.0,0.3,0.0);
-	Set_MotorSystemCGain(leg_motord,4.0,0.3,0.0);
+	Set_MotorSystemCGain(leg_motora,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motorb,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motorc,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motord,3.5,0.3,0.0);
 	
 	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
 	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
 	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);	
-	thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
+	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);
+	
+	state = RUNNING;
+	
 }
 
 void Robot::Stop(void){
-	thread_destroy(&th_control);
+	state = STOP;
+	//thread_destroy(&th_control);
 }
 
 void Robot::Safe(void){
 	//*/
+	if(state != RUNNING)return ;
 	float yaw = loca->GetYaw();
 	float terget = yaw_pid.Run(yaw,yaw_ref) + Vyaw_ref;
 	

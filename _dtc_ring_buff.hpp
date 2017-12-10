@@ -39,7 +39,7 @@ public:
 		table->MRB.BIT.DM = 0x02;			//ƒCƒ“ƒNƒŠƒƒ“ƒg
 		table->DAR = this->buff;	//“]‘—æ‚ÉSPDR‚ðÝ’è
 			
-		table->CRA = (size << 8);
+		table->CRA = (size << 8) | size;
 		table->CRB = 0xFFFF;
 			
 		DTC_SetTable(vect,table);

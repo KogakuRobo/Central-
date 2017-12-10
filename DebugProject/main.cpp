@@ -80,27 +80,27 @@ void main(void)
 		//robo.Safe();
 		//printf("%f\n",duty);
 		//if(printf("DD:%d",scanf("%f",&duty)))fflush(stdin);
-		cmd = fgetc(fin);
+		//cmd = fgetc(fin);
+		fscanf(fin,"%c\n",cmd);
 		printf("GET:%d[%d]\n",cmd,count);
 		switch(cmd){
 		case '0':
-			fprintf(fout,"%f\n",loca.GetX());
+			fprintf(fout,"%10.4e\n",loca.GetX());
 			break;
 		case '1':
-			fprintf(fout,"%f\n",loca.GetY());
+			fprintf(fout,"%10.4e\n",loca.GetY());
 			break;
 		case '2':
-			fprintf(fout,"%f\n",loca.GetYaw());
+			fprintf(fout,"%10.4e\n",loca.GetYaw());
 			break;
 		case '3':
 			float x,y,yaw;
 			fscanf(fin,"%f\n",&x);
-			fscanf(fin,"%f",&y);
-			fgetc(fin);
-			fscanf(fin,"%f",&yaw);
-			fgetc(fin);
+			fscanf(fin,"%f\n",&y);
+			fscanf(fin,"%f\n",&yaw);
 			printf("x,%f,y,%f,yaw,%f\n",x,y,yaw);
 			robo.SetPostionNode(x,y,yaw,0,0,0);
+			fprintf(fout,"3\n");
 			break;
 		case '4':
 			float temp[3];
@@ -113,6 +113,7 @@ void main(void)
 			robo.GetXPID().SetK(temp[0]);
 			robo.GetXPID().SetTi(temp[1]);
 			robo.GetXPID().SetTd(temp[2]);
+			fprintf(fout,"4\n");
 			break;
 		case '5':
 			fscanf(fin,"%f",&temp[0]);
@@ -124,6 +125,7 @@ void main(void)
 			robo.GetYPID().SetK(temp[0]);
 			robo.GetYPID().SetTi(temp[1]);
 			robo.GetYPID().SetTd(temp[2]);
+			fprintf(fout,"5\n");
 			break;
 		case '6':
 			fscanf(fin,"%f",&temp[0]);
@@ -135,12 +137,15 @@ void main(void)
 			robo.GetYawPID().SetK(temp[0]);
 			robo.GetYawPID().SetTi(temp[1]);
 			robo.GetYawPID().SetTd(temp[2]);
+			fprintf(fout,"6\n");
 			break;
 		case '8':
 			robo.Stop();
+			fprintf(fout,"8\n");
 			break;
 		case '9':
 			robo.Begin();
+			fprintf(fout,"9\n");
 			break;
 		default:
 			printf("Un Set command\n\r");

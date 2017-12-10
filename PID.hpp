@@ -19,6 +19,7 @@ class PID{
 public:
 	PID(inner_val_type k,inner_val_type ti,inner_val_type td,inner_val_type d_time):K(k),Ti(ti),Td(td),delta_time(d_time)
 	{
+		Reset();
 	}
 	
 	void Reset(void)

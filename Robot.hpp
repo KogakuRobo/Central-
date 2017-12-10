@@ -30,6 +30,12 @@ class Robot{
 	
 	//SafeƒXƒŒƒbƒh
 	thread_t th_control;
+	
+	enum{
+		INIT,
+		RUNNING,
+		STOP,
+	}state;
 public:
 	Robot(Localization *_l,
 	MotorSystem* _motora,
