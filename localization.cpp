@@ -36,7 +36,6 @@ int Localization::Begin(void)
 		return NULL;
 	}
 	
-	
 	static cmt1_timer timer;
 	timer.set_timer(2500,CT_PRIORITY_MAX,i_GyroAnalysis,this->yaw_gyro);
 	
@@ -76,7 +75,7 @@ float Localization::GetYaw(void)
 
 void Localization::set_encorder_ppr(long p){
 	encorder_ppr = p;
-	parameter_K = 0.024 * 3.14159265 / (2 * this->encorder_ppr);
+	parameter_K = 0.0175 * 3.14159265 / (2 * this->encorder_ppr);
 }
 
 //void* Localization::localization_init(void)
@@ -127,6 +126,11 @@ enum{
 	ROTARY_X,
 };
 
+enum{
+	ROTARY_R,
+	ROTARY_L,
+};
+
 void* Localization::localization(thread_t* tid,void *attr){
 	Localization* This = (Localization*)attr;
 	
@@ -134,10 +138,11 @@ void* Localization::localization(thread_t* tid,void *attr){
 	static float point[2] = {0,0};
 	static long b_count[2] = {0,0};
 	static long hensa[2];
+	static long hensa_av=0;
 	
 	This->yaw =
 			This->yaw_gyro->getYaw();
-	This->count_A =
+	/*This->count_A =
 			count[ROTARY_Y];
 	This->count_B =
 			count[ROTARY_X];
@@ -153,5 +158,24 @@ void* Localization::localization(thread_t* tid,void *attr){
 	
 	b_count[ROTARY_X] = count[ROTARY_X];
 	b_count[ROTARY_Y] = count[ROTARY_Y];
+	return NULL;*/
+	
+	This->count_A =count[ROTARY_R];
+	This->count_B =count[ROTARY_L];
+	
+	hensa[ROTARY_L] =-( count[ROTARY_L] - b_count[ROTARY_L]);
+	hensa[ROTARY_R] = count[ROTARY_R] - b_count[ROTARY_R];
+	
+	hensa_av=(hensa[ROTARY_R]+hensa[ROTARY_L])/2;
+	
+	point[ROTARY_X] += hensa_av*sin(This->yaw)*This->parameter_K;
+	point[ROTARY_Y] += hensa_av*cos(This->yaw)*This->parameter_K;
+	
+	This->X = -point[ROTARY_X];
+	This->Y = point[ROTARY_Y];
+	
+	b_count[ROTARY_L] = count[ROTARY_L];
+	b_count[ROTARY_R] = count[ROTARY_R];
 	return NULL;
+	
 }

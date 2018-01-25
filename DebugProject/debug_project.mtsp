@@ -9,13 +9,6 @@
       <FileCategoryGuid>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</FileCategoryGuid>
       <Property>fb98844b-2c27-4275-9804-f6e63e204da0</Property>
     </Instance>
-    <Instance Guid="7bbddd8b-8399-41d7-b85e-41c2fe1f930c">
-      <Name>main.cpp</Name>
-      <Type>File</Type>
-      <RelativePath>main.cpp</RelativePath>
-      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
-      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
-    </Instance>
     <Instance Guid="3afd2b81-ffbc-4ce6-b080-d4bf477f6d5b">
       <Name>CentralLibrary.rel</Name>
       <Type>File</Type>
@@ -117,6 +110,12 @@
       <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
       <Property>66ae9bf9-c1df-40d9-8366-28fc453ad389</Property>
     </Instance>
+    <Instance Guid="0c660d90-7477-4982-a680-2298c0f3a69c">
+      <Name>my</Name>
+      <Type>Category</Type>
+      <ParentItem>dcefbc51-ab14-4bea-bb00-1f4aadd5b021</ParentItem>
+      <Property>53d66302-8946-4327-9086-40f874a6c207</Property>
+    </Instance>
     <Instance Guid="e544caf6-84b0-4922-a488-c7f78e3b0898">
       <Name>MotorClass.hpp</Name>
       <Type>File</Type>
@@ -187,6 +186,125 @@
       <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
       <ParentItem>3a4a6c75-d443-469e-a3ce-33614d368682</ParentItem>
     </Instance>
+    <Instance Guid="7bbddd8b-8399-41d7-b85e-41c2fe1f930c">
+      <Name>main.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>main.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="d810e51a-668c-4f0e-bf68-b928cafec42a">
+      <Name>my_position.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\my_position.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="bb6bb477-63ec-4d17-86b6-dac13c68aa8d">
+      <Name>my_position.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\my_position.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="f41c82c0-b190-42ef-b69c-48b259ce1a0e">
+      <Name>target_point.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\target_point.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="fe153f7a-6225-47b1-ab18-5d61fa089b9b">
+      <Name>target_point.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\target_point.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="23a1793d-ee0f-488c-afc7-099cdd4ca0b1">
+      <Name>speed_control.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\speed_control.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="41ab58b7-84be-4730-89b8-0ebe3e5759bd">
+      <Name>speed_control.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\speed_control.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="3d6f41ae-7a1d-4481-9c51-6b9c0f73051b">
+      <Name>Bezier_curve.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\Bezier_curve.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="900d0367-9210-4eef-bf6a-aa6edc68c6a6">
+      <Name>Bezier_curve.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\Bezier_curve.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="5fa7fb36-459a-4f37-972c-5f5360ddb150">
+      <Name>ENUM.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\ENUM.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="ee37c464-b55a-46ac-bc11-2639636cba95">
+      <Name>setting.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\setting.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="285fd2e7-e0ef-4182-9cd1-74561f0d0fa9">
+      <Name>HAL_Robot.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\HAL_Robot.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="b0ce1c04-e2ac-4304-bc5c-e60e84cd5ec1">
+      <Name>HAL_Robot.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\HAL_Robot.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="a3381704-7af3-40a7-a133-2e1241e70b92">
+      <Name>PID_my.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\PID_my.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="ee601978-ef1f-4797-8bd2-ad2a2af82a3c">
+      <Name>PID_my.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\PID_my.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="70cf48fa-935a-4bae-b4cc-da9e1b957024">
+      <Name>speed_control2.cpp</Name>
+      <Type>File</Type>
+      <RelativePath>..\speed_control2.cpp</RelativePath>
+      <TreeImageGuid>f4d3ca11-259f-42f0-b8bd-beee0ecca48d</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
+    <Instance Guid="9c367da4-34ca-47e4-8659-90df44999ebc">
+      <Name>speed_control2.h</Name>
+      <Type>File</Type>
+      <RelativePath>..\speed_control2.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>0c660d90-7477-4982-a680-2298c0f3a69c</ParentItem>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="2a349cb6-b982-4ade-adcd-104b883ad81c">
@@ -205,6 +323,9 @@
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="66ae9bf9-c1df-40d9-8366-28fc453ad389">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="53d66302-8946-4327-9086-40f874a6c207">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
@@ -268,7 +389,21 @@
       <SourceItemType9>CppSource</SourceItemType9>
       <SourceItemGuid10>5a511a2f-eeeb-4a3b-b560-bc85f16b6852</SourceItemGuid10>
       <SourceItemType10>CppSource</SourceItemType10>
-      <SourceItemCount>11</SourceItemCount>
+      <SourceItemGuid11>d810e51a-668c-4f0e-bf68-b928cafec42a</SourceItemGuid11>
+      <SourceItemType11>CppSource</SourceItemType11>
+      <SourceItemGuid12>f41c82c0-b190-42ef-b69c-48b259ce1a0e</SourceItemGuid12>
+      <SourceItemType12>CppSource</SourceItemType12>
+      <SourceItemGuid13>23a1793d-ee0f-488c-afc7-099cdd4ca0b1</SourceItemGuid13>
+      <SourceItemType13>CppSource</SourceItemType13>
+      <SourceItemGuid14>3d6f41ae-7a1d-4481-9c51-6b9c0f73051b</SourceItemGuid14>
+      <SourceItemType14>CppSource</SourceItemType14>
+      <SourceItemGuid15>285fd2e7-e0ef-4182-9cd1-74561f0d0fa9</SourceItemGuid15>
+      <SourceItemType15>CppSource</SourceItemType15>
+      <SourceItemGuid16>a3381704-7af3-40a7-a133-2e1241e70b92</SourceItemGuid16>
+      <SourceItemType16>CppSource</SourceItemType16>
+      <SourceItemGuid17>70cf48fa-935a-4bae-b4cc-da9e1b957024</SourceItemGuid17>
+      <SourceItemType17>CppSource</SourceItemType17>
+      <SourceItemCount>18</SourceItemCount>
       <LastDeviceChangedCounter>0</LastDeviceChangedCounter>
     </Instance>
     <Instance Guid="9e208646-ccba-4100-a676-29b1efe6545f">
@@ -770,7 +905,7 @@
 -exit
 </LinkOptionCommandLine-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586892641046875557</TimeTagModified--0>
+      <TimeTagModified--0>-8586869899442276858</TimeTagModified--0>
       <LinkOptionCpu-0>False</LinkOptionCpu-0>
       <LinkOptionForm-0>Absolute</LinkOptionForm-0>
       <LinkOptionFormConvert-0>Stype</LinkOptionFormConvert-0>
@@ -1080,7 +1215,7 @@ D_2=R_2
       <LbgOptionFpu-DefaultValue>Fpu</LbgOptionFpu-DefaultValue>
       <LbgOptionFloatOrder-DefaultValue>False</LbgOptionFloatOrder-DefaultValue>
       <IsLockedByUser>False</IsLockedByUser>
-      <TimeTagModified--0>-8586892641046875557</TimeTagModified--0>
+      <TimeTagModified--0>-8586869899442276858</TimeTagModified--0>
       <LbgOptionLanguage-0>C</LbgOptionLanguage-0>
       <LbgOptionLibraryMode-0>MakeOptionChanged</LbgOptionLibraryMode-0>
       <LbgOptionLogo-0>False</LbgOptionLogo-0>
@@ -1239,6 +1374,70 @@ D_2=R_2
       <ItemAddTime>636465771247540697</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="d810e51a-668c-4f0e-bf68-b928cafec42a">
+      <ItemAddTime>636495711074241103</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="bb6bb477-63ec-4d17-86b6-dac13c68aa8d">
+      <ItemAddTime>636495711695358099</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="f41c82c0-b190-42ef-b69c-48b259ce1a0e">
+      <ItemAddTime>636495711991667637</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="fe153f7a-6225-47b1-ab18-5d61fa089b9b">
+      <ItemAddTime>636495712267475506</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="23a1793d-ee0f-488c-afc7-099cdd4ca0b1">
+      <ItemAddTime>636495712492656298</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="41ab58b7-84be-4730-89b8-0ebe3e5759bd">
+      <ItemAddTime>636495712690774806</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="3d6f41ae-7a1d-4481-9c51-6b9c0f73051b">
+      <ItemAddTime>636495713217399180</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="900d0367-9210-4eef-bf6a-aa6edc68c6a6">
+      <ItemAddTime>636495713448777779</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="5fa7fb36-459a-4f37-972c-5f5360ddb150">
+      <ItemAddTime>636495713597480812</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="ee37c464-b55a-46ac-bc11-2639636cba95">
+      <ItemAddTime>636495713778389781</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="ee601978-ef1f-4797-8bd2-ad2a2af82a3c">
+      <ItemAddTime>636495723772325916</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="a3381704-7af3-40a7-a133-2e1241e70b92">
+      <ItemAddTime>636495723543490806</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="b0ce1c04-e2ac-4304-bc5c-e60e84cd5ec1">
+      <ItemAddTime>636495714635190838</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="285fd2e7-e0ef-4182-9cd1-74561f0d0fa9">
+      <ItemAddTime>636495714989769877</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="70cf48fa-935a-4bae-b4cc-da9e1b957024">
+      <ItemAddTime>636519682848167851</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="9c367da4-34ca-47e4-8659-90df44999ebc">
+      <ItemAddTime>636519683170422088</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="0c0532ac-220e-4aad-bfbc-ef12c3fc9323">
       <TimeTagModified-SourceItem0--0>-8587064615736118577</TimeTagModified-SourceItem0--0>
       <SourceItem0-IsLockedByUser>False</SourceItem0-IsLockedByUser>
@@ -1280,9 +1479,37 @@ D_2=R_2
       <SourceItem10-IsLockedByUser>False</SourceItem10-IsLockedByUser>
       <SourceItem10-BuildingTarget-0>True</SourceItem10-BuildingTarget-0>
       <SourceItem10-IndividualCompileOption-0>False</SourceItem10-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem11--0>-8586876649780534705</TimeTagModified-SourceItem11--0>
+      <SourceItem11-IsLockedByUser>False</SourceItem11-IsLockedByUser>
+      <SourceItem11-BuildingTarget-0>True</SourceItem11-BuildingTarget-0>
+      <SourceItem11-IndividualCompileOption-0>False</SourceItem11-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem12--0>-8586876648863108171</TimeTagModified-SourceItem12--0>
+      <SourceItem12-IsLockedByUser>False</SourceItem12-IsLockedByUser>
+      <SourceItem12-BuildingTarget-0>True</SourceItem12-BuildingTarget-0>
+      <SourceItem12-IndividualCompileOption-0>False</SourceItem12-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem13--0>-8586876648362119510</TimeTagModified-SourceItem13--0>
+      <SourceItem13-IsLockedByUser>False</SourceItem13-IsLockedByUser>
+      <SourceItem13-BuildingTarget-0>True</SourceItem13-BuildingTarget-0>
+      <SourceItem13-IndividualCompileOption-0>False</SourceItem13-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem14--0>-8586876647637376628</TimeTagModified-SourceItem14--0>
+      <SourceItem14-IsLockedByUser>False</SourceItem14-IsLockedByUser>
+      <SourceItem14-BuildingTarget-0>True</SourceItem14-BuildingTarget-0>
+      <SourceItem14-IndividualCompileOption-0>False</SourceItem14-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem15--0>-8586876645865005931</TimeTagModified-SourceItem15--0>
+      <SourceItem15-IsLockedByUser>False</SourceItem15-IsLockedByUser>
+      <SourceItem15-BuildingTarget-0>True</SourceItem15-BuildingTarget-0>
+      <SourceItem15-IndividualCompileOption-0>False</SourceItem15-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem16--0>-8586876637311285002</TimeTagModified-SourceItem16--0>
+      <SourceItem16-IsLockedByUser>False</SourceItem16-IsLockedByUser>
+      <SourceItem16-BuildingTarget-0>True</SourceItem16-BuildingTarget-0>
+      <SourceItem16-IndividualCompileOption-0>False</SourceItem16-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem17--0>-8586852678006597918</TimeTagModified-SourceItem17--0>
+      <SourceItem17-IsLockedByUser>False</SourceItem17-IsLockedByUser>
+      <SourceItem17-BuildingTarget-0>True</SourceItem17-BuildingTarget-0>
+      <SourceItem17-IndividualCompileOption-0>False</SourceItem17-IndividualCompileOption-0>
     </Instance>
     <Instance Guid="cdb90474-bc83-43e4-a98a-c24de031566c">
-      <TimeTagModified-SourceItem1--0>-8586892641046885410</TimeTagModified-SourceItem1--0>
+      <TimeTagModified-SourceItem1--0>-8586869899442276858</TimeTagModified-SourceItem1--0>
       <SourceItem1-IsLockedByUser>False</SourceItem1-IsLockedByUser>
       <SourceItem1-BuildingTarget-0>True</SourceItem1-BuildingTarget-0>
       <SourceItem1-FileType-0>Relocatable</SourceItem1-FileType-0>
@@ -2060,7 +2287,7 @@ D_2=R_2
       <DebuggerProperty-EssentialProperty-TargetConnect-TargetSuppliedVoltage>Use3_3V</DebuggerProperty-EssentialProperty-TargetConnect-TargetSuppliedVoltage>
       <DebuggerProperty-EssentialProperty-TargetConnect-UserVCC>2147483647</DebuggerProperty-EssentialProperty-TargetConnect-UserVCC>
       <DebuggerProperty-EssentialProperty-TargetConnect-CommunicationMethod>Jtag</DebuggerProperty-EssentialProperty-TargetConnect-CommunicationMethod>
-      <DebuggerProperty-EssentialProperty-TargetConnect-JtagClock>Jtag_01_547</DebuggerProperty-EssentialProperty-TargetConnect-JtagClock>
+      <DebuggerProperty-EssentialProperty-TargetConnect-JtagClock>Jtag_16_500</DebuggerProperty-EssentialProperty-TargetConnect-JtagClock>
       <DebuggerProperty-EssentialProperty-TargetConnect-FineBaudRate>Fine_2000000</DebuggerProperty-EssentialProperty-TargetConnect-FineBaudRate>
       <DebuggerProperty-EssentialProperty-TargetConnect-BaudRate>115200</DebuggerProperty-EssentialProperty-TargetConnect-BaudRate>
       <DebuggerProperty-EssentialProperty-Flash-SecurityIdMode>Hex</DebuggerProperty-EssentialProperty-Flash-SecurityIdMode>

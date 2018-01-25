@@ -8,6 +8,11 @@
 
 #include "Robot.hpp"
 
+#include "HAL_Robot.h"
+#include "my_position.h"
+#include "target_point.h"
+#include "speed_control.h"
+
 class adj_Localization :public Localization{
 	float adj_x;
 	float adj_y;
@@ -60,21 +65,40 @@ void main(void)
 	MotorSystem motorb(&can_bus,0x02);
 	MotorSystem motorc(&can_bus,0x04);
 	MotorSystem motord(&can_bus,0x08);
+	/*while(1){
+		motora.SetVelocity(50);
+		motord.SetVelocity(50);
+	}*/
 	//*/
 	Localization loca;
 	loca.Begin();
 	
 	msleep(2000);
 	//*/
-	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
+	my_position M_POSI(&loca);
+	target_point T_POINT;
+	speed_control s_con(&M_POSI,&T_POINT);
+	HAL_Robot robo(&loca,&motora,&motorb,&motorc,&motord,&M_POSI,&T_POINT,&s_con);
+	//HAL_Robot robo(&loca,&motora,&M_POSI,&T_POINT,&s_con);
 	//*/
 	//robo.Begin();
 	/*
 	servo_d servo;
 	//*/
 	//fprintf(fout,"ProgramStart\n\r");
-	
-	for(float i = 0.0;;i = i + 1.0){
+	//static cmt2_timer timer2;
+	//timer2.set_timer(2500,CT_PRIORITY_MAX,(void *(*)(thread_t*,void*))robo,NULL);
+	robo.Begin();
+	while(1){
+		//printf("%f,%f,%f\n",M_POSI.m_posi_x_give(),M_POSI.m_posi_y_give(), M_POSI.m_posi_angle_give());
+		//printf("%f",atan2(0,0));
+		//printf("%f",MS.GetVelocity(void));
+		//printf("%f,%f\n",s_con.Angular_Velocity_F(1),s_con.Angular_Velocity_F(2));
+		//printf("%f,%f,%f\n",loca.GetX(),loca.GetY(),loca.GetYaw());
+		//printf("%f,%f\n",s_con.Angular_Velocity_F(1)+s_con.Angular_Velocity_B(1),s_con.Angular_Velocity_F(2)+s_con.Angular_Velocity_B(2));
+		msleep(100);
+	}
+	/*for(float i = 0.0;;i = i + 1.0){
 		int cmd;
 		static int count = 0;
 		//robo.Safe();
@@ -150,7 +174,7 @@ void main(void)
 		default:
 			printf("Un Set command\n\r");
 		}
-	}
+	}*/
 	while(1);
 }
 

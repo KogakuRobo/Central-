@@ -6,11 +6,11 @@
 #include "PID.hpp"
 
 class Robot{
-	Localization *loca;
+	/*Localization *loca;
 	MotorSystem* leg_motora;
 	MotorSystem* leg_motorb;
 	MotorSystem* leg_motorc;
-	MotorSystem* leg_motord;
+	MotorSystem* leg_motord;*/
 	
 	//x,y,yawのpid制御クラス
 	PID<float> x_pid;
@@ -37,6 +37,13 @@ class Robot{
 		STOP,
 	}state;
 public:
+
+	Localization *loca;
+	MotorSystem* leg_motora;
+	MotorSystem* leg_motorb;
+	MotorSystem* leg_motorc;
+	MotorSystem* leg_motord;
+	
 	Robot(Localization *_l,
 	MotorSystem* _motora,
 	MotorSystem* _motorb,
@@ -45,14 +52,14 @@ public:
 	);
 	
 	//Robotクラスの開始。モータシステムのイニシャライズとSafeスレッド開始
-	void Begin(long position_period = 10);
+	virtual void Begin(long position_period = 10);
 	void Stop(void);
 	int SetPostionNode(float x,float y,float yaw,float vx,float vy,float vyaw);
 	PID<float>& GetXPID(void);
 	PID<float>& GetYPID(void);
 	PID<float>& GetYawPID(void);
 private :
-	void Safe(void);
+	virtual void Safe(void);
 	static void *thread_handle(thread_t *t,void *attr);
 };
 

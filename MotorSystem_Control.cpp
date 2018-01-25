@@ -19,7 +19,7 @@ MotorSystem::MotorSystem(CAN_bus *b,unsigned char i)
 	bus = b;
 	id = i;
 	
-	begin = false;
+	begin_finish = false;
 	
 	msg.Set(0x0000 | (id & 0x0f),0,0,0,0,NULL);
 	msg.handle = ReceiveHandle;
@@ -54,8 +54,8 @@ void MotorSystem::SendRTRData(MotorSystem_CMD cmd)
 
 void MotorSystem::Begin(void)
 {
-	SendData(BEGIN,0,NULL);
-	while(begin == false);
+	SendRTRData(BEGIN);
+	while(!this->begin_finish);
 }
 
 void MotorSystem::SetVelocity(float velocity)
@@ -131,7 +131,6 @@ HandleReturn MotorSystem::send_handle(CAN_MSG msg)
 
 HandleReturn MotorSystem::ReceiveHandle(CAN_MSG msg)
 {
-	MotorSystem *This = (MotorSystem*)msg.attr;
 	DATA_TRANSER trans;
 	
 	for(int i =0;i < msg.DLC;i++){
@@ -140,10 +139,10 @@ HandleReturn MotorSystem::ReceiveHandle(CAN_MSG msg)
 	
 	switch(msg.SID >> 4){
 	case GET_VELOCITY:
-		This->velocity = trans.FLOAT.f;
+		((MotorSystem *)(msg.attr))->velocity = trans.FLOAT.f;
 		break;
 	case BEGIN:
-		This->begin = true;
+		((MotorSystem *)(msg.attr))->begin_finish = true;
 		break;
 	}
 	return RX_RESET;

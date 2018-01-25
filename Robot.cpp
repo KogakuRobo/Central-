@@ -29,23 +29,27 @@ yaw_pid(50.0,0,0,0.01)
 }
 
 void Robot::Begin(long position_period){
+	
+	leg_motora->Begin();
+	leg_motord->Begin();
+	
 	if(state == INIT){
 		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
 	}
-	leg_motora->SetVcc(12);
-	leg_motorb->SetVcc(12);
+	//leg_motora->SetVcc(12);
+	/*leg_motorb->SetVcc(12);
 	leg_motorc->SetVcc(12);
-	leg_motord->SetVcc(12);
+	leg_motord->SetVcc(12);*/
 	
-	Set_MotorSystemCGain(leg_motora,3.5,0.3,0.0);
-	Set_MotorSystemCGain(leg_motorb,3.5,0.3,0.0);
+	//Set_MotorSystemCGain(leg_motora,3.5,0.3,0.0);
+	/*Set_MotorSystemCGain(leg_motorb,3.5,0.3,0.0);
 	Set_MotorSystemCGain(leg_motorc,3.5,0.3,0.0);
-	Set_MotorSystemCGain(leg_motord,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motord,3.5,0.3,0.0);*/
 	
-	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);
+	//Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
+	/*Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);*/
+	//Set_MotorSystemVGain(leg_motord,2.7,0.3,0.001);
 	
 	state = RUNNING;
 	
@@ -69,9 +73,9 @@ void Robot::Safe(void){
 	float y_terget = y_pid.Run(y,y_ref) + Vy_ref;
 	//*/
 	leg_motora->SetVelocity(- x_terget * sin(       PI / 4  - yaw) + y_terget * cos(       PI / 4  - yaw) - terget);
-	leg_motorb->SetVelocity(- x_terget * sin(   3 * PI / 4  - yaw) + y_terget * cos(   3 * PI / 4  - yaw) - terget);
+	/*leg_motorb->SetVelocity(- x_terget * sin(   3 * PI / 4  - yaw) + y_terget * cos(   3 * PI / 4  - yaw) - terget);
 	leg_motorc->SetVelocity(- x_terget * sin( - 3 * PI / 4  - yaw) + y_terget * cos( - 3 * PI / 4  - yaw) - terget);
-	leg_motord->SetVelocity(- x_terget * sin( - 1 * PI / 4  - yaw) + y_terget * cos( - 1 * PI / 4  - yaw) - terget);
+	leg_motord->SetVelocity(- x_terget * sin( - 1 * PI / 4  - yaw) + y_terget * cos( - 1 * PI / 4  - yaw) - terget);*/
 	//*/
 	
 	//printf("X,%f,Y,%f,yaw,%f\n\r",loca->GetX(),loca->GetY(),loca->GetYaw());
