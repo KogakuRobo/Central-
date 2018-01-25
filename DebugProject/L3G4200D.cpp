@@ -1,4 +1,5 @@
 #include"L3G4200D.hpp"
+#include "CentralLibrary.h"
 #include<stdlib.h>
 #include<math.h>
 
@@ -22,7 +23,7 @@ int L3G4200D::Begin(unsigned int attr){
 //	Cutoff 50
 //	WakeUP and Z Enable
 //	X,Y disable
-	WriteCTRL_REG1(L3G4200D_REG1_ODR_400 | L3G4200D_REG1_BW_0 | L3G4200D_REG1_POWER | L3G4200D_REG1_Z_ENABLE);
+//	WriteCTRL_REG1(L3G4200D_REG1_ODR_400 | L3G4200D_REG1_BW_0 | L3G4200D_REG1_POWER | L3G4200D_REG1_Z_ENABLE);
 	mode= CALIBRATION;									//初期化に伴い、キャリブレーションモードに移行
 	gcs.p_buffer = (signed short*)malloc(NUMBER_OF_CALIBRATION * sizeof(signed short));	//キャリブレーションを行うバッファの動的確保
 
@@ -32,8 +33,17 @@ int L3G4200D::Begin(unsigned int attr){
 
 	WriteCTRL_REG4(L3G4200D_REG4_FS_500);
 	WriteCTRL_REG5(0x00);
+	
+//	CTRL_REG1
+//	ODR = 400
+//	Cutoff 50
+//	WakeUP and Z Enable
+//	X,Y disable
+	WriteCTRL_REG1(L3G4200D_REG1_ODR_400 | L3G4200D_REG1_BW_0 | L3G4200D_REG1_POWER | L3G4200D_REG1_Z_ENABLE);
 	new_data = 0;
 
+	msleep(1000);
+	
 	return 0;
 }
 

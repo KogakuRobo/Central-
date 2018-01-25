@@ -29,6 +29,10 @@ yaw_pid(50.0,0,0,0.01)
 }
 
 void Robot::Begin(long position_period){
+	
+	leg_motora->Begin();
+	leg_motord->Begin();
+	
 	if(state == INIT){
 		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
 	}
