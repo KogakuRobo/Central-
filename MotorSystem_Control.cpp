@@ -21,13 +21,13 @@ MotorSystem::MotorSystem(CAN_bus *b,unsigned char i)
 	bus = b;
 	id = i;
 	
-	begin = false;
+	begin_finish = false;
 	
 	msg.Set(0x0000 | (id & 0x0f),0,0,0,0,NULL);
 	msg.handle = ReceiveHandle;
 	msg.attr = this;
 	
-	//bus->ReceiveSet(msg,num++,0);
+	bus->ReceiveSet(msg,num++,0);
 	
 	velocity = 0;
 }
@@ -54,9 +54,10 @@ void MotorSystem::SendRTRData(MotorSystem_CMD cmd)
 	bus->Send(msg);
 }
 
-void MotorSystem::Begin(void){
-	SendData(BEGIN,0,NULL);
-	while(begin == false);
+void MotorSystem::Begin(void)
+{
+	SendRTRData(BEGIN);
+	while(!this->begin_finish);
 }
 
 
@@ -152,7 +153,7 @@ HandleReturn MotorSystem::ReceiveHandle(CAN_MSG msg)
 		This->velocity = trans.FLOAT.f;
 		break;
 	case BEGIN:
-		This->begin = true;
+		This->begin_finish = true;
 		break;
 	}
 	return RX_RESET;

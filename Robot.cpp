@@ -30,29 +30,46 @@ yaw_pid(6000.0,10000000,0.01,0.01)
 	Vx_ref = 0;
 	Vy_ref= 0;
 	Vyaw_ref= 0;
+	
+	state = INIT;
+		
 }
 
 void Robot::Begin(long position_period){
+	
+	leg_motora->Begin();
+	leg_motord->Begin();
+	
+	if(state == INIT){
+		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
+	}
 	leg_motora->SetVcc(12);
 	leg_motorb->SetVcc(12);
 	leg_motorc->SetVcc(12);
 	leg_motord->SetVcc(12);
 	
-	Set_MotorSystemCGain(leg_motora,4.0,0.3,0.0);
-	Set_MotorSystemCGain(leg_motorb,4.0,0.3,0.0);
-	Set_MotorSystemCGain(leg_motorc,4.0,0.3,0.0);
-	Set_MotorSystemCGain(leg_motord,4.0,0.3,0.0);
-		
-	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.00001);
-	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.00001);
-	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.00001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.00001);
-		
-	thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
+	Set_MotorSystemCGain(leg_motora,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motorb,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motorc,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motord,3.5,0.3,0.0);
+	
+	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);
+	
+	state = RUNNING;
+	
+}
+
+void Robot::Stop(void){
+	state = STOP;
+	//thread_destroy(&th_control);
 }
 
 void Robot::Safe(void){
 	//*/
+	if(state != RUNNING)return ;
 	float yaw = loca->GetYaw();
 	float terget = yaw_pid.Run(yaw,yaw_ref) + Vyaw_ref;
 	if(terget > 20)	terget = 20;
@@ -103,6 +120,34 @@ void *Robot::thread_handle(thread_t *t,void *attr){
 		msleep(10);
 	}
 	return NULL;
+}
+
+
+int Robot::SetPostionNode(float x,float y,float yaw,float vx,float vy,float vyaw){
+	this->x_ref = x;
+	this->y_ref = y;
+	this->yaw_ref = yaw;
+	
+	this->Vx_ref = vx;
+	this->Vy_ref = vy;
+	this->Vyaw_ref = vyaw;
+	
+	return 0;
+}
+
+PID<float>& Robot::GetXPID(void)
+{
+	return x_pid;
+}
+
+PID<float>& Robot::GetYPID(void)
+{
+	return y_pid;
+}
+
+PID<float>& Robot::GetYawPID(void)
+{
+	return yaw_pid;
 }
 
 void Set_MotorSystemCGain(MotorSystem *ms,float K,float Ti,float Td){
