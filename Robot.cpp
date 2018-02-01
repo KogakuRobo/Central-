@@ -9,10 +9,16 @@ Robot::Robot(Localization *_l,
 	MotorSystem* _motorb,
 	MotorSystem* _motorc,
 	MotorSystem* _motord
+	/*my_position* _my_posi,
+	target_point* _t_point,
+	speed_control* _s_con*/
 ) : loca(_l), leg_motora(_motora), leg_motorb(_motorb), leg_motorc(_motorc), leg_motord(_motord),
 x_pid(100,0,0,0.01),
-y_pid(100,0,0,0.01),
+y_pid(3,0,0,0.01),
 yaw_pid(50.0,0,0,0.01)
+/*t_point(_t_point),
+my_posi(_my_posi),
+s_con(_s_con)*/
 {
 	PI = 3.1415926535;
 	
@@ -60,6 +66,7 @@ void Robot::Safe(void){
 	//*/
 	if(state != RUNNING)return ;
 	float yaw = loca->GetYaw();
+	printf("%fvv\n",yaw);
 	float terget = yaw_pid.Run(yaw,yaw_ref) + Vyaw_ref;
 	
 	float x = loca->GetX();
@@ -128,3 +135,42 @@ void Set_MotorSystemVGain(MotorSystem *ms,float K,float Ti,float Td){
 	ms->SetVGain_I(Ti);
 	ms->SetVGain_D(Td);
 }
+
+/*class HAL_Robot : public Robot{
+public:
+
+	HAL_Robot(Localization *_l,
+	MotorSystem* _motora,
+	MotorSystem* _motorb,
+	MotorSystem* _motorc,
+	MotorSystem* _motord,
+	my_position* _my_posi,
+	target_point* _t_point,
+	speed_control* _s_con
+) : Robot(_l,
+	_motora,
+	_motorb,
+	_motorc,
+	_motord,
+	 _my_posi,
+	_t_point,
+	 _s_con
+){}
+	 void Safe(void){
+		 int i;
+	t_point->t_posi_get(0,0,0,0,0,0);
+	while(1){
+	for(i=0;i<=1;i+=0.01){
+	t_point->Sji_get(0,0,8,8,i);
+	leg_motora->SetVelocity(s_con->output_B_give(1));
+	leg_motorb->SetVelocity(s_con->output_B_give(2));
+	leg_motorc->SetVelocity(s_con->output_B_give(3));
+	leg_motord->SetVelocity(s_con->output_B_give(4));
+	if(i==1){i=0;}
+	}
+	}
+	}
+	void Begin2(void){
+		this->Robot::Begin();
+	}
+};*/

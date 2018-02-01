@@ -8,6 +8,11 @@
 
 #include "Robot.hpp"
 
+#include "HAL_Robot.h"
+#include "my_position.h"
+#include "target_point.h"
+#include "speed_control.h"
+
 class adj_Localization :public Localization{
 	float adj_x;
 	float adj_y;
@@ -66,15 +71,31 @@ void main(void)
 	
 	msleep(2000);
 	//*/
-	Robot robo(&loca,&motora,&motorb,&motorc,&motord);
+	my_position M_POSI(&loca);
+	target_point T_POINT;
+	speed_control s_con(&T_POINT,&M_POSI);
+	HAL_Robot robo(&loca,&motora,&motorb,&motorc,&motord,&M_POSI,&T_POINT,&s_con);
 	//*/
 	//robo.Begin();
 	/*
 	servo_d servo;
 	//*/
 	//fprintf(fout,"ProgramStart\n\r");
-	
-	for(float i = 0.0;;i = i + 1.0){
+	//static cmt2_timer timer2;
+	//timer2.set_timer(2500,CT_PRIORITY_MAX,(void *(*)(thread_t*,void*))robo,NULL);
+	robo.Begin();
+	while(1){
+		//printf("%f,%f,%f\n",M_POSI.m_posi_x_give(),M_POSI.m_posi_y_give(), M_POSI.m_posi_angle_give());
+		//printf("%f,",i);
+		//printf("%f,",t*0.01);
+		//printf("%f,%f,%f,%f\n",s_con.output_F_get(1,0),s_con.output_F_get(2,0),s_con.output_F_get(3,0),s_con.output_F_get(4,0));
+		//printf("%f,%f,%f,%f\n",s_con.output_B_get(1),s_con.output_B_get(2),s_con.output_B_get(3),s_con.output_B_get(4));
+		//printf("%f,%f\n",s_con.output_B_get(1),loca.GetY());
+		//printf("%f,%f,%f\n",loca.GetX(),loca.GetY(),loca.GetYaw());
+		//printf("%f\n",s_con.output_F_get(1)+s_con.output_B_get(1));
+		msleep(100);
+	}
+	/*for(float i = 0.0;;i = i + 1.0){
 		int cmd;
 		static int count = 0;
 		//robo.Safe();
@@ -150,7 +171,7 @@ void main(void)
 		default:
 			printf("Un Set command\n\r");
 		}
-	}
+	}*/
 	while(1);
 }
 

@@ -43,7 +43,7 @@ public:
 		Td = _td;
 	}
 	
-	inner_val_type Run(type data,type ref)
+	inner_val_type Run(type data,type ref)//ロータリ、値
 	{
 		inner_val_type error;
 		inner_val_type ret = 0;
