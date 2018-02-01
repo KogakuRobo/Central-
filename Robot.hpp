@@ -30,12 +30,6 @@ class Robot{
 	
 	//Safeスレッド
 	thread_t th_control;
-	
-	enum{
-		INIT,
-		RUNNING,
-		STOP,
-	}state;
 public:
 	Robot(Localization *_l,
 	MotorSystem* _motora,
@@ -46,11 +40,14 @@ public:
 	
 	//Robotクラスの開始。モータシステムのイニシャライズとSafeスレッド開始
 	void Begin(long position_period = 10);
-	void Stop(void);
+	
 	int SetPostionNode(float x,float y,float yaw,float vx,float vy,float vyaw);
-	PID<float>& GetXPID(void);
-	PID<float>& GetYPID(void);
-	PID<float>& GetYawPID(void);
+	
+	void SetTergetPoint(float x,float y,float yaw){x_ref = x;y_ref = y;yaw_ref = yaw;}
+	void SetTergetVelocity(float vx,float vy,float vyaw){Vx_ref = vx;Vy_ref = vy;Vyaw_ref = vyaw;}
+	void Print_Robot(void);
+	void Motor_STOP(void);
+	
 private :
 	void Safe(void);
 	static void *thread_handle(thread_t *t,void *attr);

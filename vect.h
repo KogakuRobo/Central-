@@ -590,11 +590,11 @@ void Excep_EXDMAC_EXDMAC0I(void);
 void Excep_EXDMAC_EXDMAC1I(void);
 
 // SCI0 ERI0
-//#pragma interrupt (Excep_SCI0_ERI0(vect=214))
+#pragma interrupt (Excep_SCI0_ERI0(vect=214))
 void Excep_SCI0_ERI0(void);
 
 // SCI0 RXI0
-//#pragma interrupt (Excep_SCI0_RXI0(vect=215))
+#pragma interrupt (Excep_SCI0_RXI0(vect=215))
 void Excep_SCI0_RXI0(void);
 
 // SCI0 TXI0

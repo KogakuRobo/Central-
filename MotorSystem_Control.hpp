@@ -56,7 +56,6 @@ public:
 	MotorSystem(CAN_bus *b,unsigned char i);
 	
 	void Begin(void);
-	
 	void SetVelocity(float velocity);
 	void GetVelocityRequest(void);
 	void SetVcc(float vcc);

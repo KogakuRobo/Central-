@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include"MotorSystem_Control.hpp"
+#include "Define.hpp"
 #include<stddef.h>
 
 #pragma pack
@@ -25,7 +27,7 @@ MotorSystem::MotorSystem(CAN_bus *b,unsigned char i)
 	msg.handle = ReceiveHandle;
 	msg.attr = this;
 	
-	bus->ReceiveSet(msg,num++,0);
+	//bus->ReceiveSet(msg,num++,0);
 	
 	velocity = 0;
 }
@@ -52,16 +54,22 @@ void MotorSystem::SendRTRData(MotorSystem_CMD cmd)
 	bus->Send(msg);
 }
 
-void MotorSystem::Begin(void)
-{
+void MotorSystem::Begin(void){
 	SendData(BEGIN,0,NULL);
 	while(begin == false);
 }
 
+
 void MotorSystem::SetVelocity(float velocity)
 {
 	DATA_TRANSER data;
+/*	if(velocity > RIMIT)
+	data.FLOAT.f = RIMIT;
+	else if(velocity < -RIMIT)
+	data.FLOAT.f = -RIMIT;
+	else*/
 	data.FLOAT.f = velocity;
+//	printf("vel:%f\n", data.FLOAT.f);
 	SendData(SET_VELOCITY,4,data.c_data);
 }
 
@@ -132,6 +140,7 @@ HandleReturn MotorSystem::send_handle(CAN_MSG msg)
 HandleReturn MotorSystem::ReceiveHandle(CAN_MSG msg)
 {
 	MotorSystem *This = (MotorSystem*)msg.attr;
+	
 	DATA_TRANSER trans;
 	
 	for(int i =0;i < msg.DLC;i++){

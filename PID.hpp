@@ -28,21 +28,6 @@ public:
 		befor = 0;
 	}
 	
-	void SetK(inner_val_type _k)
-	{
-		K = _k;
-	}
-	
-	void SetTi(inner_val_type _ti)
-	{
-		Ti = _ti;
-	}
-	
-	void SetTd(inner_val_type _td)
-	{
-		Td = _td;
-	}
-	
 	inner_val_type Run(type data,type ref)
 	{
 		inner_val_type error;
@@ -55,10 +40,8 @@ public:
 		Differentiation = 0;
 		
 		Proportion = K * error;
-		if(Ti != 0.0){
-			Integration = K / Ti * sum;
-		}
-		Differentiation = K * Td * (error - befor) / delta_time;
+		//Integration = K / Ti * sum;
+		//Differentiation = K * Td * (error - befor) / delta_time;
 		
 		befor = error;
 		ret = Proportion + Integration + Differentiation;
