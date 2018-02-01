@@ -6,7 +6,7 @@
 	.GLB		_swint
 	.RVECTOR	27,_low_swint
 _low_swint:
-	SETPSW		I
+;	SETPSW		I
 	;PC‚ÆPSW‚ð•Ê—Ìˆæ‚É‘Þ”ð
 ;	PUSHC		USP
 ;	PUSHC		FPSW

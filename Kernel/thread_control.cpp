@@ -3,7 +3,6 @@
 #include "task_control_block.h"
 #include "task_que.hpp"
 #include "syscall_table.h"
-#include "stack_allocate.hpp"
 
 static thread_t* current_thread;
 
@@ -25,7 +24,7 @@ struct{
 }stack_addr[NUMBER_OF_MAX_TASK];
 
 int init(void){
-	stack_manager_init();
+
 	for(int i = 0;i < NUMBER_OF_MAX_TASK;i++){
 		stack_addr[i].su_addr = (long)(__secend("SU")) - SIZE_OF_USER_STACK * i - 4;
 		stack_addr[i].si_addr = (long)(__secend("SI")) - SIZE_OF_KERNEL_STACK * i;

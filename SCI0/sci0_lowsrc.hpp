@@ -3,9 +3,6 @@
 
 #define SCI0_PATH "SCI0"
 #include "que.hpp"
-#include "RingBuff.hpp"
-
-class sci0_file_desc;
 
 class sci0_file_desc_factor:public _low_file_desc_factor{
 //	SCI0のデバイス名とオープンしたファイル数
@@ -19,25 +16,20 @@ public:
 	virtual _low_file_desc_class*	open(const char*,long);
 	virtual long close(_low_file_desc_class*);
 
-	friend sci0_file_desc;
 }sci0_factor;
 
 class sci0_file_desc:public _low_file_desc_class{
-	//static thread_list t_list;
+	static thread_list t_list;
 	static DTC_TABLE *tx_table;
 	
 	unsigned char *tx_buf;
-
-public:
-	static thread_t tx_control_thread;
-
+	
 private:
 	int buf_allocate(int);
-	
-	static void* _tx_control_handle(thread_t *tid,void* attr);
-	static void* _rx_control_handle(thread_t *tid,void* attr);
+	static int suspend(void);
 public:
 	int buf_clear(void);
+	static int resume(void);
 public:
 	sci0_file_desc(void);
 	virtual long read(unsigned char*,long);

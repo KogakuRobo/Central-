@@ -61,7 +61,3 @@ int DTC_SetTable(unsigned int vect,volatile DTC_TABLE* table){
 	return 0;
 }
 
-int DTC_IsACT(unsigned char vect)
-{
-	return (DTC.DTCSTS.BIT.ACT == 1 ) && ( DTC.DTCSTS.BIT.VECN == vect );
-}

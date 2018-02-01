@@ -66,6 +66,6 @@ int swint(int num,void *attr)
 	default:
 		ret = -1;
 	}
-	clrpsw_i();
+	
 	return schedule();
 }
