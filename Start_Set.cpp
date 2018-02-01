@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "Start_Set.hpp"
 #include "Class.hpp"
-#include "Class_PID.hpp"
 #include "Define.hpp"
 #include "ENUM.hpp"
 
@@ -10,9 +9,6 @@ extern Run_No_Class r_n;
 extern My_Position_Class m_p;		//自己位置に関するクラス
 extern My_Position_Class t_m_p;		//累積自己位置に関するクラス
 //extern Target_Point_Class t_p[4];	//目的座標に関するクラス
-extern pid_class pid_slope;		//機体の傾きのPID制御に関するクラス
-extern pid_class pid_X;			//機体のX軸のPID制御に関するクラス
-extern pid_class pid_Y;			//機体のY軸のPID制御に関するクラス
 //extern RC_filter_Class RC_f[2];	//デジタルフィルタのクラス
 extern Velocity_Class vel[4];		//速度設定に関するクラス
 //extern PSD_Class psd;			//PSD赤外線センサの自己位置推定に関するクラス
@@ -34,21 +30,6 @@ void First_Position(void) {
 	m_p.W_Position(0, 0, 0);
 	t_m_p.W_Position(0, 0, 0);
 
-}
-//PIDのゲイン値の入力
-void PID_gain(void) {
-
-	pid_slope.pid_gein(1,1,1,1);	//Ku:4400 Tid:0.0.452  1575,0.25,    2640,0.231, 0.0577,1
-	pid_X.pid_gein(1, 1, 1,1);			//ku:14000 tid:0.823
-	pid_Y.pid_gein(1, 1, 1,1);
-
-}
-
-//PID制御用の制御周期の書き込み
-void PID_time(void){
-	
-	pid_slope.pid_time(cmt0);
-	
 }
 
 void Terget_Point_TZ0(void){//ＴＺからＴＺへ行く場合

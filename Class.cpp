@@ -1,7 +1,6 @@
 #include "Class.hpp"
 #include "Define.hpp"
 #include "ENUM.hpp"
-#include "UART.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -562,11 +561,11 @@ double Rotary_Class::R_Maschine_Velocity(void){return Velocity;}
 
 void Rotary_Class::Rotary_pri(void){
 	//ロータリーカウント数
-	sci_printf("RO1:%d  RO2:%d  RO3:%d  RO4:%d\n\r", rotary(RO1), rotary(RO2), rotary(RO3), rotary(RO4));
+	printf("RO1:%d  RO2:%d  RO3:%d  RO4:%d\n\r", rotary(RO1), rotary(RO2), rotary(RO3), rotary(RO4));
 	//ロータリーの角速度
-	sci_printf("a_vel1:%lf  a_vel2:%lf  a_vel3:%lf  a_vel4:%lf\n\r", angular_velocity_self[RO1], angular_velocity_self[RO2], angular_velocity_self[RO3], angular_velocity_self[RO4]);
+	printf("a_vel1:%lf  a_vel2:%lf  a_vel3:%lf  a_vel4:%lf\n\r", angular_velocity_self[RO1], angular_velocity_self[RO2], angular_velocity_self[RO3], angular_velocity_self[RO4]);
 	//機体の移動速度
-	sci_printf("Vel:%lf", Velocity);
+	printf("Vel:%lf", Velocity);
 }
 
 

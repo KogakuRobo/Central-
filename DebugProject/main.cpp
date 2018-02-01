@@ -7,21 +7,15 @@
 #include "can_bus_setting.hpp"
 
 #include "Robot.hpp"
-#include "UART.h"
-#include "Class_PID.hpp"
 #include "Define.hpp"
 #include "Motion.hpp"
-#include "System.hpp"
 #include "Class.hpp"
 #include "ENUM.hpp"
-#include "Self_position.hpp"
 #include "Start_Set.hpp"
 
 Localization loca;
 
 double t_start[4];//t=0のとき（ベジェ用）
-pid_class g_pid;
-Rotary_class g_rotary;
 Flag_Class f_s_c(0);
 Flag_Class f_Run_Permission(0);	//走行許可、不許可のフラグ
 Flag_Class f_settle(0);
@@ -30,9 +24,6 @@ Run_No_Class r_n;		//走行経路を決めるクラス
 My_Position_Class m_p;		//自己位置クラス
 My_Position_Class t_m_p;	//目的座標に関するクラス
 Velocity_Class vel[4];
-pid_class pid_slope;		//機体の傾きのPID制御に関するクラス
-pid_class pid_X;			//機体のX軸のPID制御に関するクラス
-pid_class pid_Y;			//機体のY軸のPID制御に関するクラス
 Bezier_Class bez[4];		//ベジェ曲線クラス
 Bezier_Class bez_ref[4];	//ベジェ理想値
 TIME_Class time;		//時間計測クラス

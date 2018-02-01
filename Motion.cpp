@@ -2,12 +2,8 @@
 //#include <iodefine.h>
 #include "Motion.hpp"
 #include "Define.hpp"
-#include "UART.h"
 #include "ENUM.hpp"
-#include "Class_PID.hpp"
 #include "Class.hpp"
-#include "System.hpp"
-#include "Motor_System.hpp"
 
 #ifdef __cplusplus
 extern "C" {
