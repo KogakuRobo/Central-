@@ -2,9 +2,9 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <machine.h>
-#include "../lowsrc.hpp"
-#include "sci0_lowsrc.hpp"
-#include "sci0_dev_driver.hpp"
+#include "lowsrc.hpp"
+#include "SCI0/sci0_lowsrc.hpp"
+#include "SCI0/sci0_dev_driver.hpp"
 #include "_rx621_dtc.h"
 #include "_dtc_ring_buff.hpp"
 

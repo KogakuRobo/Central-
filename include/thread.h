@@ -1,7 +1,7 @@
 #ifndef _thread_H_
 #define _thread_H_
 
-#include "../que.hpp"
+#include "que.hpp"
 
 //スレッドの優先度
 #define CT_PRIORITY_MAX 0x00000000

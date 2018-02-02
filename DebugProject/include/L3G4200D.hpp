@@ -5,7 +5,7 @@
 #include<stdio.h>
 
 #include"Gyro.hpp"
-#include"../SPI/SPI.hpp"
+#include"SPI/SPI.hpp"
 
 #include"L3G4200D_defined.hpp"
 

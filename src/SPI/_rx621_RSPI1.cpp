@@ -1,4 +1,4 @@
-#include"_rx621_RSPI1.hpp"
+#include"SPI/_rx621_RSPI1.hpp"
 #include"./DTC/_rx621_dtc.h"
 #include"stddef.h"
 #include"iodefine.h"

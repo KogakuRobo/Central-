@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <machine.h>
-#include "../lowsrc.hpp"
+#include "lowsrc.hpp"
 #include "E1_lib.hpp"
 
 #include "user_system_call.h"

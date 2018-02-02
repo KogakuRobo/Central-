@@ -11,10 +11,10 @@
 
 #include "thread_mutex.hpp"
 
-#include "../SPI/SPI.hpp"
-#include "../SPI/_rx621_RSPI1.hpp"
+#include "SPI/SPI.hpp"
+#include "SPI/_rx621_RSPI1.hpp"
 
-#include "../CAN/_rx621_can_driver.hpp"
+#include "CAN/_rx621_can_driver.hpp"
 
 #include "../kernel/CMT1/cmt1.hpp"
 #include "../kernel/CMT2/cmt2.hpp"

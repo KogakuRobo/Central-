@@ -3,7 +3,7 @@
 #include <math.h>
 
 #include "L3G4200D.hpp"
-#include "../SPI/_rx621_RSPI1.hpp"
+#include "SPI/_rx621_RSPI1.hpp"
 
 #include "RotaryClass.hpp"
 #include "RotaryA.hpp"

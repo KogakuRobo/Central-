@@ -1,5 +1,5 @@
 #ifndef _semaphore_H_
-#define _semaphore_H
+#define _semaphore_H_
 
 typedef struct{
 	int count;
