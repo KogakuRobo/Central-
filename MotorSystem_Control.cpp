@@ -54,8 +54,8 @@ void MotorSystem::SendRTRData(MotorSystem_CMD cmd)
 
 void MotorSystem::Begin(void)
 {
-	SendData(BEGIN,0,NULL);
-	while(begin == false);
+	SendRTRData(BEGIN);
+	while(!this->begin);
 }
 
 void MotorSystem::SetVelocity(float velocity)
