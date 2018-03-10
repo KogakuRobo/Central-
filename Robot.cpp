@@ -9,16 +9,10 @@ Robot::Robot(Localization *_l,
 	MotorSystem* _motorb,
 	MotorSystem* _motorc,
 	MotorSystem* _motord
-	/*my_position* _my_posi,
-	target_point* _t_point,
-	speed_control* _s_con*/
 ) : loca(_l), leg_motora(_motora), leg_motorb(_motorb), leg_motorc(_motorc), leg_motord(_motord),
 x_pid(100,0,0,0.01),
-y_pid(3,0,0,0.01),
+y_pid(100,0,0,0.01),
 yaw_pid(50.0,0,0,0.01)
-/*t_point(_t_point),
-my_posi(_my_posi),
-s_con(_s_con)*/
 {
 	PI = 3.1415926535;
 	
@@ -35,10 +29,16 @@ s_con(_s_con)*/
 }
 
 void Robot::Begin(long position_period){
+	leg_motora->Begin();
+	leg_motorb->Begin();
+	leg_motorc->Begin();
+	leg_motord->Begin();
+	
+	
 	if(state == INIT){
 		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
 	}
-	leg_motora->SetVcc(12);
+	/*leg_motora->SetVcc(12);
 	leg_motorb->SetVcc(12);
 	leg_motorc->SetVcc(12);
 	leg_motord->SetVcc(12);
@@ -51,7 +51,9 @@ void Robot::Begin(long position_period){
 	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
 	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
 	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);*/
+	
+	
 	
 	state = RUNNING;
 	
@@ -66,7 +68,7 @@ void Robot::Safe(void){
 	//*/
 	if(state != RUNNING)return ;
 	float yaw = loca->GetYaw();
-	printf("%fvv\n",yaw);
+	//printf("%fvv\n",yaw);
 	float terget = yaw_pid.Run(yaw,yaw_ref) + Vyaw_ref;
 	
 	float x = loca->GetX();

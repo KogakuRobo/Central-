@@ -38,6 +38,8 @@ typedef enum{
 	SET_CGAIN_D	= 0x4e,
 	GET_C_D		= 0x7e,
 	
+	BEGIN 		= 0x44,
+	
 }MotorSystem_CMD;//IDÇÃè„à 7bitï™
 
 class MotorSystem{
@@ -46,10 +48,15 @@ class MotorSystem{
 	
 	float velocity;
 	
+	bool begin;	//beginäÆóπÉtÉâÉO
+	
+	//volatile __evenaccess bool begin_finish;
 	void SendData(MotorSystem_CMD cmd,unsigned char len,unsigned char data[]);
 	void SendRTRData(MotorSystem_CMD cmd);
 public:
 	MotorSystem(CAN_bus *b,unsigned char i);
+	
+	void Begin(void);
 	
 	void SetVelocity(float velocity);
 	void GetVelocityRequest(void);

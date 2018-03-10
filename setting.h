@@ -5,7 +5,8 @@
 #define squa_two 1.41421356237
 #define M_W_diameter 0.12 //メインタイヤの直径
 #define S_W_diameter 0.05 //ロータリー用タイヤの直径[m]
-#define L_wheel_distance 0.4				//機体から主タイヤの間隔[m]
+#define L_wheel_distance 0.4				//xロータリから左右の主タイヤの間隔[m]
+#define L_wheel_distance_front 0.83058			//xロータリから前左右タイヤの中心まで0.76[m] 
 #define cmt 0.01 //周期
 #define cmt1 1
 #define cmt2 1

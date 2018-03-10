@@ -65,7 +65,7 @@ void HAL_Robot::Safe(void){
 		//while(1){
 			switch(flag){
 				case 1:
-				operating_time=3;  //稼働時間
+				operating_time=5;  //稼働時間
 					//t_point->t_posi_st_get(0,0,0,6);	//目標位置設定(初期x,y,目標x,y)
 					//t_point->t_posi_get(0,0,1,9,10,10);
 			i+=0.01/operating_time;		
@@ -82,20 +82,20 @@ void HAL_Robot::Safe(void){
 				sji_section=3*(i-0.66666);
 						t_point->Sji_get(0,0,1,1,sji_section);	//S字time作成
 			}
-			s_con->robot_speed_F_set(ST,0,0,0,0,pi/2,operating_time,1);		//フィードフォワード出力値準備
+			s_con->robot_speed_F_set(ST,0,0,0,3,0,operating_time,1);		//フィードフォワード出力値準備
 			s_con->output_B_give();	//フィードバック出力値準備
-			leg_motora->SetVelocity(s_con->output_B_get(1));	//タイヤ別の出力値を与える
+			/*leg_motora->SetVelocity(s_con->output_B_get(1));	//タイヤ別の出力値を与える
 			leg_motorb->SetVelocity(s_con->output_B_get(2));
 			leg_motorc->SetVelocity(s_con->output_B_get(3));
-			leg_motord->SetVelocity(s_con->output_B_get(4));
+			leg_motord->SetVelocity(s_con->output_B_get(4));*/
 			/*leg_motora->SetVelocity(s_con->output_F_get(1)+s_con->output_B_get(1));	//タイヤ別の出力値を与える
 			leg_motorb->SetVelocity(s_con->output_F_get(2)+s_con->output_B_get(2));
 			leg_motorc->SetVelocity(s_con->output_F_get(3)+s_con->output_B_get(3));
 			leg_motord->SetVelocity(s_con->output_F_get(4)+s_con->output_B_get(4));*/
-			/*leg_motora->SetVelocity(s_con->output_F_get(1,0));	//タイヤ別の出力値を与える
-			leg_motorb->SetVelocity(s_con->output_F_get(2,0));
-			leg_motorc->SetVelocity(s_con->output_F_get(3,0));
-			leg_motord->SetVelocity(s_con->output_F_get(4,0));*/
+			//leg_motora->SetVelocity(s_con->output_F_get(1));	//タイヤ別の出力値を与える
+			//leg_motorb->SetVelocity(s_con->output_F_get(2));
+			leg_motora->SetVelocity(30);
+			//leg_motord->SetVelocity(s_con->output_F_get(4));
 			t+=1;
 			//printf("%f,",i);
 			//printf("%f,",t*0.01);
@@ -106,20 +106,20 @@ void HAL_Robot::Safe(void){
 			break;
 				case 2:
 				t_point->Sji_get(0,0,1.0,1.0,1);
-				s_con->robot_speed_F_set(ST,0,0,0,0,pi/2,operating_time,2);
+				s_con->robot_speed_F_set(ST,0,3,0,3,0,operating_time,2);
 				s_con->output_B_give();
 				/*leg_motora->SetVelocity(s_con->output_B_get(1));
 				leg_motorb->SetVelocity(s_con->output_B_get(2));
 				leg_motorc->SetVelocity(s_con->output_B_get(3)); 
 				leg_motord->SetVelocity(s_con->output_B_get(4));*/
-				/*leg_motora->SetVelocity(s_con->output_F_get(1,0));	//タイヤ別の出力値を与える
-				leg_motorb->SetVelocity(s_con->output_F_get(2,0));
-				leg_motorc->SetVelocity(s_con->output_F_get(3,0));
-				leg_motord->SetVelocity(s_con->output_F_get(4,0));*/
-				leg_motora->SetVelocity(s_con->output_F_get(1)+s_con->output_B_get(1));	//タイヤ別の出力値を与える
+				//leg_motora->SetVelocity(s_con->output_F_get(1));	//タイヤ別の出力値を与える
+				//leg_motorb->SetVelocity(s_con->output_F_get(2));
+				leg_motora->SetVelocity(30);
+				//leg_motord->SetVelocity(30);
+				/*leg_motora->SetVelocity(s_con->output_F_get(1)+s_con->output_B_get(1));	//タイヤ別の出力値を与える
 				leg_motorb->SetVelocity(s_con->output_F_get(2)+s_con->output_B_get(2));
 				leg_motorc->SetVelocity(s_con->output_F_get(3)+s_con->output_B_get(3));
-				leg_motord->SetVelocity(s_con->output_F_get(4)+s_con->output_B_get(4));
+				leg_motord->SetVelocity(s_con->output_F_get(4)+s_con->output_B_get(4));*/
 				count+=0.01;
 				
 				if(count>1){
@@ -129,7 +129,7 @@ void HAL_Robot::Safe(void){
 				}
 				break;
 				case 3:
-				operating_time=10;  //稼働時間
+				operating_time=5;  //稼働時間
 					//t_point->t_posi_st_get(0,0,0,6);	//目標位置設定(初期x,y,目標x,y)
 					//t_point->t_posi_get(0,0,1,9,10,10);
 			i+=0.01/operating_time;		
@@ -146,7 +146,7 @@ void HAL_Robot::Safe(void){
 				sji_section=3*(i-0.66666);
 						t_point->Sji_get(0,0,1,1,sji_section);	//S字time作成
 			}
-			s_con->robot_speed_F_set(ST,0,6,0,0,0,operating_time,1);		//フィードフォワード出力値準備
+			s_con->robot_speed_F_set(ST,0,3,0,0,0,operating_time,1);		//フィードフォワード出力値準備
 			s_con->output_B_give();	//フィードバック出力値準備
 			/*leg_motora->SetVelocity(s_con->output_B_get(1));	//タイヤ別の出力値を与える
 			leg_motorb->SetVelocity(s_con->output_B_get(2));

@@ -19,10 +19,12 @@ class adj_Localization :public Localization{
 	
 public:
 	float GetX(void){
-		return -1 * this->Localization::GetX() * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(this->Localization::GetYaw()) + 50;
+		return  this->Localization::GetX();//-0.68*GetYaw()/2;
+		//return -1 * this->Localization::GetX() * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(this->Localization::GetYaw()) + 50;
 	}
 	float GetY(void){
-		return this->Localization::GetY()*1000 + 50 * sin(this->Localization::GetYaw()) /*+ 244 * cos(Get_d().yaw)*/;
+		return  this->Localization::GetY();
+		//return this->Localization::GetY()*1000 + 50 * sin(this->Localization::GetYaw()) /*+ 244 * cos(Get_d().yaw)*/;
 	}
 	
 	void SetAbjX(float x){
@@ -44,7 +46,7 @@ void main(void)
 	}
 	setvbuf(fout,(char*)fout->_Buf,_IONBF,1);
 	
-	//SCI0のopenとノンバッファ処理
+	//SCI0のopenとノンバッファ処理v
 	FILE *fin = fopen("SCI0","r");
 	if(fin == NULL){
 		printf("LKK");
@@ -66,7 +68,7 @@ void main(void)
 	MotorSystem motorc(&can_bus,0x04);
 	MotorSystem motord(&can_bus,0x08);
 	//*/
-	Localization loca;
+	adj_Localization loca;
 	loca.Begin();
 	
 	msleep(2000);
@@ -88,9 +90,9 @@ void main(void)
 		//printf("%f,%f,%f\n",M_POSI.m_posi_x_give(),M_POSI.m_posi_y_give(), M_POSI.m_posi_angle_give());
 		//printf("%f,",i);
 		//printf("%f,",t*0.01);
-		//printf("%f,%f,%f,%f\n",s_con.output_F_get(1,0),s_con.output_F_get(2,0),s_con.output_F_get(3,0),s_con.output_F_get(4,0));
+		printf("%f,%f,%f,%f\n",s_con.output_F_get(1),s_con.output_F_get(2),s_con.output_F_get(3),s_con.output_F_get(4));
 		//printf("%f,%f,%f,%f\n",s_con.output_B_get(1),s_con.output_B_get(2),s_con.output_B_get(3),s_con.output_B_get(4));
-		//printf("%f,%f\n",s_con.output_B_get(1),loca.GetY());
+		//printf("%f\n",s_con.output_F_get(3));
 		//printf("%f,%f,%f\n",loca.GetX(),loca.GetY(),loca.GetYaw());
 		//printf("%f\n",s_con.output_F_get(1)+s_con.output_B_get(1));
 		msleep(100);
