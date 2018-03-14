@@ -45,14 +45,14 @@ public:
 	);
 	
 	//Robotクラスの開始。モータシステムのイニシャライズとSafeスレッド開始
-	void Begin(long position_period = 10);
+	virtual void Begin(long position_period = 10);
 	void Stop(void);
 	int SetPostionNode(float x,float y,float yaw,float vx,float vy,float vyaw);
 	PID<float>& GetXPID(void);
 	PID<float>& GetYPID(void);
 	PID<float>& GetYawPID(void);
 private :
-	void Safe(void);
+	virtual void Safe(void);
 	static void *thread_handle(thread_t *t,void *attr);
 };
 
