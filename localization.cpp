@@ -148,7 +148,7 @@ void* Localization::localization(thread_t* tid,void *attr){
 	point[ROTARY_X] += (hensa[ROTARY_X]*cos(This->yaw) - hensa[ROTARY_Y]*sin(This->yaw))*This->parameter_K;
 	point[ROTARY_Y] += (hensa[ROTARY_Y]*cos(This->yaw) + hensa[ROTARY_X]*sin(This->yaw))*This->parameter_K ;
 	
-	This->X = point[ROTARY_X];
+	This->X = -point[ROTARY_X];
 	This->Y = point[ROTARY_Y];
 	
 	b_count[ROTARY_X] = count[ROTARY_X];

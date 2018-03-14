@@ -14,10 +14,12 @@ class adj_Localization :public Localization{
 	
 public:
 	float GetX(void){
-		return -1 * this->Localization::GetX() * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(this->Localization::GetYaw()) + 50;
+		return  this->Localization::GetX();//-0.68*GetYaw()/2;
+		//return -1 * this->Localization::GetX() * 1000 /*- 244 * sin(Get_d().yaw)*/ - 50 * cos(this->Localization::GetYaw()) + 50;
 	}
 	float GetY(void){
-		return this->Localization::GetY()*1000 + 50 * sin(this->Localization::GetYaw()) /*+ 244 * cos(Get_d().yaw)*/;
+		return  this->Localization::GetY();
+		//return this->Localization::GetY()*1000 + 50 * sin(this->Localization::GetYaw()) /*+ 244 * cos(Get_d().yaw)*/;
 	}
 	
 	void SetAbjX(float x){
@@ -39,7 +41,7 @@ void main(void)
 	}
 	setvbuf(fout,(char*)fout->_Buf,_IONBF,1);
 	
-	//SCI0のopenとノンバッファ処理
+	//SCI0のopenとノンバッファ処理v
 	FILE *fin = fopen("SCI0","r");
 	if(fin == NULL){
 		printf("LKK");

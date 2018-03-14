@@ -29,10 +29,16 @@ yaw_pid(50.0,0,0,0.01)
 }
 
 void Robot::Begin(long position_period){
+	leg_motora->Begin();
+	leg_motorb->Begin();
+	leg_motorc->Begin();
+	leg_motord->Begin();
+	
+	
 	if(state == INIT){
 		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
 	}
-	leg_motora->SetVcc(12);
+	/*leg_motora->SetVcc(12);
 	leg_motorb->SetVcc(12);
 	leg_motorc->SetVcc(12);
 	leg_motord->SetVcc(12);
@@ -45,7 +51,9 @@ void Robot::Begin(long position_period){
 	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
 	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
 	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);
+	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);*/
+	
+	
 	
 	state = RUNNING;
 	
