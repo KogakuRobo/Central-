@@ -38,6 +38,7 @@ void Robot::Begin(long position_period){
 	if(state == INIT){
 		thread_create(&th_control,CT_PRIORITY_MAX + 3,Robot::thread_handle,(void*)this);
 	}
+	//*
 	/*leg_motora->SetVcc(12);
 	leg_motorb->SetVcc(12);
 	leg_motorc->SetVcc(12);
@@ -46,14 +47,20 @@ void Robot::Begin(long position_period){
 	Set_MotorSystemCGain(leg_motora,3.5,0.3,0.0);
 	Set_MotorSystemCGain(leg_motorb,3.5,0.3,0.0);
 	Set_MotorSystemCGain(leg_motorc,3.5,0.3,0.0);
-	Set_MotorSystemCGain(leg_motord,3.5,0.3,0.0);
+	Set_MotorSystemCGain(leg_motord,3.5,0.3,0.0);*/
+	//*/
 	
-	Set_MotorSystemVGain(leg_motora,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motorb,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motorc,1.0,0.1,0.0001);
-	Set_MotorSystemVGain(leg_motord,1.0,0.1,0.0001);*/
+	//*
+	/*Set_MotorSystemVGain(leg_motora,4.0,0.05,0.0);
+	Set_MotorSystemVGain(leg_motorb,4.0,0.05,0.0);
+	Set_MotorSystemVGain(leg_motorc,4.0,0.05,0.0);
+	Set_MotorSystemVGain(leg_motord,4.0,0.05,0.0);*/
+	//*/		//Velocity_PID	(4.0,0.05,0.0,1.0/4000.0 ) ‘’næ”y‚Ì
 	
-	
+	/*leg_motora->Begin();
+	leg_motorb->Begin();
+	leg_motorc->Begin();
+	leg_motord->Begin();*/
 	
 	state = RUNNING;
 	

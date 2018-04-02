@@ -33,6 +33,8 @@ int L3G4200D::Begin(unsigned int attr){
 	WriteCTRL_REG4(L3G4200D_REG4_FS_500);
 	WriteCTRL_REG5(0x00);
 	new_data = 0;
+	
+	//msleep(1000);
 
 	return 0;
 }

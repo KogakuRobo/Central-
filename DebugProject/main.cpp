@@ -86,14 +86,17 @@ void main(void)
 	//static cmt2_timer timer2;
 	//timer2.set_timer(2500,CT_PRIORITY_MAX,(void *(*)(thread_t*,void*))robo,NULL);
 	robo.Begin();
+
 	while(1){
+		//printf("%f,%f,%f,%f\n",leg_motora->GetVelocity(),leg_motorb->GetVelocity(),leg_motorc->GetVelocity(),leg_motord->GetVelocity());
 		//printf("%f,%f,%f\n",M_POSI.m_posi_x_give(),M_POSI.m_posi_y_give(), M_POSI.m_posi_angle_give());
 		//printf("%f,",i);
 		//printf("%f,",t*0.01);
-		printf("%f,%f,%f,%f\n",s_con.output_F_get(1),s_con.output_F_get(2),s_con.output_F_get(3),s_con.output_F_get(4));
-		//printf("%f,%f,%f,%f\n",s_con.output_B_get(1),s_con.output_B_get(2),s_con.output_B_get(3),s_con.output_B_get(4));
+		//printf("%f,%f,%f,%f\n",s_con.output_F_get(1),s_con.output_F_get(2),s_con.output_F_get(3),s_con.output_F_get(4));
+		//printf("%f,%f,%f,%f,",s_con.output_B_get(1),s_con.output_B_get(2),s_con.output_B_get(3),s_con.output_B_get(4));
 		//printf("%f\n",s_con.output_F_get(3));
-		//printf("%f,%f,%f\n",loca.GetX(),loca.GetY(),loca.GetYaw());
+		//printf("%f\n",loca.GetY());
+		//printf("%f\n",loca.GetX());
 		//printf("%f\n",s_con.output_F_get(1)+s_con.output_B_get(1));
 		msleep(100);
 	}

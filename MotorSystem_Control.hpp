@@ -48,7 +48,7 @@ class MotorSystem{
 	
 	float velocity;
 	
-	bool begin;	//begin完了フラグ
+	volatile __evenaccess bool begin_finish;	//begin完了フラグ
 	
 	//volatile __evenaccess bool begin_finish;
 	void SendData(MotorSystem_CMD cmd,unsigned char len,unsigned char data[]);

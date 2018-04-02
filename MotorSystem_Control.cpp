@@ -1,4 +1,5 @@
 #include"MotorSystem_Control.hpp"
+#include <stdio.h>Å@
 #include<stddef.h>
 
 #pragma pack
@@ -19,7 +20,7 @@ MotorSystem::MotorSystem(CAN_bus *b,unsigned char i)
 	bus = b;
 	id = i;
 	
-	begin = false;
+	begin_finish = false;
 	
 	msg.Set(0x0000 | (id & 0x0f),0,0,0,0,NULL);
 	msg.handle = ReceiveHandle;
@@ -55,7 +56,8 @@ void MotorSystem::SendRTRData(MotorSystem_CMD cmd)
 void MotorSystem::Begin(void)
 {
 	SendRTRData(BEGIN);
-	while(!this->begin);
+	//printf("%d",begin_finish);
+	while(!this->begin_finish);
 }
 
 void MotorSystem::SetVelocity(float velocity)
@@ -143,7 +145,7 @@ HandleReturn MotorSystem::ReceiveHandle(CAN_MSG msg)
 		This->velocity = trans.FLOAT.f;
 		break;
 	case BEGIN:
-		This->begin = true;
+		This->begin_finish = true;
 		break;
 	}
 	return RX_RESET;
