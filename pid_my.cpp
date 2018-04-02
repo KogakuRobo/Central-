@@ -1,5 +1,6 @@
 #include<iostream>
 #include "PID_my.h"
+#include<stdio.h>
 //コンストラクタ//
 PID_my::PID_my(float kp, float ki, float kd, float time) {
 	KP = kp;
@@ -18,7 +19,7 @@ double PID_my::PID_act(double target, double output) {
 	integral += ((diff[1] + diff[0]) / 2) *TIME;
 	adjustment = KP * diff[1] + KI * integral + KD * (diff[1] - diff[0]) / TIME;
 	if (diff[0] * diff[1]<0) { integral = 0; }
-
+	//printf("%f\n",adjustment);
 	return adjustment;
 }
 
@@ -35,4 +36,11 @@ double PID_my::PID_act2(double poor) {
 void PID_my::PID_Reset(void) {
 
 	integral = 0;
+}
+
+void PID_my::gain_change(float kp, float ki, float kd, float time){
+	KP = kp;
+	KI = ki;
+	KD = kd;
+	TIME = time;	
 }

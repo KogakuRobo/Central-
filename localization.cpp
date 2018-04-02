@@ -76,7 +76,7 @@ float Localization::GetYaw(void)
 
 void Localization::set_encorder_ppr(long p){
 	encorder_ppr = p;
-	parameter_K = 0.024 * 3.14159265 / (2 * this->encorder_ppr);
+	parameter_K = 0.025 * 3.14159265 / (2 * this->encorder_ppr);
 }
 
 //void* Localization::localization_init(void)
