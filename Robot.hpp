@@ -4,6 +4,7 @@
 #include "localization.hpp"
 #include "MotorSystem_Control.hpp"
 #include "PID.hpp"
+#include "PSCon.hpp"
 /*#include"my_position.h"
 #include"target_point.h"
 #include"speed_control.h"*/
@@ -32,6 +33,9 @@ class Robot{
 	
 	//‰~Žü—¦
 	float PI;
+	
+protected:
+	PSCon* PScon;
 	
 	//SafeƒXƒŒƒbƒh
 	thread_t th_control;
